@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
+const loginRoutes_1 = __importDefault(require("./routes/loginRoutes"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 class Server {
     constructor() {
@@ -16,11 +17,12 @@ class Server {
     config() {
         this.app.set('port', process.env.PORT || 3000);
         this.app.use((0, morgan_1.default)('dev'));
-        this.app.use((0, cors_1.default)());
         this.app.use(express_1.default.json());
+        this.app.use((0, cors_1.default)());
         this.app.use(express_1.default.urlencoded({ extended: false }));
     }
     routes() {
+        this.app.use(loginRoutes_1.default);
         this.app.use(indexRoutes_1.default);
     }
     start() {
