@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { indexController } from '../controllers/indexController';
+import validateToken from './validateToken';
 
 class IndexRoutes {
 
@@ -11,6 +12,7 @@ class IndexRoutes {
 
     config(): void {
         this.router.get('/', indexController.index);
+        this.router.put('/api/inicio/newPassword', validateToken, indexController.newPassword);
     }
 }
 
