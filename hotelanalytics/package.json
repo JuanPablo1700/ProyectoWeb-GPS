@@ -20,6 +20,7 @@
     "@angular/router": "^15.2.0",
     "mysql-typed": "^0.0.0",
     "mysql2": "^3.2.0",
+    "ngx-toastr": "^16.1.1",
     "rxjs": "~7.8.0",
     "sequelize": "^6.29.2",
     "sequelize-typescript": "^2.1.5",

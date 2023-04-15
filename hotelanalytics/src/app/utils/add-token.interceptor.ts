@@ -8,11 +8,13 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { ErrorService } from '../services/error.service';
 
 @Injectable()
 export class AddTokenInterceptor implements HttpInterceptor {
 
   constructor(
+    private _errorService: ErrorService,
     private router: Router
   ) {}
 
@@ -26,7 +28,7 @@ export class AddTokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          alert('Error: ' + error.error.error);
+          this._errorService.msjError(error);
           this.router.navigate(['/login']);
         }
         return throwError(() => new Error('Error'))

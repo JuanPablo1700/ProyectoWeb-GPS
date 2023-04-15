@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/interfaces/user';
+import { ErrorService } from 'src/app/services/error.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,13 +11,15 @@ import { UserService } from 'src/app/services/user.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
     user: string = '';
     password: string = '';
 
     constructor(
         private _userService: UserService,
-        private router: Router
+        private toastr: ToastrService,
+        private router: Router,
+        private _errorService: ErrorService
     ) { }
 
     ngOnInit(): void {
@@ -24,7 +28,7 @@ export class LoginComponent implements OnInit{
 
     login() {
         if (this.user == '' || this.password == '') {
-            alert('Ingrese todos los datos');
+            this.toastr.error('Todos los campos son obligatorios', 'Error');
             return
         }
 
@@ -34,13 +38,47 @@ export class LoginComponent implements OnInit{
         }
 
         this._userService.login(user).subscribe({
-            next: (token) => {
-                this.router.navigate(['/inicio']);
-                localStorage.setItem('token', token);
+            next: (json) => {
+                const data = json.split("-");
+
+                const token = data[0];
+                const activo = data[1];
+                const tipo_usuario = data[2];
+                const pass_actualizada = data[3];
+
+                if (activo === "1") {
+                    if (pass_actualizada === "0") {
+                        this.router.navigate(['/inicio']);
+                        localStorage.setItem('token', token);
+                        localStorage.setItem('user', user.user);
+                        localStorage.setItem('tipo_usuario', tipo_usuario);
+                    } else {
+                        if (tipo_usuario === "admin") {
+                            localStorage.setItem('token', token);
+                            localStorage.setItem('user', user.user);
+                            localStorage.setItem('tipo_usuario', tipo_usuario);
+                            this.router.navigate(['/principaldirector']);
+                        } else if (tipo_usuario === "gerente") {
+                            localStorage.setItem('token', token);
+                            localStorage.setItem('user', user.user);
+                            localStorage.setItem('tipo_usuario', tipo_usuario);
+                            this.router.navigate(['/principalgerente']);
+                        } else if (tipo_usuario === "recepcionista") {
+                            localStorage.setItem('token', token);
+                            localStorage.setItem('user', user.user);
+                            localStorage.setItem('tipo_usuario', tipo_usuario);
+                            this.router.navigate(['/principalrecepcionista']);
+                        }
+                    }
+                } else {
+                    this.toastr.error("Usuario desactivado", "Error");
+                    this.router.navigate(['/login']);
+                }
             },
             error: (e: HttpErrorResponse) => {
-                alert('Error: ' + e.error.error);
-            }
+                this._errorService.msjError(e);
+            },
+            complete: () => console.log('complete')
         })
     }
 }
