@@ -17,7 +17,8 @@ module.exports = {
         '60':'60px',
         '800':'1200px',
         'asosia-w':'1000px',
-        'ficha-w':'422px'
+        'ficha-w':'422px',
+        'nuehotel-w':'600px'
       },
       height:{
         '700':'500px',

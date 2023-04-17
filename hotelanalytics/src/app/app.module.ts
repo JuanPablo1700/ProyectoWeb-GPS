@@ -21,7 +21,7 @@ import { PrincipaldirectorComponent } from './components/principaldirector/princ
     AppComponent,
     LoginComponent,
     InicioComponent,
-    PrincipaldirectorComponent
+    PrincipaldirectorComponent,
   ],
   imports: [
     BrowserModule,

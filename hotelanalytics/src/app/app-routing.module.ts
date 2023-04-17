@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PrincipaldirectorComponent } from './components/principaldirector/principaldirector.component';
+import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -14,7 +15,10 @@ const routes: Routes = [
   },
   {
     path:"principaldirector",component:PrincipaldirectorComponent
-  }
+  },
+  {
+    path:"nuevohotel",component:NuevohotelComponent
+    }
 ];
 
 @NgModule({
