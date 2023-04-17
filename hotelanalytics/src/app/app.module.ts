@@ -15,6 +15,7 @@ import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PrincipaldirectorComponent } from './components/principaldirector/principaldirector.component';
+import { UsuarioscreadosComponent } from './components/usuarioscreados/usuarioscreados.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PrincipaldirectorComponent } from './components/principaldirector/princ
     LoginComponent,
     InicioComponent,
     PrincipaldirectorComponent,
+    UsuarioscreadosComponent
   ],
   imports: [
     BrowserModule,

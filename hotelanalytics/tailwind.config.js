@@ -15,10 +15,11 @@ module.exports = {
         '500':'400px',
         '740':'740px',
         '60':'60px',
-        '800':'1200px',
+        'creado':'1150px',
         'asosia-w':'1000px',
         'ficha-w':'422px',
-        'nuehotel-w':'600px'
+        'nuehotel-w':'600px',
+        '800':'1200px'
       },
       height:{
         '700':'500px',

@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PrincipaldirectorComponent } from './components/principaldirector/principaldirector.component';
 import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.component';
+import { UsuarioscreadosComponent } from './components/usuarioscreados/usuarioscreados.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -18,7 +19,10 @@ const routes: Routes = [
   },
   {
     path:"nuevohotel",component:NuevohotelComponent
-    }
+    },
+  {
+    path:"usuarioscreados",component:UsuarioscreadosComponent 
+  }  
 ];
 
 @NgModule({
