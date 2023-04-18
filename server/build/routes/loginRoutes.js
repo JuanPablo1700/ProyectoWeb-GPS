@@ -9,7 +9,6 @@ class LoginRoutes {
     }
     config() {
         this.router.post('/api/users/login', loginController_1.loginController.login);
-        this.router.post('/api/users/logout', loginController_1.loginController.logout);
     }
 }
 const loginRoutes = new LoginRoutes();

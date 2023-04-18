@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
     }
 
-    login() {
+    async login() {
         if (this.user == '' || this.password == '') {
             this.toastr.error('Todos los campos son obligatorios', 'Error');
             return
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
             password: this.password
         }
 
-        this._userService.login(user).subscribe({
+        await this._userService.login(user).subscribe({
             next: (json) => {
                 const data = json.split("-");
 
@@ -47,26 +47,17 @@ export class LoginComponent implements OnInit {
                 const pass_actualizada = data[3];
 
                 if (activo === "1") {
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('user', user.user);
+                    localStorage.setItem('tipo_usuario', tipo_usuario);
                     if (pass_actualizada === "0") {
                         this.router.navigate(['/inicio']);
-                        localStorage.setItem('token', token);
-                        localStorage.setItem('user', user.user);
-                        localStorage.setItem('tipo_usuario', tipo_usuario);
                     } else {
                         if (tipo_usuario === "admin") {
-                            localStorage.setItem('token', token);
-                            localStorage.setItem('user', user.user);
-                            localStorage.setItem('tipo_usuario', tipo_usuario);
                             this.router.navigate(['/principaldirector']);
                         } else if (tipo_usuario === "gerente") {
-                            localStorage.setItem('token', token);
-                            localStorage.setItem('user', user.user);
-                            localStorage.setItem('tipo_usuario', tipo_usuario);
                             this.router.navigate(['/principalgerente']);
                         } else if (tipo_usuario === "recepcionista") {
-                            localStorage.setItem('token', token);
-                            localStorage.setItem('user', user.user);
-                            localStorage.setItem('tipo_usuario', tipo_usuario);
                             this.router.navigate(['/principalrecepcionista']);
                         }
                     }

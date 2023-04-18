@@ -30,7 +30,7 @@ class IndexController {
             }
             try {
                 const hashPassword = yield bcrypt_1.default.hash(password, 10);
-                const result = yield database_1.default.query('UPDATE usuario SET password = ? where user = ?', [hashPassword, user]);
+                const result = yield database_1.default.query('UPDATE usuario SET password = ?, pass_actualizada = 1 where user = ?', [hashPassword, user]);
                 if (!result) {
                     return res.status(500).json({ error: 'No se actualizo la contraseña' });
                 }

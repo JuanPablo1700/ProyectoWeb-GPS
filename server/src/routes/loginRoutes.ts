@@ -11,7 +11,6 @@ class LoginRoutes {
 
     config(): void {
         this.router.post('/api/users/login', loginController.login);
-        this.router.post('/api/users/logout', loginController.logout);
     }
 }
 

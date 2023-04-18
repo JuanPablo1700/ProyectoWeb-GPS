@@ -19,7 +19,7 @@ class IndexController {
         try {
             const hashPassword = await bcrypt.hash(password, 10);
 
-            const result = await pool.query('UPDATE usuario SET password = ? where user = ?', [hashPassword, user]);
+            const result = await pool.query('UPDATE usuario SET password = ?, pass_actualizada = 1 where user = ?', [hashPassword, user]);
 
             if (!result) {
                 return res.status(500).json({ error: 'No se actualizo la contraseña' });
