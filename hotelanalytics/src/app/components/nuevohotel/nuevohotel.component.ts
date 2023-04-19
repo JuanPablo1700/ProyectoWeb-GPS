@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Hotel } from './../../interfaces/hotel';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NewHotelService } from 'src/app/services/new-hotel.service';
+import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
   selector: 'app-nuevohotel',
@@ -20,7 +23,9 @@ export class NuevohotelComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private toast: ToastrService
+    private toastr: ToastrService,
+    private _newHotelService: NewHotelService,
+    private _errorService: ErrorService
   ) { }
 
   ngOnInit(): void {
@@ -30,27 +35,27 @@ export class NuevohotelComponent implements OnInit {
   private validar() {
     //falta validar selects y que sean teléfonos y correos válidos
     if (this.nombre.trim() == '') {
-      this.toast.error('Campo nombre obligatorio', 'Error')
+      this.toastr.error('Campo nombre obligatorio', 'Error')
       return
     }
     if (this.direccion.trim() == '') {
-      this.toast.error('Campo direccion obligatorio', 'Error')
+      this.toastr.error('Campo direccion obligatorio', 'Error')
       return
     }
     if (this.correo.trim() == '') {
-      this.toast.error('Campo correo obligatorio', 'Error')
+      this.toastr.error('Campo correo obligatorio', 'Error')
       return
     }
     if (this.telefono.trim() == '') {
-      this.toast.error('Campo teléfono obligatorio', 'Error')
+      this.toastr.error('Campo teléfono obligatorio', 'Error')
       return
     }
     if (this.estrellas == -1) {
-      this.toast.error('Campo estrellas obligatorio', 'Error')
+      this.toastr.error('Campo estrellas obligatorio', 'Error')
       return
     }
     if (this.estado.trim() == '') {
-      this.toast.error('Campo estado obligatorio', 'Error')
+      this.toastr.error('Campo estado obligatorio', 'Error')
       return
     }
     return true;
@@ -68,5 +73,14 @@ export class NuevohotelComponent implements OnInit {
       estrellas: this.estrellas,
       estado: this.estado
     }
+
+    this._newHotelService.newHotel(hotel).subscribe({
+      next: (res) => {
+        this.toastr.success('Hotel registrado correctamente', 'Correcto');
+      },
+      error: (error: HttpErrorResponse) => {
+        this._errorService.msjError(error);
+      }
+    })
   }
 }

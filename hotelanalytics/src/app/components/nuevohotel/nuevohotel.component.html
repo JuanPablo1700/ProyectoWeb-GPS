@@ -110,8 +110,8 @@
                         class="absolute text-base text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         Correo electrónico</label>
                 </div>
-                <label for="estrellas" class="mb-1">Estrellas</label>
 
+                <label for="estrellas" class="mb-1">Estrellas</label>
                 <div class="selects grid">
                     <select id="estrellas" class="mb-5 border-0 border-b-2 border-gray-300" name="estrellas"
                         [(ngModel)]="estrellas">
@@ -123,10 +123,10 @@
                         <option value="5">5 Estrellas</option>
                     </select>
 
-                    <label for="estado" class="mb-5">Estado</label>
-                    <select id="estado" name="estado" [(ngModel)]="estado">
+                    <label for="estado" class="mb-1">Estado</label>
+                    <select id="estado" class="mb-5 border-0 border-b-2 border-gray-300" name="estado" [(ngModel)]="estado">
                         <option value="-1" selected>Seleccionar</option>
-                        <option value="1" selected>Activo</option>
+                        <option value="1">Activo</option>
                         <option value="0">Inactivo</option>
                     </select>
                 </div>
