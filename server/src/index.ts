@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import loginRoutes from "./routes/loginRoutes";
 import indexRoutes from './routes/indexRoutes';
+import newHotelRoutes from './routes/newHotelRoutes';
 
 class Server {
 
@@ -26,6 +27,7 @@ class Server {
     routes(): void {
         this.app.use(loginRoutes);
         this.app.use(indexRoutes);
+        this.app.use(newHotelRoutes);
     }
 
     start(): void {
