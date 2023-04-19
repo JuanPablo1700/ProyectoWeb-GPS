@@ -9,9 +9,13 @@ import { Router } from '@angular/router';
 export class PrincipaldirectorComponent {
   constructor(
     private router: Router
-  ) {
+  ) {}
 
+
+  nuevo(){
+    this.router.navigate(['/nuevohotel']);
   }
+
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
