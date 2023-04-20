@@ -17,27 +17,27 @@ class LoginController {
             const result = await pool.query('SELECT id, user, password, activo, tipo_usuario, pass_actualizada, fk_id_hotel FROM usuario WHERE user = ?', [user]);
 
             // Verificar la contraseña hash
-            const usuario: any = result[0];
+            const usuario:any = result[0];
 
             //ver si el usuario existe
             if (usuario == "") {
                 return res.status(401).json({ msg: 'Usuario no encontrado' });
             }
 
-            const passwordMatch = await bcrypt.compare(password, usuario[0][2]);
+            const passwordMatch = await bcrypt.compare(password, usuario[0].password);
 
             if (!passwordMatch) {
                 return res.status(401).json({ msg: 'Usuario o contraseña incorrectos' });
             }
 
-            const token = jwt.sign({ user: usuario[0][1] }, 'secreto12345', { expiresIn: '1h' });
+            const token = jwt.sign({ user: usuario[0].user }, 'secreto12345', { expiresIn: '1h' });
 
-            const activo = usuario[0][3];
-            const tipo_usuario = usuario[0][4];
-            const pass_actualizada = usuario[0][5];
+            const activo = usuario[0].activo;
+            const tipo_usuario = usuario[0].tipo_usuario;
+            const pass_actualizada = usuario[0].pass_actualizada;
 
             // Devolver el token como respuesta
-            return res.json(token + "-separador-" + activo + "-separador-"+ tipo_usuario + "-separador-" + pass_actualizada);
+            return res.json({token, activo, tipo_usuario, pass_actualizada});
         } catch (error) {
             console.error(error);
             res.status(500).json({ msg: 'Error del servidor' });

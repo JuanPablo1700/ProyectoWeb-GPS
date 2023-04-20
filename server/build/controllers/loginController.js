@@ -31,16 +31,16 @@ class LoginController {
                 if (usuario == "") {
                     return res.status(401).json({ msg: 'Usuario no encontrado' });
                 }
-                const passwordMatch = yield bcrypt_1.default.compare(password, usuario[0][2]);
+                const passwordMatch = yield bcrypt_1.default.compare(password, usuario[0].password);
                 if (!passwordMatch) {
                     return res.status(401).json({ msg: 'Usuario o contraseña incorrectos' });
                 }
-                const token = jsonwebtoken_1.default.sign({ user: usuario[0][1] }, 'secreto12345', { expiresIn: '1h' });
-                const activo = usuario[0][3];
-                const tipo_usuario = usuario[0][4];
-                const pass_actualizada = usuario[0][5];
+                const token = jsonwebtoken_1.default.sign({ user: usuario[0].user }, 'secreto12345', { expiresIn: '1h' });
+                const activo = usuario[0].activo;
+                const tipo_usuario = usuario[0].tipo_usuario;
+                const pass_actualizada = usuario[0].pass_actualizada;
                 // Devolver el token como respuesta
-                return res.json(token + "-separador-" + activo + "-separador-" + tipo_usuario + "-separador-" + pass_actualizada);
+                return res.json({ token, activo, tipo_usuario, pass_actualizada });
             }
             catch (error) {
                 console.error(error);

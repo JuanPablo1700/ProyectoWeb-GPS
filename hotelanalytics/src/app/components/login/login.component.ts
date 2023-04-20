@@ -38,14 +38,12 @@ export class LoginComponent implements OnInit {
         }
 
         await this._userService.login(user).subscribe({
-            next: (json) => {
-                const data = json.split("-separador-");
-                console.log(data);
+            next: (data:any) => {
                 
-                const token = data[0];
-                const activo = data[1];
-                const tipo_usuario = data[2];
-                const pass_actualizada = data[3];
+                const token = data.token;
+                const activo = data.activo;
+                const tipo_usuario = data.tipo_usuario;
+                const pass_actualizada = data.pass_actualizada;
 
                 if (activo === "1") {
                     localStorage.setItem('token', token);
