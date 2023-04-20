@@ -4,6 +4,6 @@ export default {
         user: 'developer',
         password: 'MAg09GU&6#GN',
         database: 'bd_hotel_analytics',
-        rowsAsArray: true
+        rowsAsArray: false
     }
 }

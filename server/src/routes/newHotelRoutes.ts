@@ -11,6 +11,7 @@ class NewHotelRoutes {
 
     config(): void {
         this.router.post('/api/hotel/newHotel', newHotelController.newHotel);
+        this.router.get('/api/hotel/getHotels', newHotelController.getHotels);
     }
 }
 

@@ -91,6 +91,11 @@ class NewHotelController {
       res.status(500).json({ msg: 'Error del servidor' });
     }
   }
+
+  public async getHotels(req: Request, res: Response) {
+    const listHotel = await pool.query('SELECT nombre, direccion, correo, telefono, estrellas, activo FROM hotel');
+    return res.json(listHotel[0]);
+  }
 }
 
 export const newHotelController = new NewHotelController();

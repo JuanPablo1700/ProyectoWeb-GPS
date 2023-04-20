@@ -13,6 +13,7 @@ import { ErrorService } from 'src/app/services/error.service';
   styleUrls: ['./nuevohotel.component.css']
 })
 export class NuevohotelComponent implements OnInit {
+  listHotel: Hotel[] = [];
 
   nombre: string = '';
   direccion: string = '';
@@ -29,7 +30,7 @@ export class NuevohotelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.getHotels();
   }
 
   private validar() {
@@ -77,6 +78,17 @@ export class NuevohotelComponent implements OnInit {
     this._newHotelService.newHotel(hotel).subscribe({
       next: (res) => {
         this.toastr.success('Hotel registrado correctamente', 'Correcto');
+      },
+      error: (error: HttpErrorResponse) => {
+        this._errorService.msjError(error);
+      }
+    })
+  }
+
+  getHotels() {
+    this._newHotelService.getHotels().subscribe({
+      next: (data) => {
+        this.listHotel = data;
       },
       error: (error: HttpErrorResponse) => {
         this._errorService.msjError(error);

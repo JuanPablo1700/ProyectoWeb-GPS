@@ -87,5 +87,11 @@ class NewHotelController {
             }
         });
     }
+    getHotels(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const listHotel = yield database_1.default.query('SELECT nombre, direccion, correo, telefono, estrellas, activo FROM hotel');
+            return res.json(listHotel[0]);
+        });
+    }
 }
 exports.newHotelController = new NewHotelController();

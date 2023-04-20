@@ -9,6 +9,7 @@ class NewHotelRoutes {
     }
     config() {
         this.router.post('/api/hotel/newHotel', newHotelController_1.newHotelController.newHotel);
+        this.router.get('/api/hotel/getHotels', newHotelController_1.newHotelController.getHotels);
     }
 }
 const newHotelRoutes = new NewHotelRoutes();

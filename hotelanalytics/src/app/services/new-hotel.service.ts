@@ -18,4 +18,8 @@ export class NewHotelService {
   newHotel(hotel: Hotel): Observable<string> {
     return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/newHotel`, hotel);
   }
+
+  getHotels(): Observable<Hotel[]> {
+    return this.http.get<Hotel[]>(`${this.myAppUrl}${this.myApiUrl}/getHotels`);
+  }
 }
