@@ -83,4 +83,11 @@ export class NuevohotelComponent implements OnInit {
       }
     })
   }
+
+  logOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('tipo_usuario');
+    this.router.navigate(['/login'])
+  }
 }

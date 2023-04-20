@@ -1,36 +1,37 @@
-<div class="bg-verde w-full h-24">
-    <img src="../../../assets/img/logo.png " class="h-24">
-
+<div class="bg-verde w-full h-24 ">
+    <img src="../../../assets/img/logo.png " class="h-28 -mt-4">
 </div>
-<div class="flex m-20 justify-between">
-    <div>
-        <h1 class="text-titulo text-2xl font-bold ml-72 mb-20">Bienvenido a HotelAnalytics</h1>
-        <img src="../../../assets/img/viaje.jpg " class="h-96 ml-64">
-    </div>
-    <div>
-        <div class=" p-20  bg-white w-500 h-700 rounded-lg">
+
+<div class="flex justify-center items-center h-5/6 ">
+    <div class="block lg:flex lg:justify-between w-3/4 ">
+        <div class="flex flex-col justify-center items-center">
+            <h1 class="text-titulo text-2xl font-bold text-center lg:mb-20">Bienvenido a HotelAnalytics</h1>
+            <img src="../../../assets/img/viaje.jpg " class="lg:h-96 lg:w-auto h-20 w-20">
+        </div>
+        <div class="flex justify-center">
+        <div class=" p-20 bg-white w-500 h-700 rounded-lg ">
             <p class="text-2xl font-semibold">Iniciar Sesión </p>
             <div class="relative z-0 my-10">
                 <input type="text" [(ngModel)]="user" id="usuario"
-                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    placeholder=" " />
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
+                placeholder=" " />
                 <label for="usuario"
-                    class="absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                    Nombre de Usuario</label>
+                class="absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Nombre de Usuario</label>
             </div>
             <div class="relative z-0 my-5">
                 <input type="password" [(ngModel)]="password" id="contrasena"
-                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    placeholder=" " />
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-vertext-verde peer"
+                placeholder=" " />
                 <label for="contrasena"
-                    class="absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                    Contraseña</label>
+                class="absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Contraseña</label>
                 <button (click)="login()" class="bg-verde text-white text-2xl px-20 py-1 mt-24">
                     Ingresar
                 </button>
             </div>
-
         </div>
-
     </div>
+    </div>
+
 </div>
