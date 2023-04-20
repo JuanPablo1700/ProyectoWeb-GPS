@@ -1,87 +1,82 @@
-<div class=" ">
-    <div class=" barra fixed bg-white border w-32  border-verde items-center min-h-screen">
-        <img src="../../../assets/img/logo.png" class=" w-auto h-24  ">
-        <div class="botones flex flex-col justify-between h-full items-center">
-            <button class="">
-                <img src="../../../assets/img/usuarios.png" class="w-60 h-auto ">
-            </button>
-            <button class="">
-                <img src="../../../assets/img/grafico-histograma.png" class="w-60 h-auto">
-            </button>
-            <button (click)="logOut()" class="">
-                <img src="../../../assets/img/salida.png" class="w-60 h-auto ">
-                Cerrar Sesión
-            </button>
-        </div>
+
+<div class="barra fixed bg-white border w-32 flex flex-col border-verde items-center min-h-screen flex-1">
+    <div>
+        <img src="../../../assets/img/logo.png" class="w-auto h-24">
     </div>
+    <div class="botones flex flex-col justify-between items-center h-full flex-grow mt-5">
+        <button class="">
+        <img src="../../../assets/img/usuarios.png" class="w-60 h-auto">
+        </button>
+        <button class="">
+        <img src="../../../assets/img/grafico-histograma.png" class="w-60 h-auto">
+        </button>
+        <button (click)="logOut()" class="flex flex-col items-center">
+        <img src="../../../assets/img/salida.png" class="w-60 h-auto">
+        Cerrar Sesión
+        </button>
+    </div>
+</div>
+      
 
-    <div class="contenedor ml-32 ">
-        <div
-            class=" mx-32 mt-10 flex flex-col justify-between items-center bg-white  w-auto h-800 rounded-lg">
-            <p class="text-titulo text-2xl  font-bold  flex-grow-0 flex-shrink-0 ">Asociados</p>
-            <div class="asociados bg-white grid grid-cols-2  overflow-auto ">
-                <div class=" mx-14 my-10 flex flex-col  w-ficha-w h-ficha-h border border-black">
-                    <h1 class="font-bold mx-36 mt-2">Hotel Palomas</h1>
-                    <img src="../../../assets/img/estrellas.png" class="mx-32 w-36 h-32 -my-10">
-                    <h1 class="font-bold mx-24 mb-12">Av. Insurgentes No.1100 ote</h1>
-                    <div class="flex ">
-                        <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
-                        <h1 class="font-bold text-base ml-28">Última modificación: </h1>
-                        <h1 class="ml-1">14 dias</h1>
-                    </div>
-
+<div class="contenedor ml-32 flex  h-full justify-center flex-grow items-center">
+    <div
+        class=" mx-10  flex flex-col justify-between items-center  bg-white  w-auto h-asociados rounded-lg">
+        <p class="text-titulo text-2xl mt-5 font-bold  flex-grow-0 flex-shrink-0 ">Asociados</p>
+        <div class="asociados bg-white grid xl:grid-cols-2 overflow-auto">
+            <div class=" mx-14 my-10 flex flex-col  w-ficha-w h-ficha-h border border-black items-center">
+                <h1 class="font-bold mx-36 mt-2">Hotel Palomas</h1>
+                <img src="../../../assets/img/estrellas.png" class="mx-32 w-36 h-32 -my-10">
+                <h1 class="font-bold mx-24 mb-12">Av. Insurgentes No.1100 ote</h1>
+                <div class="flex ">
+                    <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
+                    <h1 class="font-bold text-base ml-28">Última modificación: </h1>
+                    <h1 class="ml-1">14 dias</h1>
                 </div>
-                <div class=" mx-14 my-10 flex flex-col  w-ficha-w h-ficha-h border border-black">
-                    <h1 class="font-bold mx-36 mt-2">Hotel Palomas</h1>
-                    <img src="../../../assets/img/estrellas.png" class="mx-32 w-36 h-32 -my-10">
-                    <h1 class="font-bold mx-24 mb-12">Av. Insurgentes No.1100 ote</h1>
-                    <div class="flex ">
-                        <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
-                        <h1 class="font-bold text-base ml-28">Última modificación: </h1>
-                        <h1 class="ml-1">14 dias</h1>
-                    </div>
-
-                </div>
-                <div class=" mx-14 my-10 flex flex-col  w-ficha-w h-ficha-h border border-black">
-                    <h1 class="font-bold mx-36 mt-2">Hotel Palomas</h1>
-                    <img src="../../../assets/img/estrellas.png" class="mx-32 w-36 h-32 -my-10">
-                    <h1 class="font-bold mx-24 mb-12">Av. Insurgentes No.1100 ote</h1>
-                    <div class="flex ">
-                        <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
-                        <h1 class="font-bold text-base ml-28">Última modificación: </h1>
-                        <h1 class="ml-1">14 dias</h1>
-                    </div>
-
-                </div>
-                <div class=" mx-14 my-10 flex flex-col  w-ficha-w h-ficha-h border border-black">
-                    <h1 class="font-bold mx-36 mt-2">Hotel Palomas</h1>
-                    <img src="../../../assets/img/estrellas.png" class="mx-32 w-36 h-32 -my-10">
-                    <h1 class="font-bold mx-24 mb-12">Av. Insurgentes No.1100 ote</h1>
-                    <div class="flex ">
-                        <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
-                        <h1 class="font-bold text-base ml-28">Última modificación: </h1>
-                        <h1 class="ml-1">14 dias</h1>
-                    </div>
-
-                </div>
-                <div class=" mx-14 my-10 flex flex-col  w-ficha-w h-ficha-h border border-black">
-                    <h1 class="font-bold mx-36 mt-2">Hotel Palomas</h1>
-                    <img src="../../../assets/img/estrellas.png" class="mx-32 w-36 h-32 -my-10">
-                    <h1 class="font-bold mx-24 mb-12">Av. Insurgentes No.1100 ote</h1>
-                    <div class="flex ">
-                        <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
-                        <h1 class="font-bold text-base ml-28">Última modificación: </h1>
-                        <h1 class="ml-1">14 dias</h1>
-                    </div>
-
-                </div>
-
-
             </div>
-            <button class="my-5" (click)="nuevo()">
-                <img src="../../../assets/img/agregar.png" class="w-60 h-58 flex-grow-0 flex-shrink-0">
-            </button>
-
+            <div class=" mx-14 my-10 flex flex-col  w-ficha-w h-ficha-h border border-black items-center">
+                <h1 class="font-bold mx-36 mt-2">Hotel Palomas</h1>
+                <img src="../../../assets/img/estrellas.png" class="mx-32 w-36 h-32 -my-10">
+                <h1 class="font-bold mx-24 mb-12">Av. Insurgentes No.1100 ote</h1>
+                <div class="flex ">
+                    <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
+                    <h1 class="font-bold text-base ml-28">Última modificación: </h1>
+                    <h1 class="ml-1">14 dias</h1>
+                </div>
+            </div>
+            <div class=" mx-14 my-10 flex flex-col  w-ficha-w h-ficha-h border border-black items-center">
+                <h1 class="font-bold mx-36 mt-2">Hotel Palomas</h1>
+                <img src="../../../assets/img/estrellas.png" class="mx-32 w-36 h-32 -my-10">
+                <h1 class="font-bold mx-24 mb-12">Av. Insurgentes No.1100 ote</h1>
+                <div class="flex ">
+                    <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
+                    <h1 class="font-bold text-base ml-28">Última modificación: </h1>
+                    <h1 class="ml-1">14 dias</h1>
+                </div>
+            </div>
+            <div class=" mx-14 my-10 flex flex-col  w-ficha-w h-ficha-h border border-black items-center">
+                <h1 class="font-bold mx-36 mt-2">Hotel Palomas</h1>
+                <img src="../../../assets/img/estrellas.png" class="mx-32 w-36 h-32 -my-10">
+                <h1 class="font-bold mx-24 mb-12">Av. Insurgentes No.1100 ote</h1>
+                <div class="flex ">
+                    <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
+                    <h1 class="font-bold text-base ml-28">Última modificación: </h1>
+                    <h1 class="ml-1">14 dias</h1>
+                </div>
+            </div>
+            <div class=" mx-14 my-10 flex flex-col  w-ficha-w h-ficha-h border border-black items-center">
+                <h1 class="font-bold mx-36 mt-2">Hotel Palomas</h1>
+                <img src="../../../assets/img/estrellas.png" class="mx-32 w-36 h-32 -my-10">
+                <h1 class="font-bold mx-24 mb-12">Av. Insurgentes No.1100 ote</h1>
+                <div class="flex ">
+                    <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
+                    <h1 class="font-bold text-base ml-28">Última modificación: </h1>
+                    <h1 class="ml-1">14 dias</h1>
+                </div>
+            </div>
         </div>
+        <button class="my-5" (click)="nuevo()">
+            <img src="../../../assets/img/agregar.png" class="w-60 h-58 flex-grow-0 flex-shrink-0">
+        </button>
+
     </div>
 </div>

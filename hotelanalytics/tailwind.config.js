@@ -27,7 +27,8 @@ module.exports = {
         '58':'58px',
         '800':'650px',
         'asosia-h':'530px',
-        'ficha-h':'200px'
+        'ficha-h':'200px',
+        'asociados':'900px'
       }
     },
   },
