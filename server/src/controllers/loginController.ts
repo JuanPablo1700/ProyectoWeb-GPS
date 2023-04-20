@@ -37,7 +37,7 @@ class LoginController {
             const pass_actualizada = usuario[0][5];
 
             // Devolver el token como respuesta
-            return res.json(token + "-" + activo + "-"+ tipo_usuario + "-" + pass_actualizada);
+            return res.json(token + "-separador-" + activo + "-separador-"+ tipo_usuario + "-separador-" + pass_actualizada);
         } catch (error) {
             console.error(error);
             res.status(500).json({ msg: 'Error del servidor' });

@@ -39,8 +39,9 @@ export class LoginComponent implements OnInit {
 
         await this._userService.login(user).subscribe({
             next: (json) => {
-                const data = json.split("-");
-
+                const data = json.split("-separador-");
+                console.log(data);
+                
                 const token = data[0];
                 const activo = data[1];
                 const tipo_usuario = data[2];

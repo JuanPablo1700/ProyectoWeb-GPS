@@ -40,7 +40,7 @@ class LoginController {
                 const tipo_usuario = usuario[0][4];
                 const pass_actualizada = usuario[0][5];
                 // Devolver el token como respuesta
-                return res.json(token + "-" + activo + "-" + tipo_usuario + "-" + pass_actualizada);
+                return res.json(token + "-separador-" + activo + "-separador-" + tipo_usuario + "-separador-" + pass_actualizada);
             }
             catch (error) {
                 console.error(error);
