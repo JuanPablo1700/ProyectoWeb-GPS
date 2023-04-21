@@ -76,7 +76,8 @@ export class NuevohotelComponent implements OnInit {
     }
 
     this._newHotelService.newHotel(hotel).subscribe({
-      next: (res) => {
+      next: (whatsappUrl) => {
+        window.open(whatsappUrl);
         this.toastr.success('Hotel registrado correctamente', 'Correcto');
       },
       error: (error: HttpErrorResponse) => {

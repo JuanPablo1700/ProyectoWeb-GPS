@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import bcrypt from 'bcrypt';
 import pool from '../database';
-import nodemailer from 'nodemailer';
 
 class NewHotelController {
 
@@ -25,9 +24,9 @@ class NewHotelController {
         return res.status(401).json({ msg: 'No se pudo insertar el hotel' });
       }
 
-      const nuevoHotel: any = await pool.query('SELECT id, correo FROM hotel WHERE correo = ?', [correo]);
+      const nuevoHotel: any = await pool.query('SELECT id, telefono FROM hotel WHERE correo = ?', [correo]);
 
-      if (nuevoHotel) {
+      if (nuevoHotel[0][0]) {
         //Crear los nuevos usuarios de gerente y recepcionista
         let gerente = 'gerente-' + nombre.toLowerCase().replace(/\s+/g, "-");
         let recepcion = 'recepcion-' + nombre.toLowerCase().replace(/\s+/g, "-");
@@ -36,52 +35,48 @@ class NewHotelController {
         let passGerente = await bcrypt.hash(gerente, 10);
         let passRecepcion = await bcrypt.hash(recepcion, 10);
 
-        let fk_id_hotel = nuevoHotel[0][0][0];
+        let fk_id_hotel = nuevoHotel[0][0].id;
+        let telefono = nuevoHotel[0][0].telefono;
         
-        console.log(fk_id_hotel);
-
         try {
           //Insertar los usuarios con el fk_id_hotel = id del hotel que acabamos de crear
-          const insertGerente = await pool.query('INSERT INTO usuario (user, password, activo, tipo_usuario, pass_actualizada, fk_id_hotel) values (?,?,?,?,?,?)',
+          await pool.query('INSERT INTO usuario (user, password, activo, tipo_usuario, pass_actualizada, fk_id_hotel) values (?,?,?,?,?,?)',
             [gerente, passGerente, '1', 'gerente', 0, fk_id_hotel]);
   
-          const insertRecepcion = await pool.query('INSERT INTO usuario (user, password, activo, tipo_usuario, pass_actualizada, fk_id_hotel) values (?,?,?,?,?,?)',
+          await pool.query('INSERT INTO usuario (user, password, activo, tipo_usuario, pass_actualizada, fk_id_hotel) values (?,?,?,?,?,?)',
             [recepcion, passRecepcion, '1', 'recepcionista', 0, fk_id_hotel]);
         } catch (error) {
-          console.log(error);
+          return res.status(401).json({ msg: 'Error al guardar los usuarios' });
         }
 
-        //mandar correo al de los usuarios al correo registrado del hotel
-        let transporter = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 587,
-          secure: false,
-          auth: {
-            user: 'hotelanalyticss@gmail.com',
-            pass: 'CR141q$MkBvU3e!CQ'
-          }
-        });
-
-        let mailOptions = {
-          from: 'Remitente <hotelanalyticss@gmail.com>',
-          to: 'jcamposcasillas@gmail.com',
-          subject: 'Usuarios para accesar a HotelAnalytics',
-          text: `El usuario y la contraseña para el gerente es: ${gerente} , y el usuario y la contraseña para el recepcionista es: ${recepcion}. Recuerde que debera actualizar la contraseña la primera vez que inicie sesión.`
-        };
-
-        transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-            console.log(error);
-            res.status(500).json({ msg: 'Error al enviar el correo electrónico' });
-          } else {
-            console.log('Correo electrónico enviado: ' + info.response);
-            res.send('Correo electrónico enviado correctamente');
-          }
-        });
+        //mandar mensaje de los usuarios al telefono registrado del hotel
+        
+        const phoneNumber = telefono;
+        const message = `Estimado Gerente de Hotel ${nombre},
+        
+        Le escribo para proporcionarle las cuentas para acceder al sitio web Hotel Analytics
+        
+        Usuario Gerente:
+        Nombre de usuario: ${gerente}
+        Contraseña: ${gerente}
+        
+        Usuario Recepcionista:
+        Nombre de usuario: ${recepcion}
+        Contraseña: ${recepcion}
+        
+        Espero que les permita acceder a su sitio web sin problemas. Si necesita más información de mi parte, por favor no dude en ponerse en contacto conmigo.
+        
+        Gracias por su atención y espero que tenga un excelente día.
+        
+        Atentamente,
+        
+        Asociación de Hoteles y Moteles de Tepic.`;
+        
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
         //Si no hay errores mandar respuesta de exitosa
 
-        return res.json({ msj: 'Correo enviado correctamente' });
+        return res.json(whatsappUrl);
       } else {
         return res.status(401).json({ msg: 'Hotel no encontrado' });
       }
