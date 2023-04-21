@@ -24,14 +24,14 @@ export class EditarhotelComponent implements OnInit {
     activo: 0
   };
 
-  id: any = 0;
-  nombre: string = '';
-  direccion: string = '';
-  correo: string = '';
-  telefono: string = '';
-  estrellas: number = 0;
-  estado: string = '';
-  activo: number = 0;
+  id: any;
+  nombre: string;
+  direccion: string;
+  correo: string;
+  telefono: string;
+  estrellas: number;
+  estado: string;
+  activo: number;
 
   constructor(
     private router: Router,
@@ -39,11 +39,19 @@ export class EditarhotelComponent implements OnInit {
     private _newHotelService: NewHotelService,
     private _errorService: ErrorService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.nombre = '';
+    this.direccion = '';
+    this.correo = '';
+    this.telefono = '';
+    this.estrellas = 0;
+    this.estado = '';
+    this.activo = 0;
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    
+
     const idInt = parseInt(this.id);
     this.getHotel(idInt);
   }
@@ -52,6 +60,13 @@ export class EditarhotelComponent implements OnInit {
     this._newHotelService.getHotel(id).subscribe({
       next: (data: any) => {
         this.hotel = data;
+        this.nombre = this.hotel.nombre;
+        this.direccion = this.hotel.direccion;
+        this.correo = this.hotel.correo;
+        this.telefono = this.hotel.telefono;
+        this.estrellas = this.hotel.estrellas;
+        this.estado = this.hotel.activo+'';
+        this.activo = this.hotel.activo;
       },
       error: (error: HttpErrorResponse) => {
         this._errorService.msjError(error);
@@ -59,7 +74,7 @@ export class EditarhotelComponent implements OnInit {
     })
   }
 
-  private validar() {
+  validar() {
     //falta validar selects y que sean teléfonos y correos válidos
 
     this.nombre = this.nombre.trim();
@@ -69,7 +84,6 @@ export class EditarhotelComponent implements OnInit {
 
     const telefonoRegex = /^(\+?\d{1,2}\s)?(\d{10,13})$/;
     const correoRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
 
     if (this.nombre == '') {
       this.toastr.error('Campo nombre obligatorio', 'Error')
@@ -99,14 +113,14 @@ export class EditarhotelComponent implements OnInit {
       this.toastr.error('Campo estrellas obligatorio', 'Error')
       return false;
     }
-    if (this.estado.trim() == '') {
+    if (this.estado == '-1') {
       this.toastr.error('Campo estado obligatorio', 'Error')
-      return
+      return false;
     }
     return true;
   }
 
-  actualizar() {
+  async actualizar() {
     if (this.validar()) {
       const hotel: Hotel = {
         id: this.id,
@@ -119,7 +133,7 @@ export class EditarhotelComponent implements OnInit {
         estado: this.estado
       }
 
-      this._newHotelService.updateHotel(this.id, hotel).subscribe({
+      await this._newHotelService.updateHotel(this.id, hotel).subscribe({
         next: () => {
           this.toastr.success('Hotel actualizado correctamente', 'Correcto');
         },
@@ -137,8 +151,5 @@ export class EditarhotelComponent implements OnInit {
     localStorage.removeItem('tipo_usuario');
     this.router.navigate(['/login'])
   }
-}
-function getIdFromUrl(): string | null {
-  throw new Error('Function not implemented.');
 }
 

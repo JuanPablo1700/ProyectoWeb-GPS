@@ -21,12 +21,12 @@
 
         <div class="mx-16 mt-10 flex flex-col justify-start items-center  bg-white w-nuehotel-w h-800 rounded-lg">
             <p class="self-center text-titulo text-2xl font-bold flex-grow-0 flex-shrink-0 mt-5">
-                Nuevo Hotel
+                Editar Hotel
             </p>
             <div class="mx-14 my-10 flex flex-col w-ficha-w h-800">
-                <form action="insertar()">
+                <form>
                     <div class="relative z-0 my-5">
-                        <input type="text" id="nombre" name="nombre" [(ngModel)]="hotel.nombre" value="{{hotel.nombre}}"
+                        <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre" value="{{hotel.nombre}}"
                             class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
                             placeholder=" " /> 
                         <label for="nombre"
@@ -82,7 +82,7 @@
                         </select>
                     </div>
                     <div class=" flex justify-center">
-                        <button (click)="actualizar()" type="submit"
+                        <button (click)="actualizar()"
                             class="bg-verde text-white text-2xl px-20 py-1 mt-14 rounded-lg  focus:border-verde ">
                             Guardar
                         </button>
