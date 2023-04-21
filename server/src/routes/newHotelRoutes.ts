@@ -12,6 +12,8 @@ class NewHotelRoutes {
     config(): void {
         this.router.post('/api/hotel/newHotel', newHotelController.newHotel);
         this.router.get('/api/hotel/getHotels', newHotelController.getHotels);
+        this.router.get('/api/hotel/getHotel/:id', newHotelController.getHotel);
+        this.router.put('/api/hotel/updateHotels/:id', newHotelController.updateHotel);
     }
 }
 
