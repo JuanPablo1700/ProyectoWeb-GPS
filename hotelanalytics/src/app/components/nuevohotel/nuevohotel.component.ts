@@ -119,6 +119,10 @@ export class NuevohotelComponent implements OnInit {
     })
   }
 
+  principaldirector() {
+    this.router.navigate(['/principaldirector']);
+  };
+
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

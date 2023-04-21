@@ -145,6 +145,10 @@ export class EditarhotelComponent implements OnInit {
     }
   }
 
+  principaldirector() {
+    this.router.navigate(['/principaldirector']);
+  };
+
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

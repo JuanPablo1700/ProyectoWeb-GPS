@@ -23,7 +23,7 @@
         <div class="asociados bg-white grid xl:grid-cols-2 overflow-auto">
             <div *ngFor="let hotel of listHotel" (click)="editar(hotel.id)"
                 class="hotel cursor-pointer mx-14 my-5 flex flex-col w-ficha-w h-ficha-h border border-black items-center hover:border-verde hover:border-2 hover:scale-105">
-                <h1 class="font-bold mx-36 mt-2">{{hotel.nombre}}</h1>
+                <h1 class="font-bold  mt-2">{{hotel.nombre}}</h1>
                 <div class="estrellas flex my-2">
                     <svg *ngFor="let i of [1, 2, 3, 4, 5]" fill="currentColor"
                         [ngClass]="{'text-yellow-500 fill-current': i <= hotel.estrellas, 'fill-none stroke-current stroke-2': i > hotel.estrellas}"
@@ -34,7 +34,7 @@
                             clip-rule="evenodd" />
                     </svg>
                 </div>
-                <h1 class="font-regular my-5">{{hotel.direccion}}</h1>
+                <h1 class="font-regular my-5 text-center">{{hotel.direccion}}</h1>
                 <div class="flex">
                     <div [ngClass]="{'text-green-600 font-bold text-base ml-2' : hotel.activo==1, 'text-red-700 font-bold text-base ml-2' : hotel.activo==0}"
                         class="">
