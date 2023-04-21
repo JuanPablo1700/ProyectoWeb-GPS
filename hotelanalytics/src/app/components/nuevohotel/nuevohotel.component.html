@@ -26,7 +26,7 @@
       <div class="asociados bg-white flex flex-col h-full overflow-auto">
         <div *ngFor="let hotel of listHotel"
           class="hotel mx-14 my-5 flex flex-col w-ficha-w h-ficha-h border border-black items-center">
-          <h1 class="font-bold mx-36 mt-2">{{hotel.nombre}}</h1>
+          <h1 class="font-bold  mt-2">{{hotel.nombre}}</h1>
           <div class="estrellas flex my-2">
             <svg *ngFor="let i of [1, 2, 3, 4, 5]" fill="currentColor"
               [ngClass]="{'text-yellow-500 fill-current': i <= hotel.estrellas, 'fill-none stroke-current stroke-2': i > hotel.estrellas}"
@@ -39,7 +39,11 @@
           </div>
           <h1 class="font-regular my-5">{{hotel.direccion}}</h1>
           <div class="flex">
-            <h1 class="text-verde font-bold text-base ml-2">Activo</h1>
+            <div
+              [ngClass]="{'text-green-600 font-bold text-base ml-2' : hotel.activo==1, 'text-red-700 font-bold text-base ml-2' : hotel.activo==0}"
+              class="">
+              <h1 [textContent]=" hotel.activo == 0 ? 'Inactivo' : 'Activo'"></h1>
+            </div>
             <h1 class="font-bold text-base ml-28">Última modificación:</h1>
             <h1 class="ml-1">14 dias</h1>
           </div>
@@ -53,37 +57,37 @@
       </p>
       <div class="mx-14 my-10 flex flex-col w-ficha-w h-800">
         <form action="insertar()">
-          <div class="relative z-0 my-5">
+          <div class="relative z-0 my-6">
             <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre"
-              class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
+              class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
               placeholder=" " />
             <label for="nombre"
-              class="absolute text-base text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              class="absolute text-base text-gray-900 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-10">
               Nombre
             </label>
           </div>
-          <div class="relative z-0 my-5">
+          <div class="relative z-0 my-6">
             <input type="text" id="direccion" name="direccion" [(ngModel)]="direccion"
-              class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
+              class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
               placeholder=" " />
             <label for="direccion"
-              class="absolute text-base text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              class="absolute text-base text-gray-900 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-10">
               Dirección</label>
           </div>
-          <div class="relative z-0 my-5">
+          <div class="relative z-0 my-6">
             <input type="text" id="telefono" name="telefono" [(ngModel)]="telefono" required
-              class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
+              class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
               placeholder=" " />
             <label for="telefono"
-              class="absolute text-base text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              class="absolute text-base text-gray-900 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-10">
               Teléfono</label>
           </div>
-          <div class="relative z-0 my-5">
+          <div class="relative z-0 my-6">
             <input type="email" id="correo" name="correo" [(ngModel)]="correo"
-              class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
+              class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
               placeholder=" " />
             <label for="correo"
-              class="absolute text-base text-gray-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              class="absolute text-base text-gray-900 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-10">
               Correo electrónico</label>
           </div>
 
