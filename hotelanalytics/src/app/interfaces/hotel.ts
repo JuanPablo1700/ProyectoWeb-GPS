@@ -6,4 +6,5 @@ export interface Hotel {
     telefono:string;
     estrellas:number;
     estado:string;
+    activo:number;
 }

@@ -22,6 +22,7 @@ export class NuevohotelComponent implements OnInit {
   telefono: string = '';
   estrellas: number = 0;
   estado: string = '';
+  activo: number = 0;
 
   constructor(
     private router: Router,
@@ -90,7 +91,8 @@ export class NuevohotelComponent implements OnInit {
         correo: this.correo,
         telefono: this.telefono,
         estrellas: this.estrellas,
-        estado: this.estado
+        estado: this.estado,
+        activo: this.activo
       }
   
       this._newHotelService.newHotel(hotel).subscribe({
