@@ -35,25 +35,43 @@ export class NuevohotelComponent implements OnInit {
 
   private validar() {
     //falta validar selects y que sean teléfonos y correos válidos
-    if (this.nombre.trim() == '') {
+
+    this.nombre= this.nombre.trim() ;
+    this.direccion= this.direccion.trim() ;
+    this.correo= this.correo.trim() ;
+    this.telefono= this.telefono.trim() ;
+
+    const telefonoRegex = /^(\+?\d{1,2}\s)?(\d{10,13})$/;
+    const correoRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+
+    if (this.nombre == '') {
       this.toastr.error('Campo nombre obligatorio', 'Error')
-      return
+      return false;
     }
-    if (this.direccion.trim() == '') {
+    if (this.direccion == '') {
       this.toastr.error('Campo direccion obligatorio', 'Error')
-      return
+      return false;
     }
-    if (this.correo.trim() == '') {
-      this.toastr.error('Campo correo obligatorio', 'Error')
-      return
-    }
-    if (this.telefono.trim() == '') {
+    if (this.telefono == '') {
       this.toastr.error('Campo teléfono obligatorio', 'Error')
-      return
+      return false;
+    }
+    if(!telefonoRegex.test(this.telefono)){
+      this.toastr.error('Teléfono inválido', 'Error')
+      return false;
+    }
+    if (this.correo == '') {
+      this.toastr.error('Campo correo obligatorio', 'Error')
+      return false;
+    }
+    if (!correoRegex.test(this.correo)) {
+      this.toastr.error('Correo inválido', 'Error')
+      return false;
     }
     if (this.estrellas == -1) {
       this.toastr.error('Campo estrellas obligatorio', 'Error')
-      return
+      return false;
     }
     if (this.estado.trim() == '') {
       this.toastr.error('Campo estado obligatorio', 'Error')
@@ -63,27 +81,27 @@ export class NuevohotelComponent implements OnInit {
   }
 
   insertar() {
-
-    this.validar();
-
-    const hotel: Hotel = {
-      nombre: this.nombre,
-      direccion: this.direccion,
-      correo: this.correo,
-      telefono: this.telefono,
-      estrellas: this.estrellas,
-      estado: this.estado
-    }
-
-    this._newHotelService.newHotel(hotel).subscribe({
-      next: (whatsappUrl) => {
-        window.open(whatsappUrl);
-        this.toastr.success('Hotel registrado correctamente', 'Correcto');
-      },
-      error: (error: HttpErrorResponse) => {
-        this._errorService.msjError(error);
+    if(this.validar()){
+      const hotel: Hotel = {
+        nombre: this.nombre,
+        direccion: this.direccion,
+        correo: this.correo,
+        telefono: this.telefono,
+        estrellas: this.estrellas,
+        estado: this.estado
       }
-    })
+  
+      this._newHotelService.newHotel(hotel).subscribe({
+        next: (whatsappUrl) => {
+          window.open(whatsappUrl);
+          this.toastr.success('Hotel registrado correctamente', 'Correcto');
+        },
+        error: (error: HttpErrorResponse) => {
+          this._errorService.msjError(error);
+        }
+      })
+      this.router.navigate(['/principaldirector']);
+    }
   }
 
   getHotels() {
