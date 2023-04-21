@@ -22,7 +22,7 @@ export class NuevohotelComponent implements OnInit {
   telefono: string = '';
   estrellas: number = 0;
   estado: string = '';
-  activo: number = 0;
+  activo:number = 0;
 
   constructor(
     private router: Router,

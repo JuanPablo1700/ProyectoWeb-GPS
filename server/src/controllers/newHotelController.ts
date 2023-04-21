@@ -94,9 +94,11 @@ class NewHotelController {
   }
 
   public async getHotel(req: Request, res: Response) {
-    const id = req.params;
-    const hotel:any = await pool.query('SELECT id, nombre, direccion, correo, telefono, estrellas, activo FROM hotel WHERE id = ?', [id]);
-    return res.json( hotel[0][0] );
+    const id = req.params.id;
+    const idInt = parseInt(id);
+    const response:any = await pool.query('SELECT id, nombre, direccion, correo, telefono, estrellas, activo FROM hotel WHERE id = ?', [idInt]);
+    const hotel = response[0][0];
+    return res.json(hotel);
   }
 
   public async updateHotel(req: Request, res: Response) {

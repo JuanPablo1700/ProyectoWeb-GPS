@@ -26,7 +26,7 @@
             <div class="mx-14 my-10 flex flex-col w-ficha-w h-800">
                 <form action="insertar()">
                     <div class="relative z-0 my-5">
-                        <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre" value="{{id}}"
+                        <input type="text" id="nombre" name="nombre" [(ngModel)]="hotel.nombre" value="{{hotel.nombre}}"
                             class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
                             placeholder=" " /> 
                         <label for="nombre"
@@ -35,7 +35,7 @@
                         </label>
                     </div>
                     <div class="relative z-0 my-5">
-                        <input type="text" id="direccion" name="direccion" [(ngModel)]="direccion"
+                        <input type="text" id="direccion" name="direccion" [(ngModel)]="direccion" value="{{hotel.direccion}}"
                             class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
                             placeholder=" " />
                         <label for="direccion"
@@ -43,7 +43,7 @@
                             Dirección</label>
                     </div>
                     <div class="relative z-0 my-5">
-                        <input type="text" id="telefono" name="telefono" [(ngModel)]="telefono" required
+                        <input type="text" id="telefono" name="telefono" [(ngModel)]="telefono" value="{{hotel.telefono}}" required
                             class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
                             placeholder=" " />
                         <label for="telefono"
@@ -51,7 +51,7 @@
                             Teléfono</label>
                     </div>
                     <div class="relative z-0 my-5">
-                        <input type="email" id="correo" name="correo" [(ngModel)]="correo"
+                        <input type="email" id="correo" name="correo" [(ngModel)]="correo" value="{{hotel.correo}}" readonly
                             class="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
                             placeholder=" " />
                         <label for="correo"
@@ -62,7 +62,7 @@
                     <label for="estrellas" class="mb-1">Estrellas</label>
                     <div class="selects grid">
                         <select id="estrellas"
-                            class="mb-5 border-0 border-b-2 border-gray-300 focus:border-verde peer-focus:text-verde"
+                            class="mb-5 border-0 border-b-2 border-gray-300 focus:border-verde peer-focus:text-verde" value="{{hotel.estrellas}}"
                             name="estrellas" [(ngModel)]="estrellas">
                             <option value="-1" selected>Seleccionar</option>
                             <option value="1">1 Estrella</option>
@@ -73,7 +73,7 @@
                         </select>
 
                         <label for="estado" class="mb-1">Estado</label>
-                        <select id="estado"
+                        <select id="estado" value="{{hotel.activo}}"
                             class="mb-5 border-0 border-b-2 border-gray-300  focus:border-verde peer-focus:text-verde"
                             name="estado" [(ngModel)]="estado">
                             <option value="-1" selected>Seleccionar</option>

@@ -13,14 +13,25 @@ import { NewHotelService } from 'src/app/services/new-hotel.service';
 })
 export class EditarhotelComponent implements OnInit {
 
-  
-  id:any = 0;
+  hotel: Hotel = {
+    id: 0,
+    nombre: '',
+    direccion: '',
+    correo: '',
+    telefono: '',
+    estrellas: 0,
+    estado: '',
+    activo: 0
+  };
+
+  id: any = 0;
   nombre: string = '';
   direccion: string = '';
   correo: string = '';
   telefono: string = '';
   estrellas: number = 0;
   estado: string = '';
+  activo: number = 0;
 
   constructor(
     private router: Router,
@@ -32,8 +43,20 @@ export class EditarhotelComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    //this.getHotel();
+    
+    const idInt = parseInt(this.id);
+    this.getHotel(idInt);
+  }
 
+  getHotel(id: number) {
+    this._newHotelService.getHotel(id).subscribe({
+      next: (data: any) => {
+        this.hotel = data;
+      },
+      error: (error: HttpErrorResponse) => {
+        this._errorService.msjError(error);
+      }
+    })
   }
 
   private validar() {
@@ -92,10 +115,11 @@ export class EditarhotelComponent implements OnInit {
         correo: this.correo,
         telefono: this.telefono,
         estrellas: this.estrellas,
+        activo: this.activo,
         estado: this.estado
       }
 
-      this._newHotelService.newHotel(hotel).subscribe({
+      this._newHotelService.updateHotel(this.id, hotel).subscribe({
         next: () => {
           this.toastr.success('Hotel actualizado correctamente', 'Correcto');
         },
