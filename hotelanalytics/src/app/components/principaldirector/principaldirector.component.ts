@@ -46,6 +46,10 @@ export class PrincipaldirectorComponent implements OnInit {
     this.router.navigate(['/editarhotel', id]);
   }
 
+  principaldirector() {
+    this.router.navigate(['/principaldirector']);
+  };
+
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
