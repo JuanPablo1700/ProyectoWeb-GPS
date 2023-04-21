@@ -10,20 +10,21 @@ import { Hotel } from 'src/app/interfaces/hotel';
   templateUrl: './principaldirector.component.html',
   styleUrls: ['./principaldirector.component.css']
 })
-export class PrincipaldirectorComponent implements OnInit{
+export class PrincipaldirectorComponent implements OnInit {
   listHotel: Hotel[] = [];
+
+  id: number = 0;
+
   ultimaMod: number = -1;
 
   constructor(
     private router: Router,
     private _newHotelService: NewHotelService,
     private _errorService: ErrorService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getHotels();
-
-
   }
 
   getHotels() {
@@ -37,8 +38,12 @@ export class PrincipaldirectorComponent implements OnInit{
     })
   }
 
-  nuevo(){
+  nuevo() {
     this.router.navigate(['/nuevohotel']);
+  }
+
+  editar(id: number) {
+    this.router.navigate(['/editarhotel',id])
   }
 
   logOut() {

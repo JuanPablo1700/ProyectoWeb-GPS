@@ -6,6 +6,7 @@ import { PrincipaldirectorComponent } from './components/principaldirector/princ
 import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.component';
 import { UsuarioscreadosComponent } from './components/usuarioscreados/usuarioscreados.component';
 import { AuthGuard } from './utils/auth.guard';
+import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
 
 const routes: Routes = [
   { path:'', redirectTo: '/login', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path:'inicio',component:InicioComponent, canActivate: [AuthGuard] },
   { path:"principaldirector",component:PrincipaldirectorComponent, canActivate: [AuthGuard] },
   { path:"nuevohotel",component:NuevohotelComponent, canActivate: [AuthGuard] },
+  { path:"editarhotel/id",component:EditarhotelComponent, canActivate: [AuthGuard] },
   { path:"usuarioscreados",component:UsuarioscreadosComponent, canActivate: [AuthGuard] }  
 ];
 

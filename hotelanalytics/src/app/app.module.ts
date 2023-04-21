@@ -17,6 +17,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { PrincipaldirectorComponent } from './components/principaldirector/principaldirector.component';
 import { UsuarioscreadosComponent } from './components/usuarioscreados/usuarioscreados.component';
 import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.component';
+import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.componen
     InicioComponent,
     PrincipaldirectorComponent,
     UsuarioscreadosComponent,
-    NuevohotelComponent
+    NuevohotelComponent,
+    EditarhotelComponent
   ],
   imports: [
     BrowserModule,

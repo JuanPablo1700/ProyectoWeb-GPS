@@ -1,21 +1,20 @@
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { Hotel } from './../../interfaces/hotel';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { NewHotelService } from 'src/app/services/new-hotel.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Hotel } from 'src/app/interfaces/hotel';
 import { ErrorService } from 'src/app/services/error.service';
+import { NewHotelService } from 'src/app/services/new-hotel.service';
 
 @Component({
-  selector: 'app-nuevohotel',
-  templateUrl: './nuevohotel.component.html',
-  styleUrls: ['./nuevohotel.component.css']
+  selector: 'app-editarhotel',
+  templateUrl: './editarhotel.component.html',
+  styleUrls: ['./editarhotel.component.css']
 })
-export class NuevohotelComponent implements OnInit {
-  listHotel: Hotel[] = [];
+export class EditarhotelComponent implements OnInit {
 
-  id:number=0;
+  
+  id:any = 0;
   nombre: string = '';
   direccion: string = '';
   correo: string = '';
@@ -27,20 +26,27 @@ export class NuevohotelComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private _newHotelService: NewHotelService,
-    private _errorService: ErrorService
+    private _errorService: ErrorService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.getHotels();
+    this.route.queryParams.subscribe(params => {
+      this.id = params['id'];
+      // aquí puedes hacer lo que necesites con el valor de "id"
+    });
+    /* this.id = this.route.snapshot.paramMap.get('id'); */
+    //this.getHotel();
+
   }
 
   private validar() {
     //falta validar selects y que sean teléfonos y correos válidos
 
-    this.nombre= this.nombre.trim() ;
-    this.direccion= this.direccion.trim() ;
-    this.correo= this.correo.trim() ;
-    this.telefono= this.telefono.trim() ;
+    this.nombre = this.nombre.trim();
+    this.direccion = this.direccion.trim();
+    this.correo = this.correo.trim();
+    this.telefono = this.telefono.trim();
 
     const telefonoRegex = /^(\+?\d{1,2}\s)?(\d{10,13})$/;
     const correoRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -58,7 +64,7 @@ export class NuevohotelComponent implements OnInit {
       this.toastr.error('Campo teléfono obligatorio', 'Error')
       return false;
     }
-    if(!telefonoRegex.test(this.telefono)){
+    if (!telefonoRegex.test(this.telefono)) {
       this.toastr.error('Teléfono inválido', 'Error')
       return false;
     }
@@ -81,8 +87,8 @@ export class NuevohotelComponent implements OnInit {
     return true;
   }
 
-  insertar() {
-    if(this.validar()){
+  actualizar() {
+    if (this.validar()) {
       const hotel: Hotel = {
         id: this.id,
         nombre: this.nombre,
@@ -92,11 +98,10 @@ export class NuevohotelComponent implements OnInit {
         estrellas: this.estrellas,
         estado: this.estado
       }
-  
+
       this._newHotelService.newHotel(hotel).subscribe({
-        next: (whatsappUrl) => {
-          window.open(whatsappUrl);
-          this.toastr.success('Hotel registrado correctamente', 'Correcto');
+        next: () => {
+          this.toastr.success('Hotel actualizado correctamente', 'Correcto');
         },
         error: (error: HttpErrorResponse) => {
           this._errorService.msjError(error);
@@ -106,17 +111,6 @@ export class NuevohotelComponent implements OnInit {
     }
   }
 
-  getHotels() {
-    this._newHotelService.getHotels().subscribe({
-      next: (data) => {
-        this.listHotel = data;
-      },
-      error: (error: HttpErrorResponse) => {
-        this._errorService.msjError(error);
-      }
-    })
-  }
-
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -124,3 +118,7 @@ export class NuevohotelComponent implements OnInit {
     this.router.navigate(['/login'])
   }
 }
+function getIdFromUrl(): string | null {
+  throw new Error('Function not implemented.');
+}
+
