@@ -109,6 +109,7 @@ class NewHotelController {
 
     try {
       await pool.query('UPDATE hotel SET nombre = ?, direccion = ?, telefono = ?, estrellas = ?, activo = ? WHERE id = ?', [nombre, direccion, telefono, estrellasInt, estado, idInt]);
+      await pool.query('UPDATE usuario SET activo = ? where fk_id_hotel = ?', [estado, idInt]);
       return res.json({ msg: 'Hotel actualizado con exito.' });
     } catch (error) {
       return res.status(401).json({ msg: 'Hubo un problema al actualizar los datos.', error });
