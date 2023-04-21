@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('token', token);
                     localStorage.setItem('user', user.user);
                     localStorage.setItem('tipo_usuario', tipo_usuario);
-                    if (pass_actualizada === "0") {
+                    if (pass_actualizada == "0") {
                         this.router.navigate(['/inicio']);
                     } else {
                         if (tipo_usuario === "admin") {
