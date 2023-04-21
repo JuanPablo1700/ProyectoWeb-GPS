@@ -22,4 +22,12 @@ export class NewHotelService {
   getHotels(): Observable<Hotel[]> {
     return this.http.get<Hotel[]>(`${this.myAppUrl}${this.myApiUrl}/getHotels`);
   }
+  
+  getHotel(id: number): Observable<Hotel> {
+    return this.http.get<Hotel>(`${this.myAppUrl}${this.myApiUrl}/getHotel/${id}`);
+  }
+  
+  updateHotel(id: number, hotel:Hotel): Observable<Hotel> {
+    return this.http.put<Hotel>(`${this.myAppUrl}${this.myApiUrl}/updateHotel/${id}`, hotel);
+  }
 }
