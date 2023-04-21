@@ -21,7 +21,7 @@
     <div class=" mx-10 fixed flex flex-col justify-between items-center  bg-white  w-auto h-asociados rounded-lg">
         <p class="text-titulo text-2xl mt-5 font-bold  flex-grow-0 flex-shrink-0 ">Asociados</p>
         <div class="asociados bg-white grid xl:grid-cols-2 overflow-auto">
-            <div *ngFor="let hotel of listHotel" (click)="editar(4)" [routerLink]="['/editarhotel']" [queryParams]="{ id: 4}"
+            <div *ngFor="let hotel of listHotel" (click)="editar(hotel.id)" 
                 class="hotel mx-14 my-5 flex flex-col w-ficha-w h-ficha-h border border-black items-center">
                 <h1 class="font-bold mx-36 mt-2">{{hotel.nombre}}</h1>
                 <div class="estrellas flex my-2">

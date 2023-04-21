@@ -14,7 +14,7 @@ const routes: Routes = [
   { path:'inicio',component:InicioComponent, canActivate: [AuthGuard] },
   { path:"principaldirector",component:PrincipaldirectorComponent, canActivate: [AuthGuard] },
   { path:"nuevohotel",component:NuevohotelComponent, canActivate: [AuthGuard] },
-  { path:"editarhotel/id",component:EditarhotelComponent, canActivate: [AuthGuard] },
+  { path:"editarhotel/:id",component:EditarhotelComponent, canActivate: [AuthGuard] },
   { path:"usuarioscreados",component:UsuarioscreadosComponent, canActivate: [AuthGuard] }  
 ];
 

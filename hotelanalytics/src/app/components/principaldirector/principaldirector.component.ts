@@ -43,7 +43,7 @@ export class PrincipaldirectorComponent implements OnInit {
   }
 
   editar(id: number) {
-    this.router.navigate(['/editarhotel',id])
+    this.router.navigate(['/editarhotel', id]);
   }
 
   logOut() {

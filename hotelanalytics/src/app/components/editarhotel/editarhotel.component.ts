@@ -31,11 +31,7 @@ export class EditarhotelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.id = params['id'];
-      // aquí puedes hacer lo que necesites con el valor de "id"
-    });
-    /* this.id = this.route.snapshot.paramMap.get('id'); */
+    this.id = this.route.snapshot.paramMap.get('id');
     //this.getHotel();
 
   }
