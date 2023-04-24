@@ -18,6 +18,7 @@ import { PrincipaldirectorComponent } from './components/principaldirector/princ
 import { UsuarioscreadosComponent } from './components/usuarioscreados/usuarioscreados.component';
 import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.component';
 import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
+import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxhotel.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EditarhotelComponent } from './components/editarhotel/editarhotel.compo
     PrincipaldirectorComponent,
     UsuarioscreadosComponent,
     NuevohotelComponent,
-    EditarhotelComponent
+    EditarhotelComponent,
+    GraficasxhotelComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.componen
 import { UsuarioscreadosComponent } from './components/usuarioscreados/usuarioscreados.component';
 import { AuthGuard } from './utils/auth.guard';
 import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
+import { GraficasgeneralesComponent } from './components/graficasgenerales/graficasgenerales.component';
+import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxhotel.component';
 
 const routes: Routes = [
   { path:'', redirectTo: '/login', pathMatch: 'full' },
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path:"principaldirector",component:PrincipaldirectorComponent, canActivate: [AuthGuard] },
   { path:"nuevohotel",component:NuevohotelComponent, canActivate: [AuthGuard] },
   { path:"editarhotel/:id",component:EditarhotelComponent, canActivate: [AuthGuard] },
-  { path:"usuarioscreados",component:UsuarioscreadosComponent, canActivate: [AuthGuard] }  
+  { path:"usuarioscreados",component:UsuarioscreadosComponent, canActivate: [AuthGuard] }  ,
+  {path:"graficasgenerales",component:GraficasgeneralesComponent},
+  {path:"graficasxhotel",component:GraficasxhotelComponent}
 ];
 
 @NgModule({
