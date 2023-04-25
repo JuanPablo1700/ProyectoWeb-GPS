@@ -55,7 +55,8 @@ export class LoginComponent implements OnInit {
                         if (tipo_usuario === "admin") {
                             this.router.navigate(['/principaldirector']);
                         } else if (tipo_usuario === "gerente") {
-                            this.router.navigate(['/principalgerente']);
+                            //this.router.navigate(['/principalgerente']);
+                            this.router.navigate(['/graficasxhotel']);
                         } else if (tipo_usuario === "recepcionista") {
                             this.router.navigate(['/principalrecepcionista']);
                         }
