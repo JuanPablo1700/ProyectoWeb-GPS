@@ -15,10 +15,10 @@ import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PrincipaldirectorComponent } from './components/principaldirector/principaldirector.component';
-import { UsuarioscreadosComponent } from './components/usuarioscreados/usuarioscreados.component';
 import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.component';
 import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
 import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxhotel.component';
+import { GraficasgeneralesComponent } from './components/graficasgenerales/graficasgenerales.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +26,9 @@ import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxho
     LoginComponent,
     InicioComponent,
     PrincipaldirectorComponent,
-    UsuarioscreadosComponent,
     NuevohotelComponent,
     EditarhotelComponent,
+    GraficasgeneralesComponent,
     GraficasxhotelComponent
   ],
   imports: [

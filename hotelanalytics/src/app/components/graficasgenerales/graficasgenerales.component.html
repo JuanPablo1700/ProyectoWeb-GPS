@@ -1,63 +1,70 @@
-<div class="flex  h-full w-full  ">
-    <div class="barra fixed bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
-        <img src="../../../assets/img/logo.png" class=" w-24 h-24 sm:w-24 sm:h-24 ">
-        <button class="my-4">
-            <img src="../../../assets/img/usuarios.png" class="w-60 sm:w-60 h-auto mt-36 mb-8">
-        </button>
-        <button class="my-4">
-            <img src="../../../assets/img/grafico-histograma.png" class="w-60 sm:w-60 h-auto">
-        </button>
-        <button class="my-4">
-            <img src="../../../assets/img/salida.png" class="w-60 sm:w-60 h-auto mt-36 ">
-        </button>
-        <h1 class=" sm:text-xl text-black font-bold mx-auto">
-            Cerrar Sesión
-        </h1>
-    </div>
-    <div>
-        <div class="ml-64 mt-10 flex flex-col  items-center bg-white  w-creado h-graficapor rounded-lg">
-            <h1 class="  text-titulo text-2xl   font-bold items-center my-6">Graficas Generales</h1>
-            <select id="Graficas" class="mb-5">
-                <option value="opcion1" selected> Gráficas Generales</option>
-                <option value="opcion2">Gráficas por hotel</option>
+<div>
 
+    <div class="barra fixed bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
+        <div>
+            <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2">
+        </div>
+        <div class="botones flex flex-col justify-between items-center h-full flex-grow mt-9">
+            <button (click)="principaldirector()">
+                <img src="../../../assets/img/usuarios.png" class="w-60 h-auto">
+            </button>
+            <button class="">
+                <img src="../../../assets/img/grafico-histograma.png" class="w-60 h-auto">
+            </button>
+            <button (click)="logOut()" class="flex flex-col items-center">
+                <img src="../../../assets/img/salida.png" class="w-60 h-auto">
+                Cerrar Sesión
+            </button>
+        </div>
+    </div>
+
+    <div class="contenedor  ml-32 flex flex-col justify-center flex-grow items-center">
+        <h1 class="  text-titulo text-2xl font-bold my-12">Graficas Generales</h1>
+        <div class="flex flex-col items-center bg-white w-4/5 rounded-lg">
+            <select [(ngModel)]="tipoGrafica" id="Graficas" class="my-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                <option value="1"> Gráficas Generales </option>
+                <option value="2">Gráficas por hotel</option>
             </select>
 
-            
-
-            <div class="flex ">
-                <select id="fechaconsulta" class="mb-5">
-                    <option value="opcion1" selected> Fecha de consulta</option>
-                    <option value="opcion2">Este día</option>
-                    <option value="opcion3">Este semana</option>
-                    <option value="opcion4">Este mes</option>
-                    <option value="opcion2">Personalizado
+            <div class="flex justify-center items-start mb-10">
+                <select [(ngModel)]="fechaSelect" id="fechaconsulta" class="mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    <option value="-1" selected> Fecha de consulta</option>
+                    <option value="1">Este día</option>
+                    <option value="2">Este semana</option>
+                    <option value="3">Este mes</option>
+                    <option value="4">Personalizado
                 </select>
 
-                <label for="fechainicio" class="ml-20 mr-3"> Fecha Inicio:   </label>
-                <input type="date" id="fechainicio" name="fecha" >
+
+                <div *ngIf="fechaSelect == '4'" class="flex flex-col">
+                    <div class="">
+                        <label for="fechainicio"> Fecha Inicio: </label>
+                        <input type="date" id="fechainicio" name="fecha" class="mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    </div>
+                    <div class="mt-4">
+                        <label for="fechafin" class=""> Fecha Fin: </label>
+                        <input type="date" id="fechafin" name="fecha" class="-mr-12 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    </div>
+                </div>
+
+                <select *ngIf="tipoGrafica == '1'" id="Graficas" class="border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    <option value="-1" selected> Tipo de hotel</option>
+                    <option value="0">Todos</option>
+                    <option value="1"> 1 estrellas </option>
+                    <option value="2"> 2 estrellas </option>
+                    <option value="3"> 3 estrellas </option>
+                    <option value="4"> 4 estrellas </option>
+                    <option value="5"> 5 estrellas </option>
+                </select>
                 
-                <select id="Graficas" class="mb-5 ml-8">
-                    <option value="opcion1" selected> Tipo de hotel</option>
-                    <option value="opcion2">Gráficas por hotel</option>
-
+                <select *ngIf="tipoGrafica == '2'" id="Graficas" class="border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    <option value="-1" selected> Seleccione un Hotel </option>
+                    <option *ngFor="let hotel of hoteles" [value]="hotel.id">{{hotel.nombre}}</option>
                 </select>
-
             </div>
-            <div>
-                <label for="fechafin" class=" mr-7"> Fecha Fin:   </label>
-                <input type="date" id="fechafin" name="fecha" class="-mr-12" >
-            </div>
-           
         </div>
-        <div class="flex justify-center items-baseline">
-            <button  class="  bg-verde text-white text-2xl px-20 py-1 ml-52 mt-5  ">
-                Generar PDF
-            </button>
-
-        </div>
-        
-
+        <button class="  bg-verde text-white text-2xl px-20 py-2 mt-8 rounded-lg">
+            Generar PDF
+        </button>
     </div>
-
 </div>
