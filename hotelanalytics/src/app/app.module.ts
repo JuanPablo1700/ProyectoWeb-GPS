@@ -19,6 +19,7 @@ import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.componen
 import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
 import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxhotel.component';
 import { GraficasgeneralesComponent } from './components/graficasgenerales/graficasgenerales.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { GraficasgeneralesComponent } from './components/graficasgenerales/grafi
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxChartsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,

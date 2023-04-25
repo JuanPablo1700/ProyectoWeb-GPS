@@ -21,13 +21,15 @@
     <div class="contenedor  ml-32 flex flex-col justify-center flex-grow items-center">
         <h1 class="  text-titulo text-2xl font-bold my-12">Graficas Generales</h1>
         <div class="flex flex-col items-center bg-white w-4/5 rounded-lg">
-            <select [(ngModel)]="tipoGrafica" id="Graficas" class="my-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+            <select [(ngModel)]="tipoGrafica" id="Graficas"
+                class="my-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                 <option value="1"> Gráficas Generales </option>
                 <option value="2">Gráficas por hotel</option>
             </select>
 
             <div class="flex justify-center items-start mb-10">
-                <select [(ngModel)]="fechaSelect" id="fechaconsulta" class="mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                <select [(ngModel)]="fechaSelect" id="fechaconsulta"
+                    class="mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Fecha de consulta</option>
                     <option value="1">Este día</option>
                     <option value="2">Este semana</option>
@@ -39,15 +41,18 @@
                 <div *ngIf="fechaSelect == '4'" class="flex flex-col">
                     <div class="">
                         <label for="fechainicio"> Fecha Inicio: </label>
-                        <input type="date" id="fechainicio" name="fecha" class="mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                        <input type="date" id="fechainicio" name="fecha"
+                            class="mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     </div>
                     <div class="mt-4">
                         <label for="fechafin" class=""> Fecha Fin: </label>
-                        <input type="date" id="fechafin" name="fecha" class="-mr-12 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                        <input type="date" id="fechafin" name="fecha"
+                            class="-mr-12 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     </div>
                 </div>
 
-                <select *ngIf="tipoGrafica == '1'" id="Graficas" class="border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                <select *ngIf="tipoGrafica == '1'" id="Graficas"
+                    class="border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Tipo de hotel</option>
                     <option value="0">Todos</option>
                     <option value="1"> 1 estrellas </option>
@@ -56,13 +61,27 @@
                     <option value="4"> 4 estrellas </option>
                     <option value="5"> 5 estrellas </option>
                 </select>
-                
-                <select *ngIf="tipoGrafica == '2'" id="Graficas" class="border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+
+                <select *ngIf="tipoGrafica == '2'" id="Graficas"
+                    class="border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Seleccione un Hotel </option>
                     <option *ngFor="let hotel of hoteles" [value]="hotel.id">{{hotel.nombre}}</option>
                 </select>
             </div>
         </div>
+        <ngx-charts-pie-chart 
+            [view]="view" 
+            scheme="cool" 
+            [results]="single" 
+            [gradient]="gradient"
+            [legend]="showLegend" 
+            [legendPosition]="legendPosition" 
+            [labels]="showLabels" 
+            [doughnut]="isDoughnut"
+            (select)="onSelect($event)" 
+            (activate)="onActivate($event)" 
+            (deactivate)="onDeactivate($event)">
+        </ngx-charts-pie-chart>
         <button class="  bg-verde text-white text-2xl px-20 py-2 mt-8 rounded-lg">
             Generar PDF
         </button>
