@@ -4,42 +4,25 @@ import { NewHotelService } from 'src/app/services/new-hotel.service';
 import { Hotel } from 'src/app/interfaces/hotel';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-graficasgenerales',
   templateUrl: './graficasgenerales.component.html',
   styleUrls: ['./graficasgenerales.component.css']
 })
-export class GraficasgeneralesComponent implements OnInit{
+export class GraficasgeneralesComponent implements OnInit {
 
   fechaSelect = "";
   tipoGrafica = "";
 
   hoteles: Hotel[] = [];
 
-  single = [
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-    {
-      "name": "USA",
-      "value": 5000000
-    },
-    {
-      "name": "France",
-      "value": 7200000
-    },
-      {
-      "name": "UK",
-      "value": 6200000
-    }
-  ];
-
   constructor(
     private router: Router,
     private _newHotelService: NewHotelService,
     private _errorService: ErrorService,
+    private _dataService: DataService
   ) { }
 
   ngOnInit(): void {
@@ -48,14 +31,24 @@ export class GraficasgeneralesComponent implements OnInit{
     this.getHotels();
   }
 
+  get multi() {
+    return this._dataService.countryData;
+  }
+
   view: [number, number] = [700, 400];
 
   // options
-  gradient: boolean = true;
+  showXAxis: boolean = true;
+  showYAxis: boolean = true;
+  gradient: boolean = false;
   showLegend: boolean = true;
-  showLabels: boolean = true;
-  isDoughnut: boolean = false;
   legendPosition: string = 'below';
+  showXAxisLabel: boolean = true;
+  yAxisLabel: string = 'Country';
+  showYAxisLabel: boolean = true;
+  xAxisLabel = 'Population';
+
+  schemeType: string = 'ordinal';
 
   onSelect(data: any): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
