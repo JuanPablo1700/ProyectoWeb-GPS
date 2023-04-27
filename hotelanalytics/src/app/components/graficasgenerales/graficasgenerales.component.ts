@@ -31,13 +31,15 @@ export class GraficasgeneralesComponent implements OnInit {
     this.tipoGrafica = "1";
     this.getHotels();
 
-    this.nuevo = this._dataService.getMotivoGeneral();
-    console.log(this.nuevo);
+    this._dataService.getMotivoGeneral().subscribe({
+      next: data => {
+        this.nuevo = data;
+      }
+    });
+    
   }
 
   get multi() {
-    /* this.nuevo = this._dataService.getMotivoGeneral();
-    console.log(this.nuevo); */
     return this.nuevo;
   }
 

@@ -35,8 +35,8 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getMotivoGeneral()  {
-    return this.http.get(`http://localhost:3000/api/data/getMotivoGeneral`);
+  getMotivoGeneral(): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:3000/api/data/getMotivoGeneral`);
   }
 /* 
   private data: Country[] = [
