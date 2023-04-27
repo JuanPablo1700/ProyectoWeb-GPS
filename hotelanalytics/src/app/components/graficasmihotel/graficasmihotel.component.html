@@ -1,0 +1,59 @@
+<div class="flex  h-full w-full  ">
+    <div class="barra fixed bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
+        <img src="../../../assets/img/logo.png" class=" w-24 h-24 sm:w-24 sm:h-24 ">
+        <button class="my-4">
+            <img src="../../../assets/img/habitacion.png" class="w-60 sm:w-60 h-auto mt-36 mb-8">
+        </button>
+        <button class="my-4">
+            <img src="../../../assets/img/grafico-histograma.png" class="w-60 sm:w-60 h-auto">
+        </button>
+        <button class="mt-7">
+            <img src="../../../assets/img/edificio.png" class="w-60 sm:w-60 h-auto">
+        </button>
+        <button class="my-1">
+            <img src="../../../assets/img/salida.png" class="w-60 sm:w-60 h-auto mt-24 ">
+        </button>
+        <h1 class=" sm:text-xl text-black font-bold mx-auto">
+            Cerrar Sesión
+        </h1>
+    </div>
+    <div>
+        <div class="ml-64 mt-10 flex flex-col  items-center bg-white  w-creado h-graficapor rounded-lg">
+            <h1 class="  text-titulo text-2xl   font-bold items-center my-6">Graficas de mi hotel</h1>
+            <select id="consulta" class="mb-5">
+                <option value="opcion1" selected> Fecha de consulta</option>
+                <option value="opcion2">Este día</option>
+                <option value="opcion3">Este semana</option>
+                <option value="opcion4">Este mes</option>
+                <option value="opcion5">Personalizado</option>
+            </select>
+
+            
+
+            <div class="flex  mt-24">
+                
+
+                <label for="fechainicio" class="mr-3"> Fecha Inicio:   </label>
+                <input type="date" id="fechainicio" name="fecha" >
+                
+              
+
+            </div>
+
+            <div class="flex  mt-5">
+
+                <label for="fechafin" class="mr-3">  Fecha Fin        :   </label>
+                <input type="date" id="fechafin" name="fecha" class="ml-3" >
+            </div>          
+        </div>
+        <div class="flex justify-center items-baseline">
+            <button  class="  bg-verde text-white text-2xl px-20 py-1 ml-52 mt-5  ">
+                Generar PDF
+            </button>
+
+        </div>
+        
+
+    </div>
+
+</div>

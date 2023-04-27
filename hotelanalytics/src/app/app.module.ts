@@ -19,6 +19,9 @@ import { UsuarioscreadosComponent } from './components/usuarioscreados/usuariosc
 import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.component';
 import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
 import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxhotel.component';
+import { DatoshotelComponent } from './components/datoshotel/datoshotel.component';
+import { MicategoriaComponent } from './components/micategoria/micategoria.component';
+import { GraficasmihotelComponent } from './components/graficasmihotel/graficasmihotel.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxho
     UsuarioscreadosComponent,
     NuevohotelComponent,
     EditarhotelComponent,
-    GraficasxhotelComponent
+    GraficasxhotelComponent,
+    DatoshotelComponent,
+    MicategoriaComponent,
+    GraficasmihotelComponent
   ],
   imports: [
     BrowserModule,

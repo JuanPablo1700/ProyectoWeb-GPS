@@ -9,6 +9,9 @@ import { AuthGuard } from './utils/auth.guard';
 import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
 import { GraficasgeneralesComponent } from './components/graficasgenerales/graficasgenerales.component';
 import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxhotel.component';
+import { DatoshotelComponent } from './components/datoshotel/datoshotel.component';
+import { MicategoriaComponent } from './components/micategoria/micategoria.component';
+import { GraficasmihotelComponent } from './components/graficasmihotel/graficasmihotel.component';
 
 const routes: Routes = [
   { path:'', redirectTo: '/login', pathMatch: 'full' },
@@ -19,7 +22,10 @@ const routes: Routes = [
   { path:"editarhotel/:id",component:EditarhotelComponent, canActivate: [AuthGuard] },
   { path:"usuarioscreados",component:UsuarioscreadosComponent, canActivate: [AuthGuard] }  ,
   {path:"graficasgenerales",component:GraficasgeneralesComponent},
-  {path:"graficasxhotel",component:GraficasxhotelComponent}
+  {path:"graficasxhotel",component:GraficasxhotelComponent},
+  {path:"datoshotel",component:DatoshotelComponent},
+  {path:"micategoria",component:MicategoriaComponent},
+  {path:"graficasmihotel",component:GraficasmihotelComponent}
 ];
 
 @NgModule({
