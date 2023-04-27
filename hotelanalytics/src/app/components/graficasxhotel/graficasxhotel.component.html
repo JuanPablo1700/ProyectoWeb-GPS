@@ -1,65 +1,57 @@
 <div class="flex  h-full w-full  ">
-    <div class="barra fixed bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
-        <img src="../../../assets/img/logo.png" class=" w-24 h-24 sm:w-24 sm:h-24 ">
-        <button class="my-4">
-            <img src="../../../assets/img/usuarios.png" class="w-60 sm:w-60 h-auto mt-36 mb-8">
-        </button>
-        <button class="my-4">
-            <img src="../../../assets/img/grafico-histograma.png" class="w-60 sm:w-60 h-auto">
-        </button>
-        <button class="my-4">
-            <img src="../../../assets/img/salida.png" class="w-60 sm:w-60 h-auto mt-36 ">
-        </button>
-        <h1 class=" sm:text-xl text-black font-bold mx-auto">
-            Cerrar Sesión
-        </h1>
-    </div>
-    <div>
-        <div class="ml-64 mt-10 flex flex-col  items-center bg-white  w-creado h-graficapor rounded-lg">
-            <h1 class="  text-titulo text-2xl   font-bold items-center my-6">Graficas por hotel</h1>
-            <select id="Graficas" class="mb-5">
-                <option value="opcion1" selected> Gráficas Generales</option>
-                <option value="opcion2">Gráficas por hotel</option>
-
-            </select>
-
-            
-
-            <div class="flex ">
-                <select id="fechaconsulta" class="mb-5">
-                    <option value="opcion1" selected> Fecha de consulta</option>
-                    <option value="opcion2">Este día</option>
-                    <option value="opcion3">Este semana</option>
-                    <option value="opcion4">Este mes</option>
-                    <option value="opcion2">Personalizado
-                </select>
-
-                <label for="fechainicio" class="ml-20 mr-3"> Fecha Inicio:   </label>
-                <input type="date" id="fechainicio" name="fecha" >
-                
-                <select id="Graficas" class="mb-5 ml-8">
-                    <option value="opcion1" selected> Hotel San Jose</option>
-                    <option value="opcion2">Hotel Las Plumas</option>
-                    <option value="opcion3">Hotel De Paso</option>
-                    <option value="opcion4">Hotel El Perron</option>
-
-                </select>
-
-            </div>
-            <div>
-                <label for="fechafin" class=" mr-5"> Fecha Fin:   </label>
-                <input type="date" id="fechafin" name="fecha" class="-mr-14" >
-            </div>
-           
+    <div class="barra fixed z-50 bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
+        <div>
+            <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2">
         </div>
-        <div class="flex justify-center items-baseline">
-            <button  class="  bg-verde text-white text-2xl px-20 py-1 ml-52 mt-5  ">
+        <div class="botones flex flex-col justify-between items-center h-full flex-grow mt-9">
+            <button class="">
+                <img src="../../../assets/img/habitacion.png" class="w-60 h-auto">
+            </button>
+            <button class="">
+                <img src="../../../assets/img/grafico-de-barras.png" class="w-60 h-auto">
+            </button>
+            <button (click)="principal()">
+                <img src="../../../assets/img/hotel.png" class="w-60 h-auto">
+            </button>
+            <button (click)="logOut()" class="flex flex-col items-center">
+                <img src="../../../assets/img/salida.png" class="w-60 h-auto">
+                Cerrar Sesión
+            </button>
+        </div>
+    </div>
+
+    <div class="contenedor ml-32 flex h-full flex-col justify-center flex-grow items-center">
+        <div class="mx-10 mt-10 flex flex-col items-center bg-white w-3/4 h-3/4 rounded-lg">
+            <h1 class="text-titulo text-2xl font-bold items-center mt-6">Graficas de mi hotel</h1>
+            <div class="flex flex-col justify-items-center grid-rows-3 gap-3 items-center mt-3">
+
+                <select id="filtroConsulta" [(ngModel)]="filtroConsulta"
+                    class="h-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    <option value="0" selected> Fecha de consulta</option>
+                    <option value="1">Este día</option>
+                    <option value="2">Este semana</option>
+                    <option value="3">Este mes</option>
+                    <option value="4">Personalizado
+                </select>
+
+                <div *ngIf="filtroConsulta==4">
+                    <div class="flex flex-col items-center">
+                        <label for="fechaInicio" class=""> Fecha Inicio: </label>
+                        <input type="date" id="fechaInicio" name="fechaInicio" [(ngModel)]="fechaInicio"
+                            class="mb-5 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <label for="fechaFin" class=""> Fecha Fin: </label>
+                        <input type="date" id="fechaFin" name="fecha" [(ngModel)]="fechaFin"
+                            class="mb-5 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="filtroConsulta!=0"  class="flex justify-center items-baseline mt-2">
+            <button class="hover:bg-verde text-white text-xl px-10 py-1 rounded-lg bg-green-600 focus:border-verde ">
                 Generar PDF
             </button>
-
         </div>
-        
-
     </div>
-
 </div>

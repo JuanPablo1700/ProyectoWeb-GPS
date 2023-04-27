@@ -29,7 +29,6 @@ module.exports = {
         'asosia-h':'530px',
         'ficha-h':'200px',
         'asociados':'700px',
-        'graficapor':'600px'
       }
     },
   },

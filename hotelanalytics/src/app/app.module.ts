@@ -15,13 +15,17 @@ import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PrincipaldirectorComponent } from './components/principaldirector/principaldirector.component';
-import { UsuarioscreadosComponent } from './components/usuarioscreados/usuarioscreados.component';
 import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.component';
 import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
 import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxhotel.component';
+<<<<<<< HEAD
 import { DatoshotelComponent } from './components/datoshotel/datoshotel.component';
 import { MicategoriaComponent } from './components/micategoria/micategoria.component';
 import { GraficasmihotelComponent } from './components/graficasmihotel/graficasmihotel.component';
+=======
+import { GraficasgeneralesComponent } from './components/graficasgenerales/graficasgenerales.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+>>>>>>> d285ff7211204d15684cdef9b43268e9d91816dd
 
 @NgModule({
   declarations: [
@@ -29,19 +33,24 @@ import { GraficasmihotelComponent } from './components/graficasmihotel/graficasm
     LoginComponent,
     InicioComponent,
     PrincipaldirectorComponent,
-    UsuarioscreadosComponent,
     NuevohotelComponent,
     EditarhotelComponent,
+<<<<<<< HEAD
     GraficasxhotelComponent,
     DatoshotelComponent,
     MicategoriaComponent,
     GraficasmihotelComponent
+=======
+    GraficasgeneralesComponent,
+    GraficasxhotelComponent
+>>>>>>> d285ff7211204d15684cdef9b43268e9d91816dd
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxChartsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,

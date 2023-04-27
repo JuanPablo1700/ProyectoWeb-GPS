@@ -4,7 +4,6 @@ import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PrincipaldirectorComponent } from './components/principaldirector/principaldirector.component';
 import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.component';
-import { UsuarioscreadosComponent } from './components/usuarioscreados/usuarioscreados.component';
 import { AuthGuard } from './utils/auth.guard';
 import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
 import { GraficasgeneralesComponent } from './components/graficasgenerales/graficasgenerales.component';
@@ -20,12 +19,17 @@ const routes: Routes = [
   { path:"principaldirector",component:PrincipaldirectorComponent, canActivate: [AuthGuard] },
   { path:"nuevohotel",component:NuevohotelComponent, canActivate: [AuthGuard] },
   { path:"editarhotel/:id",component:EditarhotelComponent, canActivate: [AuthGuard] },
+<<<<<<< HEAD
   { path:"usuarioscreados",component:UsuarioscreadosComponent, canActivate: [AuthGuard] }  ,
   {path:"graficasgenerales",component:GraficasgeneralesComponent},
   {path:"graficasxhotel",component:GraficasxhotelComponent},
   {path:"datoshotel",component:DatoshotelComponent},
   {path:"micategoria",component:MicategoriaComponent},
   {path:"graficasmihotel",component:GraficasmihotelComponent}
+=======
+  { path:"graficasgenerales",component:GraficasgeneralesComponent, canActivate: [AuthGuard] },
+  { path:"graficasxhotel",component:GraficasxhotelComponent, canActivate: [AuthGuard] }
+>>>>>>> d285ff7211204d15684cdef9b43268e9d91816dd
 ];
 
 @NgModule({
