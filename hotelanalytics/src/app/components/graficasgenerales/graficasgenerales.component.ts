@@ -17,6 +17,7 @@ export class GraficasgeneralesComponent implements OnInit {
   tipoGrafica = "";
 
   hoteles: Hotel[] = [];
+  nuevo:any;
 
   constructor(
     private router: Router,
@@ -29,10 +30,15 @@ export class GraficasgeneralesComponent implements OnInit {
     this.fechaSelect = "-1";
     this.tipoGrafica = "1";
     this.getHotels();
+
+    this.nuevo = this._dataService.getMotivoGeneral();
+    console.log(this.nuevo);
   }
 
   get multi() {
-    return this._dataService.countryData;
+    /* this.nuevo = this._dataService.getMotivoGeneral();
+    console.log(this.nuevo); */
+    return this.nuevo;
   }
 
   view: [number, number] = [700, 400];
@@ -44,9 +50,9 @@ export class GraficasgeneralesComponent implements OnInit {
   showLegend: boolean = true;
   legendPosition: string = 'below';
   showXAxisLabel: boolean = true;
-  yAxisLabel: string = 'Country';
+  yAxisLabel: string = 'Hotel';
   showYAxisLabel: boolean = true;
-  xAxisLabel = 'Population';
+  xAxisLabel = 'Cantidad';
 
   schemeType: string = 'ordinal';
 

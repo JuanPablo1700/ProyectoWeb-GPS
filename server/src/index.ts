@@ -5,6 +5,7 @@ import cors from 'cors';
 import loginRoutes from "./routes/loginRoutes";
 import indexRoutes from './routes/indexRoutes';
 import newHotelRoutes from './routes/newHotelRoutes';
+import dataRoutes from './routes/dataRoutes';
 
 class Server {
 
@@ -28,6 +29,7 @@ class Server {
         this.app.use(loginRoutes);
         this.app.use(indexRoutes);
         this.app.use(newHotelRoutes);
+        this.app.use(dataRoutes);
     }
 
     start(): void {

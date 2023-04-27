@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
-interface Country {
+/* interface Country {
   name: string,
   series: [{
       name: string,
@@ -18,174 +20,29 @@ interface Country {
       name: string,
       value: number
     },
-  ]
-  /* hotel: string,
-  motivo: [{
-      name: string,
-      value: number
-    },
-    {
-      name: string,
-      value: number
-    },
-    {
-      name: string,
-      value: number
-    },
-    {
-      name: string,
-      value: number
-    },
     {
       name: string,
       value: number
     }
-  ]; */
-}
+  ];
+} */
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
+  getMotivoGeneral()  {
+    return this.http.get(`http://localhost:3000/api/data/getMotivoGeneral`);
+  }
+/* 
   private data: Country[] = [
     {
-      "name": "Germany",
+      "name": "Honguito",
       "series": [
-        {
-          "name": "2010",
-          "value": 7300000
-        },
-        {
-          "name": "2011",
-          "value": 8940000
-        },
-        {
-          "name": "2012",
-          "value": 8940000
-        },
-        {
-          "name": "2013",
-          "value": 8940000
-        }
-      ]
-    },
-  
-    {
-      "name": "USA",
-      "series": [
-        {
-          "name": "2010",
-          "value": 7870000
-        },
-        {
-          "name": "2011",
-          "value": 8270000
-        },
-        {
-          "name": "2012",
-          "value": 8940000
-        },
-        {
-          "name": "2013",
-          "value": 8940000
-        }
-      ]
-    },
-  
-    {
-      "name": "France",
-      "series": [
-        {
-          "name": "2010",
-          "value": 5000002
-        },
-        {
-          "name": "2011",
-          "value": 5800000
-        },
-        {
-          "name": "2012",
-          "value": 8940000
-        },
-        {
-          "name": "2013",
-          "value": 8940000
-        }
-      ]
-    },
-  
-    {
-      "name": "France1",
-      "series": [
-        {
-          "name": "2010",
-          "value": 5000002
-        },
-        {
-          "name": "2011",
-          "value": 5800000
-        },
-        {
-          "name": "2012",
-          "value": 8940000
-        },
-        {
-          "name": "2013",
-          "value": 8940000
-        }
-      ]
-    },
-  
-    {
-      "name": "France2",
-      "series": [
-        {
-          "name": "2010",
-          "value": 5000002
-        },
-        {
-          "name": "2011",
-          "value": 5800000
-        },
-        {
-          "name": "2012",
-          "value": 8940000
-        },
-        {
-          "name": "2013",
-          "value": 8940000
-        }
-      ]
-    },
-  
-    {
-      "name": "France3",
-      "series": [
-        {
-          "name": "2010",
-          "value": 5000002
-        },
-        {
-          "name": "2011",
-          "value": 5800000
-        },
-        {
-          "name": "2012",
-          "value": 8940000
-        },
-        {
-          "name": "2013",
-          "value": 8940000
-        }
-      ]
-    }
-    
-    /* {
-      "hotel": "Honguito",
-      "motivo": [
         {
           "name": "Negocios",
           "value": 200
@@ -209,8 +66,8 @@ export class DataService {
       ]
     },
     {
-      "hotel": "Honguito1",
-      "motivo": [
+      "name": "Honguito1",
+      "series": [
         {
           "name": "Negocios",
           "value": 243
@@ -234,8 +91,8 @@ export class DataService {
       ]
     },
     {
-      "hotel": "Honguito3",
-      "motivo": [
+      "name": "Honguito3",
+      "series": [
         {
           "name": "Negocios",
           "value": 123
@@ -259,8 +116,8 @@ export class DataService {
       ]
     },
     {
-      "hotel": "Honguito4",
-      "motivo": [
+      "name": "Honguito4",
+      "series": [
         {
           "name": "Negocios",
           "value": 224
@@ -282,10 +139,10 @@ export class DataService {
           "value": 100
         }
       ]
-    } */
+    }
   ];
 
   get countryData() {
     return this.data;
-  }
+  } */
 }
