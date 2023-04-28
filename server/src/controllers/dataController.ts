@@ -43,8 +43,7 @@ class DataController {
     public async getMotivoGeneral(req: Request, res: Response) {
 
         const datos: any[] = await pool.query('SELECT h.nombre, mv.motivo, COUNT(*) as cantidad FROM registro_huesped as rg LEFT JOIN habitacion_hotel as hh on hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel as h on h.id = hh.fk_id_hotel LEFT JOIN motivo_visita as mv on mv.id = rg.fk_id_motivo GROUP BY h.nombre, mv.motivo ORDER BY h.nombre');
-        /* return res.json(data[0]); */
-
+       
         const hoteles: Hotel_motivo[] = [];
         const mapaHoteles = new Map<string, Hotel_motivo>();
 
