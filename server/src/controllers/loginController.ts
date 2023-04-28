@@ -35,9 +35,10 @@ class LoginController {
             const activo = usuario[0].activo;
             const tipo_usuario = usuario[0].tipo_usuario;
             const pass_actualizada = usuario[0].pass_actualizada;
+            const fk_id_hotel = usuario[0].fk_id_hotel;
 
             // Devolver el token como respuesta
-            return res.json({token, activo, tipo_usuario, pass_actualizada});
+            return res.json({token, activo, tipo_usuario, pass_actualizada, fk_id_hotel});
         } catch (error) {
             console.error(error);
             res.status(500).json({ msg: 'Error del servidor' });

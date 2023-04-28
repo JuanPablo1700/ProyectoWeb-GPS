@@ -22,9 +22,7 @@ export class LoginComponent implements OnInit {
         private _errorService: ErrorService
     ) { }
 
-    ngOnInit(): void {
-
-    }
+    ngOnInit(): void {}
 
     async login() {
         if (this.user == '' || this.password == '') {
@@ -44,11 +42,13 @@ export class LoginComponent implements OnInit {
                 const activo = data.activo;
                 const tipo_usuario = data.tipo_usuario;
                 const pass_actualizada = data.pass_actualizada;
+                const fk_id_hotel = data.fk_id_hotel;
 
                 if (activo === "1") {
                     localStorage.setItem('token', token);
                     localStorage.setItem('user', user.user);
                     localStorage.setItem('tipo_usuario', tipo_usuario);
+                    localStorage.setItem('fk_id_hotel', fk_id_hotel);
                     if (pass_actualizada == "0") {
                         this.router.navigate(['/inicio']);
                     } else {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
                             this.router.navigate(['/principaldirector']);
                         } else if (tipo_usuario === "gerente") {
                             //this.router.navigate(['/principalgerente']);
-                            this.router.navigate(['/graficasxhotel']);
+                            this.router.navigate(['/graficasmihotel']);
                         } else if (tipo_usuario === "recepcionista") {
                             this.router.navigate(['/principalrecepcionista']);
                         }

@@ -17,7 +17,7 @@ export class GraficasgeneralesComponent implements OnInit {
   tipoGrafica = "";
 
   hoteles: Hotel[] = [];
-  nuevo:any;
+  motivo:any;
 
   constructor(
     private router: Router,
@@ -33,14 +33,14 @@ export class GraficasgeneralesComponent implements OnInit {
 
     this._dataService.getMotivoGeneral().subscribe({
       next: data => {
-        this.nuevo = data;
+        this.motivo = data;
       }
     });
     
   }
 
   get multi() {
-    return this.nuevo;
+    return this.motivo;
   }
 
   view: [number, number] = [700, 400];
