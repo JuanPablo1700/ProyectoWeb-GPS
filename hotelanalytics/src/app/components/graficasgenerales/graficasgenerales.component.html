@@ -21,18 +21,19 @@
     <div class="contenedor  ml-32 flex flex-col justify-center flex-grow items-center">
         <h1 class="  text-titulo text-2xl font-bold my-12">Graficas Generales</h1>
         <div class="flex flex-col items-center bg-white w-4/5 rounded-lg">
-            <select [(ngModel)]="tipoGrafica" id="Graficas"
+            <select [(ngModel)]="tipoGrafica" id="tipoGrafica" name="tipoGrafica"
                 class="my-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                <option value="-1"> Seleccione un tipo de gráfica </option>
                 <option value="1"> Gráficas Generales </option>
                 <option value="2">Gráficas por hotel</option>
             </select>
 
-            <div class="flex justify-center items-start mb-10">
-                <select [(ngModel)]="fechaSelect" id="fechaconsulta"
+            <div *ngIf="tipoGrafica != '-1'" class="flex justify-center items-start mb-3">
+                <select [(ngModel)]="fechaSelect" id="fechaconsulta" name="fechaSelect"
                     class="mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Fecha de consulta</option>
                     <option value="1">Este día</option>
-                    <option value="2">Este semana</option>
+                    <option value="2">Esta semana</option>
                     <option value="3">Este mes</option>
                     <option value="4">Personalizado
                 </select>
@@ -41,17 +42,17 @@
                 <div *ngIf="fechaSelect == '4'" class="flex flex-col">
                     <div class="">
                         <label for="fechainicio"> Fecha Inicio: </label>
-                        <input type="date" id="fechainicio" name="fecha"
+                        <input type="date" id="fechainicio" name="fecha_inicio" [(ngModel)]="fechaInicio"
                             class="mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     </div>
                     <div class="mt-4">
                         <label for="fechafin" class=""> Fecha Fin: </label>
-                        <input type="date" id="fechafin" name="fecha"
+                        <input type="date" id="fechafin" name="fecha_fin" [(ngModel)]="fechaFin"
                             class="-mr-12 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     </div>
                 </div>
 
-                <select *ngIf="tipoGrafica == '1'" id="Graficas"
+                <select *ngIf="tipoGrafica == '1'" id="estrellas" name="estrellas" [(ngModel)]="estrellas"
                     class="border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Tipo de hotel</option>
                     <option value="0">Todos</option>
@@ -62,33 +63,36 @@
                     <option value="5"> 5 estrellas </option>
                 </select>
 
-                <select *ngIf="tipoGrafica == '2'" id="Graficas"
+                <select *ngIf="tipoGrafica == '2'" id="id_hotel" name="id_hotel" [(ngModel)]="idHotel"
                     class="border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Seleccione un Hotel </option>
                     <option *ngFor="let hotel of hoteles" [value]="hotel.id">{{hotel.nombre}}</option>
                 </select>
             </div>
+            <button (click)="consultar()" class="bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
+                Consultar
+            </button>
+            <ngx-charts-bar-horizontal-2d *ngIf="motivo" class="mb-10"
+                [view]="view"
+                scheme="cool"
+                [schemeType]="schemeType"
+                [results]="multi2"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
+                [legendPosition]="legendPosition"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+                >
+            </ngx-charts-bar-horizontal-2d>
         </div>
-        <ngx-charts-bar-horizontal-2d
-            [view]="view"
-            scheme="cool"
-            [schemeType]="schemeType"
-            [results]="multi"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [legendPosition]="legendPosition"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            (select)="onSelect($event)"
-            (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)"
-            >
-        </ngx-charts-bar-horizontal-2d>
-        <button class="  bg-verde text-white text-2xl px-20 py-2 mt-8 rounded-lg">
+        <button *ngIf="motivo" class="bg-verde text-white text-2xl px-20 py-2 mt-8 rounded-lg">
             Generar PDF
         </button>
     </div>

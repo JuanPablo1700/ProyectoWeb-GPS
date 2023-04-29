@@ -11,7 +11,7 @@ class DataRoutes {
     }
 
     config(): void {
-        this.router.get('/api/data/getMotivoGeneral', dataController.getMotivoGeneral);
+        this.router.post('/api/data/getMotivoGeneral', dataController.getMotivoGeneral);
     }
 }
 

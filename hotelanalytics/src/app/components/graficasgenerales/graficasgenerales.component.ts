@@ -5,6 +5,7 @@ import { Hotel } from 'src/app/interfaces/hotel';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/services/error.service';
 import { DataService } from 'src/app/services/data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-graficasgenerales',
@@ -15,31 +16,73 @@ export class GraficasgeneralesComponent implements OnInit {
 
   fechaSelect = "";
   tipoGrafica = "";
+  fechaInicio = "";
+  fechaFin = "";
+  estrellas = "";
+  idHotel = "";
 
   hoteles: Hotel[] = [];
-  motivo:any;
+  motivo: any;
+
+  data_Motivo: any;
 
   constructor(
     private router: Router,
+    private toastr: ToastrService,
     private _newHotelService: NewHotelService,
     private _errorService: ErrorService,
     private _dataService: DataService
   ) { }
 
   ngOnInit(): void {
+    this.tipoGrafica = "-1";
     this.fechaSelect = "-1";
-    this.tipoGrafica = "1";
+    this.fechaInicio = "";
+    this.fechaFin = "";
+    this.estrellas = "-1";
+    this.idHotel = "-1";
     this.getHotels();
-
-    this._dataService.getMotivoGeneral().subscribe({
-      next: data => {
-        this.motivo = data;
-      }
-    });
-    
   }
 
-  get multi() {
+  consultar() {
+
+    if (this.tipoGrafica == "-1") {
+      return this.toastr.error('Seleccione un tipo de gráfica', 'Error');
+    }
+
+    if (this.fechaSelect == "-1") {
+      return this.toastr.error('Seleccione la fecha de consulta', 'Error');
+    }
+    
+    if (this.fechaSelect == "4" && !this.fechaInicio) {
+      return this.toastr.error('Seleccione una fecha de inicio', 'Error');
+    }
+ 
+    if (this.fechaSelect == "4" && !this.fechaFin) {
+      return this.toastr.error('Seleccione una fecha final', 'Error');
+    }
+
+    if (this.tipoGrafica == "1" && this.estrellas == "-1") {
+      return this.toastr.error('Seleccione un tipo de hotel', 'Error');
+    }
+
+    if (this.tipoGrafica == "2" && this.idHotel == "-1") {
+      return this.toastr.error('Seleccione un hotel', 'Error');
+    }
+
+    this.data_Motivo = {
+      "tipoGrafica": this.tipoGrafica,
+      "fechaSelect": this.fechaSelect,
+      "fechaInicio": this.fechaInicio,
+      "fechaFin": this.fechaFin,
+      "estrellas": this.estrellas,
+      "idHotel": this.idHotel
+    }
+
+    return this._dataService.getMotivoGeneral(this.data_Motivo).subscribe(data => { this.motivo = data });
+  }
+
+  get multi2() {
     return this.motivo;
   }
 
