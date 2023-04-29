@@ -9,6 +9,13 @@ interface Hotel_motivo {
     }[];
 }
 
+interface DatosHotel {
+    name: {
+        name: string;
+        value: number;
+    }[];
+}
+
 class DataController {
 
     public async getMotivoGeneral(req: Request, res: Response) {
@@ -43,7 +50,6 @@ class DataController {
         if (formulario.fechaSelect == "4") { // Personalizado
             
         }
-        
 
         const datos: any[] = await pool.query('SELECT h.nombre, mv.motivo, COUNT(*) as cantidad FROM registro_huesped as rg LEFT JOIN habitacion_hotel as hh on hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel as h on h.id = hh.fk_id_hotel LEFT JOIN motivo_visita as mv on mv.id = rg.fk_id_motivo GROUP BY h.nombre, mv.motivo ORDER BY h.nombre');
 
@@ -107,6 +113,44 @@ class DataController {
         return res.json(hoteles);
     }
 
+    public async getMotivoHotel(req: Request, res:Response){
+        const form = req.body;
+        let fechaInicio:Date;
+        let fechaFin:Date;
+        const hoy = new Date();
+        console.log(form);
+        console.log(hoy);
+
+       // const datos: any[] = await pool.query("SELECT h.nombre, mv.motivo, COUNT(*) AS cantidad FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN motivo_visita AS mv ON mv.id = rg.fk_id_motivo WHERE h.id = 36 AND (fecha_registro >= '2023-04-21' AND fecha_registro <= '2023-04-26' ) GROUP BY h.nombre, mv.motivo;")
+       const datos: any[] = await pool.query('SELECT h.nombre, mv.motivo, COUNT(*) as cantidad FROM registro_huesped as rg LEFT JOIN habitacion_hotel as hh on hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel as h on h.id = hh.fk_id_hotel LEFT JOIN motivo_visita as mv on mv.id = rg.fk_id_motivo GROUP BY h.nombre, mv.motivo ORDER BY h.nombre'); 
+       console.log(datos[0]);
+        /* const hoteles: DatosHotel[] = [];
+        const mapaHoteles = new Map<string, DatosHotel>();
+
+        datos[0].forEach((dato: any) => {
+            const motivo = mapaHoteles.get(dato.nombre);
+            if (motivo) {
+                motivo.series.push({
+                    name: dato.motivo,
+                    value: dato.cantidad
+                });
+            } else {
+                const nuevoHotel: Hotel_motivo = {
+                    name: dato.nombre,
+                    series: [
+                        {
+                            name: dato.motivo,
+                            value: dato.cantidad
+                        }
+                    ]
+                };
+                mapaHoteles.set(dato.nombre, nuevoHotel);
+                hoteles.push(nuevoHotel);
+            }
+        });
+        return res.json(hoteles);
+        */
+    }
 }
 
 export const dataController = new DataController();

@@ -12,6 +12,7 @@ class DataRoutes {
 
     config(): void {
         this.router.post('/api/data/getMotivoGeneral', dataController.getMotivoGeneral);
+        this.router.post('/api/data/getMotivoHotel', dataController.getMotivoHotel);
     }
 }
 
