@@ -11,6 +11,9 @@ import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxho
 import { DatoshotelComponent } from './components/datoshotel/datoshotel.component';
 import { MicategoriaComponent } from './components/micategoria/micategoria.component';
 import { GraficasmihotelComponent } from './components/graficasmihotel/graficasmihotel.component';
+import { registerLocaleData } from '@angular/common';
+import { RegistrosComponent } from './components/registros/registros.component';
+import { EditarregistrosComponent } from './components/editarregistros/editarregistros.component';
 
 const routes: Routes = [
   { path:'', redirectTo: '/login', pathMatch: 'full' },
@@ -25,7 +28,9 @@ const routes: Routes = [
   { path:"micategoria",component:MicategoriaComponent },
   { path:"graficasmihotel",component:GraficasmihotelComponent },
   { path:"graficasgenerales",component:GraficasgeneralesComponent, canActivate: [AuthGuard] },
-  { path:"graficasxhotel",component:GraficasxhotelComponent, canActivate: [AuthGuard] }
+  { path:"graficasxhotel",component:GraficasxhotelComponent, canActivate: [AuthGuard] },
+  {path:"registros",component:RegistrosComponent},
+  {path:"editarregistros",component:EditarregistrosComponent}
 ];
 
 @NgModule({

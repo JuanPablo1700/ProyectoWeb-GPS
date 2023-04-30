@@ -23,6 +23,8 @@ import { MicategoriaComponent } from './components/micategoria/micategoria.compo
 import { GraficasmihotelComponent } from './components/graficasmihotel/graficasmihotel.component';
 import { GraficasgeneralesComponent } from './components/graficasgenerales/graficasgenerales.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { RegistrosComponent } from './components/registros/registros.component';
+import { EditarregistrosComponent } from './components/editarregistros/editarregistros.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MicategoriaComponent,
     GraficasmihotelComponent,
     GraficasgeneralesComponent,
-    GraficasxhotelComponent
+    GraficasxhotelComponent,
+    RegistrosComponent,
+    EditarregistrosComponent
   ],
   imports: [
     BrowserModule,
