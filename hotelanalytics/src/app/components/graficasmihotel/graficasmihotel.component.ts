@@ -22,6 +22,7 @@ export class GraficasmihotelComponent implements OnInit {
   graficasVisibles = 0;
 
   motivo: any;
+  ciudad: any;
   parametros: any;
 
   /* motivo = [
@@ -49,6 +50,9 @@ export class GraficasmihotelComponent implements OnInit {
 
   get single() {
     return this.motivo;
+  }
+  get single2() {
+    return this.ciudad;
   }
 
   consultar() {
@@ -88,8 +92,13 @@ export class GraficasmihotelComponent implements OnInit {
       "fechaFin": this.fechaFin,
       "fk_id_hotel": localStorage.getItem('fk_id_hotel')
     }
-
+    
     this.graficasVisibles = 1;
+
+    this.ciudad = this.dataService.getCiudadHotel(this.parametros).subscribe(data => {
+      this.ciudad = data;
+    })
+    
     return this.dataService.getMotivoHotel(this.parametros).subscribe(data => {
       this.motivo = data;
     })

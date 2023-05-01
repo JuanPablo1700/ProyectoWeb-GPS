@@ -1,4 +1,4 @@
-<div class="flex  h-full w-full  ">
+<div class="flex  h-full w-full bg-fondo">
     <div class="barra fixed z-50 bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
         <div>
             <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2">
@@ -54,8 +54,15 @@
 
             <div *ngIf="graficasVisibles==1"  class="graficas">
                 <div class="motivo flex border-2 p-5">
-                    <h2 class="block text-center font-bold">Motivo</h2>
+                    <h2 class="block text-center font-bold">Motivos</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="single"
+                        [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
+                        (deactivate)="onDeactivate($event)">
+                    </ngx-charts-advanced-pie-chart>
+                </div>
+                <div class="ciudad flex border-2 p-5">
+                    <h2 class="block text-center font-bold">Ciudades</h2>
+                    <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="single2"
                         [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)">
                     </ngx-charts-advanced-pie-chart>
