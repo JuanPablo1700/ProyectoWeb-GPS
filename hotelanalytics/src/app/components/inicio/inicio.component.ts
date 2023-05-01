@@ -15,19 +15,19 @@ export class InicioComponent {
   newPassword = '';
   confirmNewPassword = '';
   user: User = {
-    user:'',
-    password:''
+    user: '',
+    password: ''
   };
   constructor(
     private _inicioService: InicioService,
     private _errorService: ErrorService,
     private toastr: ToastrService,
     private router: Router
-  ){ }
+  ) { }
 
   actualizarPassword() {
-    const userLocal:any = localStorage.getItem('user');
-    const tipo_usuario:any = localStorage.getItem('tipo_usuario');
+    const userLocal: any = localStorage.getItem('user');
+    const tipo_usuario: any = localStorage.getItem('tipo_usuario');
 
     if (this.newPassword === "" || this.confirmNewPassword === "") {
       this.toastr.error('Todos los campos son obligatorios', 'Error');
@@ -38,21 +38,20 @@ export class InicioComponent {
       this.user.user = userLocal;
       this.user.password = this.newPassword;
       this._inicioService.newPassword(this.user).subscribe({
-          next: (res) => {
-            this.toastr.success('Contraseña actualizadda correctamente', 'Correcto');
-            if (tipo_usuario === "admin") {
-              this.router.navigate(['/principaldirector']);
+        next: (res) => {
+          this.toastr.success('Contraseña actualizadda correctamente', 'Correcto');
+          if (tipo_usuario === "admin") {
+            this.router.navigate(['/principaldirector']);
           } else if (tipo_usuario === "gerente") {
-              //this.router.navigate(['/principalgerente']);
-              this.router.navigate(['/graficasxhotel']);
+            this.router.navigate(['/graficasxhotel']);
           } else if (tipo_usuario === "recepcionista") {
-              this.router.navigate(['/principalrecepcionista']);
+            this.router.navigate(['/registros']);
           }
-          },
-          error: (error: HttpErrorResponse) => {
-            this._errorService.msjError(error);
-          }
-      })  
+        },
+        error: (error: HttpErrorResponse) => {
+          this._errorService.msjError(error);
+        }
+      })
     } else {
       this.toastr.error('Las contraseñas no coinciden', 'Error');
       return

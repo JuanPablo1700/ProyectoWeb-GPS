@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
         private _errorService: ErrorService
     ) { }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
 
     async login() {
         if (this.user == '' || this.password == '') {
@@ -36,8 +36,7 @@ export class LoginComponent implements OnInit {
         }
 
         await this._userService.login(user).subscribe({
-            next: (data:any) => {
-                
+            next: (data: any) => {
                 const token = data.token;
                 const activo = data.activo;
                 const tipo_usuario = data.tipo_usuario;
@@ -55,10 +54,9 @@ export class LoginComponent implements OnInit {
                         if (tipo_usuario === "admin") {
                             this.router.navigate(['/principaldirector']);
                         } else if (tipo_usuario === "gerente") {
-                            //this.router.navigate(['/principalgerente']);
                             this.router.navigate(['/graficasmihotel']);
                         } else if (tipo_usuario === "recepcionista") {
-                            this.router.navigate(['/principalrecepcionista']);
+                            this.router.navigate(['/registros']);
                         }
                     }
                 } else {
