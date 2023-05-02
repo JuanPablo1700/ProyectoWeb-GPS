@@ -6,6 +6,7 @@ import loginRoutes from "./routes/loginRoutes";
 import indexRoutes from './routes/indexRoutes';
 import newHotelRoutes from './routes/newHotelRoutes';
 import dataRoutes from './routes/dataRoutes';
+import registrosRoutes from './routes/registrosRoutes';
 
 class Server {
 
@@ -30,6 +31,7 @@ class Server {
         this.app.use(indexRoutes);
         this.app.use(newHotelRoutes);
         this.app.use(dataRoutes);
+        this.app.use(registrosRoutes);
     }
 
     start(): void {
