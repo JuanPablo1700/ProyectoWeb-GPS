@@ -22,4 +22,7 @@ export class RegistrosComponent implements OnInit{
   ngOnInit() {
     
   }
+
+  
+
 }
