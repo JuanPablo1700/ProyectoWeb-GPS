@@ -10,10 +10,17 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  //Generales
   getMotivoGeneral(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getMotivoGeneral/`, data);
   }
 
+  //Por categoria
+  getMotivoCategoria(data:any): Observable<any[]> {
+    return this.http.post<any[]>(`http://localhost:3000/api/data/getMotivoCategoria/`, data);
+  }
+
+  
   //Individuales
   getMotivoHotel(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getMotivoHotel/`, data);

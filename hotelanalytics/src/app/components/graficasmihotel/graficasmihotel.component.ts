@@ -68,11 +68,11 @@ export class GraficasmihotelComponent implements OnInit {
     }
     if (this.filtroConsulta == 2) { //Esta semana
       this.fechaInicio = new Date(hoy.setDate(hoy.getDate() - hoy.getDay())); //inicio de la semana actual empezando por domingo
-      this.fechaFin = hoy;
+      this.fechaFin = hoy; //NOTA: mandar el último día de la semana
     }
     if (this.filtroConsulta == 3) { //Este mes
       this.fechaInicio = new Date(hoy.getFullYear(), hoy.getMonth(), 1); //inicio de mes actual
-      this.fechaFin = hoy;
+      this.fechaFin = hoy; //NOTA: mandar el último día del mes
     }
     if (this.filtroConsulta == 4) { //Personalizado
       if (this.fechaInicio == "" || this.fechaFin == "") {
@@ -134,11 +134,17 @@ export class GraficasmihotelComponent implements OnInit {
   habitaciones(){
     this.router.navigate(['/datoshotel']);
   }
-  
+  micategoria(){
+    this.router.navigate(['/micategoria']);
+  }
+
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('fk_id_hotel');
+    localStorage.removeItem('estrellas');
     localStorage.removeItem('tipo_usuario');
+    localStorage.removeItem('id_usuario');
     this.router.navigate(['/login']);
   }
 
