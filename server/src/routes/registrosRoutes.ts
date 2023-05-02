@@ -14,7 +14,10 @@ class RegistrosRoutes {
         this.router.post('/api/registros/nuevo', validateToken, registrosController.nuevo);
         this.router.get('/api/registros/getRegistros', validateToken, registrosController.getRegistros);
         this.router.get('/api/registros/getRegistro/:id', validateToken, registrosController.getRegistro);
-        this.router.put('/api/registros/actualizar/:id', registrosController.actualizar);
+        this.router.put('/api/registros/actualizar/:id', validateToken, registrosController.actualizar);
+        
+        this.router.get('/api/habitacion/getHabitacionesHotel/:id', validateToken, registrosController.getTipoHabitacion);
+        this.router.get('/api/getMotivosVisita', validateToken, registrosController.getMotivos);
     }
 }
 

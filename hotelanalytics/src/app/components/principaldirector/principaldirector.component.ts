@@ -58,6 +58,9 @@ export class PrincipaldirectorComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('tipo_usuario');
+    localStorage.removeItem('fk_id_hotel');
+    localStorage.removeItem('estrellas');
+    localStorage.removeItem('id_usuario');
     this.router.navigate(['/login'])
   }
 }

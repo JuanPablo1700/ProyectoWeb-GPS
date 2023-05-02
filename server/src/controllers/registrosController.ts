@@ -4,7 +4,17 @@ import pool from '../database';
 class RegistrosController {
 
     public async getTipoHabitacion(req: Request, res: Response) {
+        const id = req.params.id;
 
+        const habitaciones: any = await pool.query("SELECT * FROM habitacion_hotel hh LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion WHERE hh.fk_id_hotel = 36", [id]);
+
+        return res.json(habitaciones[0]);
+    }
+
+    public async getMotivos(req: Request, res: Response) {
+        const motivos: any = await pool.query("SELECT * FROM motivo_visita");
+
+        return res.json(motivos[0]);
     }
 
     public async nuevo(req: Request, res: Response) {

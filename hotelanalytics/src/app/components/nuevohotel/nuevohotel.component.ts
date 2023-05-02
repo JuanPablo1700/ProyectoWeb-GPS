@@ -15,14 +15,14 @@ import { ErrorService } from 'src/app/services/error.service';
 export class NuevohotelComponent implements OnInit {
   listHotel: Hotel[] = [];
 
-  id:number=0;
+  id: number = 0;
   nombre: string = '';
   direccion: string = '';
   correo: string = '';
   telefono: string = '';
   estrellas: number = 0;
   estado: string = '';
-  activo:number = 0;
+  activo: number = 0;
 
   constructor(
     private router: Router,
@@ -38,10 +38,10 @@ export class NuevohotelComponent implements OnInit {
   private validar() {
     //falta validar selects y que sean teléfonos y correos válidos
 
-    this.nombre= this.nombre.trim() ;
-    this.direccion= this.direccion.trim() ;
-    this.correo= this.correo.trim() ;
-    this.telefono= this.telefono.trim() ;
+    this.nombre = this.nombre.trim();
+    this.direccion = this.direccion.trim();
+    this.correo = this.correo.trim();
+    this.telefono = this.telefono.trim();
 
     const telefonoRegex = /^(\+?\d{1,2}\s)?(\d{10,13})$/;
     const correoRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -59,7 +59,7 @@ export class NuevohotelComponent implements OnInit {
       this.toastr.error('Campo teléfono obligatorio', 'Error')
       return false;
     }
-    if(!telefonoRegex.test(this.telefono)){
+    if (!telefonoRegex.test(this.telefono)) {
       this.toastr.error('Teléfono inválido', 'Error')
       return false;
     }
@@ -83,7 +83,7 @@ export class NuevohotelComponent implements OnInit {
   }
 
   insertar() {
-    if(this.validar()){
+    if (this.validar()) {
       const hotel: Hotel = {
         id: this.id,
         nombre: this.nombre,
@@ -94,7 +94,7 @@ export class NuevohotelComponent implements OnInit {
         estado: this.estado,
         activo: this.activo
       }
-  
+
       this._newHotelService.newHotel(hotel).subscribe({
         next: (whatsappUrl) => {
           window.open(whatsappUrl);
@@ -127,6 +127,9 @@ export class NuevohotelComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     localStorage.removeItem('tipo_usuario');
+    localStorage.removeItem('fk_id_hotel');
+    localStorage.removeItem('estrellas');
+    localStorage.removeItem('id_usuario');
     this.router.navigate(['/login'])
   }
 }
