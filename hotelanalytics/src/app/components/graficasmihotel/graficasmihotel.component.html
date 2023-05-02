@@ -52,7 +52,7 @@
                 Consultar
             </button>
 
-            <div *ngIf="graficasVisibles==1"  class="graficas">
+            <div *ngIf="graficasVisibles==1"  class="graficas"> <!-- Se muestran los datos que se ingresen en el rango seleccionado -->
                 <div class="motivo flex border-2 p-5">
                     <h2 class="block text-center font-bold">Motivos</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="single"
@@ -68,7 +68,7 @@
                     </ngx-charts-advanced-pie-chart>
                 </div>
                 <div class="ciudad flex border-2 p-5">
-                    <h2 class="block text-center font-bold">Ocupación</h2>
+                    <h2 class="block text-center font-bold">Registros</h2> <!-- Mostrar los registros por día -->
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="single2"
                         [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)">

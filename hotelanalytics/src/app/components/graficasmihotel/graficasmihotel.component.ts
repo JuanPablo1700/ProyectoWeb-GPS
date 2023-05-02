@@ -69,10 +69,12 @@ export class GraficasmihotelComponent implements OnInit {
     if (this.filtroConsulta == 2) { //Esta semana
       this.fechaInicio = new Date(hoy.setDate(hoy.getDate() - hoy.getDay())); //inicio de la semana actual empezando por domingo
       this.fechaFin = hoy; //NOTA: mandar el último día de la semana
+      this.fechaFin.setDate(this.fechaFin.getDate() + (6 - this.fechaFin.getDay()));
+      console.log(this.fechaFin);
     }
     if (this.filtroConsulta == 3) { //Este mes
       this.fechaInicio = new Date(hoy.getFullYear(), hoy.getMonth(), 1); //inicio de mes actual
-      this.fechaFin = hoy; //NOTA: mandar el último día del mes
+      this.fechaFin = new Date(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth() + 1, 0);
     }
     if (this.filtroConsulta == 4) { //Personalizado
       if (this.fechaInicio == "" || this.fechaFin == "") {
@@ -98,6 +100,8 @@ export class GraficasmihotelComponent implements OnInit {
     this.ciudad = this.dataService.getCiudadHotel(this.parametros).subscribe(data => {
       this.ciudad = data;
     })
+
+    console.log(this.ciudad);
     
     return this.dataService.getMotivoHotel(this.parametros).subscribe(data => {
       this.motivo = data;
