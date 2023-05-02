@@ -36,8 +36,6 @@ export class NuevohotelComponent implements OnInit {
   }
 
   private validar() {
-    //falta validar selects y que sean teléfonos y correos válidos
-
     this.nombre = this.nombre.trim();
     this.direccion = this.direccion.trim();
     this.correo = this.correo.trim();

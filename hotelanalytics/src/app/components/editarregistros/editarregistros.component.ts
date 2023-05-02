@@ -11,17 +11,16 @@ import { RegistroService } from 'src/app/services/registro.service';
 @Component({
   selector: 'app-editarregistros',
   templateUrl: './editarregistros.component.html',
-  styleUrls: ['./editarregistros.component.css']
+  styleUrls: ['./editarregistros.component.css'],
 })
 export class EditarregistrosComponent implements OnInit {
+  ciudad: string = '';
+  motivo: string = '';
+  habitacion: string = '';
+  fecha_ingreso: any = '';
+  fecha_salida: any = '';
 
-  ciudad:string="";
-  motivo:string="";
-  habitacion:string="";
-  fecha_ingreso:any="";
-  fecha_salida:any="";
-
-  id_hotel:any;
+  id_hotel: any;
 
   tipoHabitacion: TipoHabitacion[] = [];
   motivos: Motivo[] = [];
@@ -38,23 +37,23 @@ export class EditarregistrosComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.registro = {
-      fecha_ingreso: "",
-      fecha_salida: "",
-      ciudad_huesped: "",
+      fecha_ingreso: '',
+      fecha_salida: '',
+      ciudad_huesped: '',
       costo_estancia: 0,
       fk_id_habitacion_hotel: 0,
       fk_id_usuario: 0,
-      fk_id_motivo: "",
+      fk_id_motivo: '',
       fk_id_hotel: 0,
-      fk_id_tipoHabitacion: ""
-    }
+      fk_id_tipoHabitacion: '',
+    };
   }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     const idInt = parseInt(this.id);
-    this.habitacion = "-1";
-    this.motivo = "-1";
+    this.habitacion = '-1';
+    this.motivo = '-1';
     this.id_hotel = localStorage.getItem('fk_id_hotel');
     this.getHabitaciones(this.id_hotel);
     this.getMotivos();
@@ -68,24 +67,24 @@ export class EditarregistrosComponent implements OnInit {
         this.ciudad = data.ciudad_huesped;
         this.motivo = data.fk_id_motivo;
         this.habitacion = data.id_tipoHabitacion;
-        this.fecha_ingreso = (data.fecha_ingreso).substring(0,10);
-        this.fecha_salida = (data.fecha_salida).substring(0,10);
+        this.fecha_ingreso = data.fecha_ingreso.substring(0, 10);
+        this.fecha_salida = data.fecha_salida.substring(0, 10);
       },
       error: (error: HttpErrorResponse) => {
         this._errorService.msjError(error);
-      }
-    })
+      },
+    });
   }
 
-  async getHabitaciones(id_hotel:number) {
+  async getHabitaciones(id_hotel: number) {
     await this._registroService.getHabitacionesHotel(id_hotel).subscribe({
       next: (data) => {
         this.tipoHabitacion = data;
       },
       error: (error: HttpErrorResponse) => {
         this._errorService.msjError(error);
-      }
-    })
+      },
+    });
   }
 
   async getMotivos() {
@@ -95,8 +94,8 @@ export class EditarregistrosComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this._errorService.msjError(error);
-      }
-    })
+      },
+    });
   }
 
   async actualizar() {
@@ -107,21 +106,54 @@ export class EditarregistrosComponent implements OnInit {
     this.registro.fk_id_hotel = localStorage.getItem('fk_id_hotel');
     this.registro.fk_id_tipoHabitacion = this.habitacion;
     this.registro.fk_id_motivo = this.motivo;
-    
-    await this._registroService.actualizar(this.id, this.registro).subscribe({
-      next:() => {
-        this.fecha_ingreso = "";
-        this.fecha_salida = "";
-        this.ciudad = "";
-        this.habitacion = "-1";
-        this.motivo = "-1";
-        this.router.navigate(['/registros']);
-        this.toastr.success('Hotel actualizado correctamente', 'Correcto');
-      },
-      error: (error: HttpErrorResponse) => {
-        this._errorService.msjError(error);
-      }
-    })
+
+    if (this.validar()) {
+      await this._registroService.actualizar(this.id, this.registro).subscribe({
+        next: () => {
+          this.fecha_ingreso = '';
+          this.fecha_salida = '';
+          this.ciudad = '';
+          this.habitacion = '-1';
+          this.motivo = '-1';
+          this.router.navigate(['/registros']);
+          this.toastr.success('Hotel actualizado correctamente', 'Correcto');
+        },
+        error: (error: HttpErrorResponse) => {
+          this._errorService.msjError(error);
+        },
+      });
+    }
+  }
+  validar() {
+    this.ciudad = this.ciudad.trim();
+
+    if (this.ciudad == '') {
+      this.toastr.error('Campo ciudad obligatorio', 'Error');
+      return false;
+    }
+    if (this.motivo == '-1') {
+      this.toastr.error('Campo motivo obligatorio', 'Error');
+      return false;
+    }
+    if (this.habitacion == '-1') {
+      this.toastr.error('Campo habitación obligatorio', 'Error');
+      return false;
+    }
+    if (this.fecha_ingreso == '' || this.fecha_salida == '') {
+      this.toastr.error(
+        'Seleccione fecha ingreso y fecha salida correctamente',
+        'Error'
+      );
+      return false;
+    }
+    if (this.fecha_ingreso > this.fecha_salida) {
+      this.toastr.error(
+        'Seleccione fecha ingreso y fecha salida correctamente',
+        'Error'
+      );
+      return false;
+    }
+    return true;
   }
 
   logOut() {
@@ -131,6 +163,6 @@ export class EditarregistrosComponent implements OnInit {
     localStorage.removeItem('fk_id_hotel');
     localStorage.removeItem('estrellas');
     localStorage.removeItem('id_usuario');
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 }

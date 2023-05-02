@@ -48,10 +48,10 @@
                 <form action="insertar()" class="flex flex-col">
                     <div class="relative z-0 my-6">
                         <input type="text" id="ciudad" name="ciudad" [(ngModel)]="ciudad"
-                            class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
+                            class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-verde peer"
                             placeholder=" " />
                         <label for="ciudad"
-                            class="absolute text-base font-bold text-gray-900 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus-within:left-0 peer-focus-within:text-verde peer-focus-within:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus-within:scale-75 peer-focus-within:-translate-y-10">
+                            class="absolute block w-full text-base font-bold text-gray-900 duration-300 transform -translate-y-8  top-3 -z-10 origin-[0] peer-focus-within:left-0 peer-focus-within:text-verde peer-focus-within:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus-within:scale-75 peer-focus-within:-translate-y-10">
                             Ciudad de visita
                         </label>
                     </div>
@@ -70,8 +70,8 @@
                         <option *ngFor="let tipo of tipoHabitacion" value="{{tipo.id}}"> {{tipo.tipo_habitacion}} </option>
                     </select>
 
-                    <label for="fechaInicio" class="mb-1 font-bold"> Fecha Ingreso </label>
-                    <input type="date" id="fechaInicio" name="fechaInicio" [(ngModel)]="fecha_ingreso"
+                    <label for="fecha_ingreso" class="mb-1 font-bold"> Fecha Ingreso </label>
+                    <input type="date" id="fecha_ingreso" name="fecha_ingreso" [(ngModel)]="fecha_ingreso"
                         class="mb-5 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <label for="fecha_salida" class="mb-1 font-bold"> Fecha Salida </label>
                     <input type="date" id="fecha_salida" name="fecha_salida" [(ngModel)]="fecha_salida"
