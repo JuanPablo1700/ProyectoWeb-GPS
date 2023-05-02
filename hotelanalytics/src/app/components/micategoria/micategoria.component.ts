@@ -80,17 +80,22 @@ export class MicategoriaComponent implements OnInit {
   // motivo: any;
   view: [number, number] = [750, 400];
 
-  get single() {
+  // options
+  showXAxis: boolean = true;
+  showYAxis: boolean = true;
+  gradient: boolean = false;
+  showLegend: boolean = true;
+  legendPosition: string = 'below';
+  showXAxisLabel: boolean = true;
+  yAxisLabel: string = 'Hotel';
+  showYAxisLabel: boolean = true;
+  xAxisLabel = 'Cantidad';
+
+  schemeType: string = 'ordinal';
+
+  get multi() {
     return this.motivo;
   }
-  get single2() {
-    return this.ciudad;
-  }
-  // options
-  gradient: boolean = true;
-  showLegend: boolean = true;
-  showLabels: boolean = true;
-  isDoughnut: boolean = false;
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
