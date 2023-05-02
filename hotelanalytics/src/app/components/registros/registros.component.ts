@@ -7,6 +7,7 @@ import { Registro } from 'src/app/interfaces/registro';
 import { TipoHabitacion } from 'src/app/interfaces/tipoHabitacion';
 import { ErrorService } from 'src/app/services/error.service';
 import { RegistroService } from 'src/app/services/registro.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registros',
@@ -147,6 +148,31 @@ export class RegistrosComponent implements OnInit {
   actualizar(id: any) {
     this.router.navigate(['/editarregistros', id]);
   }
+  
+  eliminar(id: any) {
+    
+    Swal.fire({
+      title: '¿Estás seguro de eliminar?',
+      text: "No podrás revertir esto",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#10B981',
+      cancelButtonColor: '#EF4444',
+      confirmButtonText: 'Sí, eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Aquí pones la lógica para eliminar el elemento
+        this.router.navigate(['/editarregistros', id]);
+        Swal.fire(
+          'Eliminado!',
+          'El registro ha sido eliminado.',
+          'success'
+        )
+      }
+    })
+    
+  }
+
 
   logOut() {
     localStorage.removeItem('token');

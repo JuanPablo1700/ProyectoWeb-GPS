@@ -61,6 +61,13 @@ class RegistrosController {
         const registro = response[0][0];
         return res.json(registro);
     }
+    public async eliminar(req: Request, res: Response) {
+        const id = req.params.id;
+        const idInt = parseInt(id);
+        const response: any = await pool.query('DELETE FROM registro_huesped WHERE id = ?', [idInt]);
+        const registro = response[0][0];
+        return res.json(registro);
+    }
 
     public async actualizar(req: Request, res: Response) {
         const { fecha_ingreso, fecha_salida, ciudad_huesped, fk_id_tipoHabitacion, fk_id_usuario, fk_id_motivo, fk_id_hotel } = req.body;

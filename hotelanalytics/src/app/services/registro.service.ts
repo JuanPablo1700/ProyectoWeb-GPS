@@ -32,6 +32,10 @@ export class RegistroService {
   getRegistro(id: number): Observable<Registro> {
     return this.http.get<Registro>(`${this.myAppUrl}${this.myApiUrlRegistros}/getRegistro/${id}`);
   }
+
+  deleteRegistro(id:number):Observable<Registro> {
+    return this.http.get<Registro>(`${this.myAppUrl}${this.myApiUrlRegistros}/deleteRegistro/${id}`);
+  }
   
   actualizar(id: number, registro:Registro): Observable<Registro> {
     return this.http.put<Registro>(`${this.myAppUrl}${this.myApiUrlRegistros}/actualizar/${id}`, registro);
@@ -44,5 +48,6 @@ export class RegistroService {
   getMotivos(): Observable<Motivo[]> {
     return this.http.get<Motivo[]>(`${this.myAppUrl}api/getMotivosVisita`);
   }
+
 
 }
