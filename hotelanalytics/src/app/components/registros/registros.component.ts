@@ -12,7 +12,8 @@ export class RegistrosComponent implements OnInit{
   motivo:string="";
   dias:number=0;
   habitacion:string="";
-  costo:number=0;
+  fecha_ingreso:any="";
+  fecha_salida:any="";
 
   constructor(
     private router: Router,
