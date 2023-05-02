@@ -42,12 +42,16 @@ export class LoginComponent implements OnInit {
                 const tipo_usuario = data.tipo_usuario;
                 const pass_actualizada = data.pass_actualizada;
                 const fk_id_hotel = data.fk_id_hotel;
+                const estrellas = data.estrellas;
+                const id_usuario = data.id_usuario;
 
                 if (activo === "1") {
                     localStorage.setItem('token', token);
                     localStorage.setItem('user', user.user);
                     localStorage.setItem('tipo_usuario', tipo_usuario);
                     localStorage.setItem('fk_id_hotel', fk_id_hotel);
+                    localStorage.setItem('estrellas', estrellas);
+                    localStorage.setItem('id_usuario', id_usuario);
                     if (pass_actualizada == "0") {
                         this.router.navigate(['/inicio']);
                     } else {

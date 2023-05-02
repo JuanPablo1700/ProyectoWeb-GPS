@@ -14,7 +14,7 @@ class LoginController {
         }
 
         try {
-            const result = await pool.query('SELECT id, user, password, activo, tipo_usuario, pass_actualizada, fk_id_hotel FROM usuario WHERE user = ?', [user]);
+            const result = await pool.query('SELECT u.id, u.user, u.password, u.activo, u.tipo_usuario, u.pass_actualizada, u.fk_id_hotel, h.estrellas FROM usuario u LEFT JOIN hotel as h on u.fk_id_hotel = h.id WHERE user = ?', [user]);
 
             // Verificar la contraseña hash
             const usuario:any = result[0];
@@ -32,13 +32,15 @@ class LoginController {
 
             const token = jwt.sign({ user: usuario[0].user }, 'secreto12345', { expiresIn: '1h' });
 
+            const id_usuario = usuario[0].id;
             const activo = usuario[0].activo;
             const tipo_usuario = usuario[0].tipo_usuario;
             const pass_actualizada = usuario[0].pass_actualizada;
             const fk_id_hotel = usuario[0].fk_id_hotel;
+            const estrellas = usuario[0].estrellas;
 
             // Devolver el token como respuesta
-            return res.json({token, activo, tipo_usuario, pass_actualizada, fk_id_hotel});
+            return res.json({token, id_usuario, activo, tipo_usuario, pass_actualizada, fk_id_hotel, estrellas});
         } catch (error) {
             console.error(error);
             res.status(500).json({ msg: 'Error del servidor' });
