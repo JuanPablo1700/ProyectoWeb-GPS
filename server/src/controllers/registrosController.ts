@@ -57,13 +57,13 @@ class RegistrosController {
     public async getRegistro(req: Request, res: Response) {
         const id = req.params.id;
         const idInt = parseInt(id);
-        const response: any = await pool.query('SELECT * FROM registro_huesped WHERE id = ?', [idInt]);
+        const response: any = await pool.query('SELECT rh.id, rh.fecha_ingreso, rh.fecha_salida, rh.ciudad_huesped, rh.costo_estancia, rh.fk_id_habitacion_hotel, rh.fk_id_usuario, rh.fk_id_motivo, mv.motivo, th.id as id_tipoHabitacion, th.tipo_habitacion FROM registro_huesped rh LEFT JOIN motivo_visita as mv on mv.id = rh.fk_id_motivo LEFT JOIN habitacion_hotel as hh on hh.id = rh.fk_id_habitacion_hotel LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion WHERE rh.id = ?', [idInt]);
         const registro = response[0][0];
         return res.json(registro);
     }
 
     public async actualizar(req: Request, res: Response) {
-        const { fecha_ingreso, fecha_salida, ciudad, fk_id_tipoHabitacion, fk_id_usuario, fk_id_motivo, fk_id_hotel } = req.body;
+        const { fecha_ingreso, fecha_salida, ciudad_huesped, fk_id_tipoHabitacion, fk_id_usuario, fk_id_motivo, fk_id_hotel } = req.body;
         const id = req.params.id;
         const idInt = parseInt(id);
         const idUsuarioInt = parseInt(fk_id_usuario);
@@ -83,7 +83,7 @@ class RegistrosController {
             costo = diferenciaEnDias * habitacion_hotel[0][0].precio;
 
             await pool.query('UPDATE registro_huesped SET fecha_ingreso = ?, fecha_salida = ?, ciudad_huesped = ?, costo_estancia = ?, fk_id_habitacion_hotel = ?, fk_id_usuario = ?, fk_id_motivo = ? WHERE id = ?',
-            [fecha_ingreso, fecha_salida, ciudad, costo, habitacion_hotel[0][0].id, idUsuarioInt, idMotivoInt, idInt]);
+            [fecha_ingreso, fecha_salida, ciudad_huesped, costo, habitacion_hotel[0][0].id, idUsuarioInt, idMotivoInt, idInt]);
             return res.json({ msg: 'Registro actualizado con exito.' });
         } catch (error) {
             return res.status(401).json({ msg: 'Hubo un problema al actualizar los datos.', error });

@@ -114,6 +114,10 @@ export class RegistrosComponent implements OnInit{
     })
   }
 
+  actualizar(id: any) {
+    this.router.navigate(['/editarregistros', id]);
+  }
+
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

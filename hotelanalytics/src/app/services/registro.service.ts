@@ -34,7 +34,7 @@ export class RegistroService {
   }
   
   actualizar(id: number, registro:Registro): Observable<Registro> {
-    return this.http.put<Registro>(`${this.myAppUrl}${this.myApiUrlRegistros}/actializar/${id}`, registro);
+    return this.http.put<Registro>(`${this.myAppUrl}${this.myApiUrlRegistros}/actualizar/${id}`, registro);
   }
 
   getHabitacionesHotel(id: number): Observable<TipoHabitacion[]> {
