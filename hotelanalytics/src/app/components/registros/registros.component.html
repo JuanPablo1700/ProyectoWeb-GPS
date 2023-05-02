@@ -16,84 +16,20 @@
         <div class=" mt-10 xl:flex flex-col justify-between items-center bg-white w-nuehotel-w h-800 rounded-lg hidden">
             <p class="text-titulo text-2xl font-bold flex-grow-0 flex-shrink-0 mt-5">Registros de hoy</p>
             <div class="bg-white flex flex-col h-full overflow-auto">
-                <div class="mx-14 my-2 flex flex-col w-ficha-w h-ficha-h border border-black">
+                <div *ngFor="let registro of registros" class="mx-14 my-2 flex flex-col w-ficha-w h-ficha-h border border-black">
                     <div class="grid grid-cols-2 mt-2">
                         <p class="font-bold text-right pr-8">Ciudad:</p>
-                        <p>Tepic</p>
+                        <p>{{registro.ciudad_huesped}}</p>
                         <p class="font-bold text-right pr-8">Motivo:</p>
-                        <p>Negocios</p>
-                        <p class="font-bold text-right pr-8">Días:</p>
-                        <p>1</p>
+                        <p>{{registro.motivo}}</p>
+                        <p class="font-bold text-right pr-8">Fecha ingreso:</p>
+                        <p>{{(registro.fecha_ingreso).substring(0,10)}}</p>
+                        <p class="font-bold text-right pr-8">Fecha salida:</p>
+                        <p>{{(registro.fecha_salida).substring(0,10)}}</p>
                         <p class="font-bold text-right pr-8">Habitación:</p>
-                        <p>Simple</p>
+                        <p>{{registro.tipo_habitacion}}</p>
                         <p class="font-bold text-right pr-8">Costo:</p>
-                        <p>$1000</p>
-                    </div>
-                    <div class="flex justify-end -mt-9 mb-1">
-                        <button class="mr-3">
-                            <img src="../../../assets/img/editar.png" class="w-8 h-auto">
-                        </button>
-                        <button class="mr-3">
-                            <img src="../../../assets/img/cerca.png" class="w-8 h-auto">
-                        </button>
-                    </div>
-                </div>
-                <div class="mx-14 my-2 flex flex-col w-ficha-w h-ficha-h border border-black">
-                    <div class="grid grid-cols-2 mt-2">
-                        <p class="font-bold text-right pr-8">Ciudad:</p>
-                        <p>Tepic</p>
-                        <p class="font-bold text-right pr-8">Motivo:</p>
-                        <p>Negocios</p>
-                        <p class="font-bold text-right pr-8">Días:</p>
-                        <p>1</p>
-                        <p class="font-bold text-right pr-8">Habitación:</p>
-                        <p>Simple</p>
-                        <p class="font-bold text-right pr-8">Costo:</p>
-                        <p>$1000</p>
-                    </div>
-                    <div class="flex justify-end -mt-9 mb-1">
-                        <button class="mr-3">
-                            <img src="../../../assets/img/editar.png" class="w-8 h-auto">
-                        </button>
-                        <button class="mr-3">
-                            <img src="../../../assets/img/cerca.png" class="w-8 h-auto">
-                        </button>
-                    </div>
-                </div>
-                <div class="mx-14 my-2 flex flex-col w-ficha-w h-ficha-h border border-black">
-                    <div class="grid grid-cols-2 mt-2">
-                        <p class="font-bold text-right pr-8">Ciudad:</p>
-                        <p>Tepic</p>
-                        <p class="font-bold text-right pr-8">Motivo:</p>
-                        <p>Negocios</p>
-                        <p class="font-bold text-right pr-8">Días:</p>
-                        <p>1</p>
-                        <p class="font-bold text-right pr-8">Habitación:</p>
-                        <p>Simple</p>
-                        <p class="font-bold text-right pr-8">Costo:</p>
-                        <p>$1000</p>
-                    </div>
-                    <div class="flex justify-end -mt-9 mb-1">
-                        <button class="mr-3">
-                            <img src="../../../assets/img/editar.png" class="w-8 h-auto">
-                        </button>
-                        <button class="mr-3">
-                            <img src="../../../assets/img/cerca.png" class="w-8 h-auto">
-                        </button>
-                    </div>
-                </div>
-                <div class="mx-14 my-2 flex flex-col w-ficha-w h-ficha-h border border-black">
-                    <div class="grid grid-cols-2 mt-2">
-                        <p class="font-bold text-right pr-8">Ciudad:</p>
-                        <p>Tepic</p>
-                        <p class="font-bold text-right pr-8">Motivo:</p>
-                        <p>Negocios</p>
-                        <p class="font-bold text-right pr-8">Días:</p>
-                        <p>1</p>
-                        <p class="font-bold text-right pr-8">Habitación:</p>
-                        <p>Simple</p>
-                        <p class="font-bold text-right pr-8">Costo:</p>
-                        <p>$1000</p>
+                        <p>${{registro.costo_estancia}}</p>
                     </div>
                     <div class="flex justify-end -mt-9 mb-1">
                         <button class="mr-3">
@@ -140,7 +76,7 @@
                     <label for="fecha_salida" class="mb-1 font-bold"> Fecha Salida </label>
                     <input type="date" id="fecha_salida" name="fecha_salida" [(ngModel)]="fecha_salida"
                         class="mb-5 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
-                    <button
+                    <button (click)="nuevoRegistro()"
                         class="mt-14 hover:bg-verde text-white text-xl px-10 py-1 rounded-lg bg-green-600 focus:border-verde ">
                         Guardar
                     </button>

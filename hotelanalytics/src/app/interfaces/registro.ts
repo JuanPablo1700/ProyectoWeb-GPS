@@ -7,6 +7,8 @@ export interface Registro {
     fk_id_habitacion_hotel:number;
     fk_id_usuario:any;
     fk_id_motivo:string;
-    fk_id_hotel:any;
-    fk_id_tipoHabitacion:string;
+    motivo?:string;
+    tipo_habitacion?:string;
+    fk_id_hotel?:any;
+    fk_id_tipoHabitacion?:string;
 }

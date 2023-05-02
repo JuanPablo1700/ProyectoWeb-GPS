@@ -24,8 +24,9 @@ export class RegistrosComponent implements OnInit{
 
   tipoHabitacion: TipoHabitacion[] = [];
   motivos: Motivo[] = [];
+  registros: Registro[] = [];
 
-  registro: Registro;
+  newRegistro: Registro;
 
   constructor(
     private router: Router,
@@ -33,7 +34,7 @@ export class RegistrosComponent implements OnInit{
     private _errorService: ErrorService,
     private _registroService: RegistroService
   ){
-    this.registro = {
+    this.newRegistro = {
       fecha_ingreso: "",
       fecha_salida: "",
       ciudad_huesped: "",
@@ -52,6 +53,7 @@ export class RegistrosComponent implements OnInit{
     this.id_hotel = localStorage.getItem('fk_id_hotel');
     this.getHabitaciones(this.id_hotel);
     this.getMotivos();
+    this.getRegistros();
   }
 
   getHabitaciones(id_hotel:number) {
@@ -76,19 +78,35 @@ export class RegistrosComponent implements OnInit{
     })
   }
 
+  getRegistros() {
+    this._registroService.getRegistros().subscribe({
+      next: (data) => {
+        this.registros = data;
+      },
+      error: (error: HttpErrorResponse) => {
+        this._errorService.msjError(error);
+      }
+    })
+  }
+
   nuevoRegistro() {
-    this.registro.fecha_ingreso = this.fecha_ingreso;
-    this.registro.fecha_salida = this.fecha_salida;
-    this.registro.ciudad_huesped = this.ciudad;
-    this.registro.fk_id_usuario = localStorage.getItem('id_usuario');
-    this.registro.fk_id_hotel = localStorage.getItem('fk_id_hotel');
-    this.registro.fk_id_tipoHabitacion = this.habitacion;
-    this.registro.fk_id_motivo = this.motivo;
+    this.newRegistro.fecha_ingreso = this.fecha_ingreso;
+    this.newRegistro.fecha_salida = this.fecha_salida;
+    this.newRegistro.ciudad_huesped = this.ciudad;
+    this.newRegistro.fk_id_usuario = localStorage.getItem('id_usuario');
+    this.newRegistro.fk_id_hotel = localStorage.getItem('fk_id_hotel');
+    this.newRegistro.fk_id_tipoHabitacion = this.habitacion;
+    this.newRegistro.fk_id_motivo = this.motivo;
     
-    return this._registroService.nuevo(this.registro).subscribe({
+    return this._registroService.nuevo(this.newRegistro).subscribe({
       next:() => {
-        this.toastr.success('Hotel registrado correctamente', 'Correcto');
+        this.fecha_ingreso = "";
+        this.fecha_salida = "";
+        this.ciudad = "";
+        this.habitacion = "-1";
+        this.motivo = "-1";
         this.router.navigate(['/registros']);
+        this.toastr.success('Hotel registrado correctamente', 'Correcto');
       },
       error: (error: HttpErrorResponse) => {
         this._errorService.msjError(error);

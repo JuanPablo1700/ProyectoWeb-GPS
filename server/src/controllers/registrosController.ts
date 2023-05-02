@@ -19,7 +19,7 @@ class RegistrosController {
 
     public async nuevo(req: Request, res: Response) {
 
-        const { fecha_ingreso, fecha_salida, ciudad, fk_id_tipoHabitacion, fk_id_usuario, fk_id_motivo, fk_id_hotel } = req.body;
+        const { fecha_ingreso, fecha_salida, ciudad_huesped, fk_id_tipoHabitacion, fk_id_usuario, fk_id_motivo, fk_id_hotel } = req.body;
 
         let costo = 0;
 
@@ -36,7 +36,7 @@ class RegistrosController {
             costo = diferenciaEnDias * habitacion_hotel[0][0].precio;
 
             const registroInsertado: any = await pool.query('INSERT INTO registro_huesped (fecha_ingreso, fecha_salida, ciudad_huesped, costo_estancia, fk_id_habitacion_hotel, fk_id_usuario, fk_id_motivo) values (?,?,?,?,?,?,?)',
-            [fecha_ingreso, fecha_salida, ciudad, costo, habitacion_hotel[0][0].id, fk_id_usuario, fk_id_motivo]);
+            [fecha_ingreso, fecha_salida, ciudad_huesped, costo, habitacion_hotel[0][0].id, fk_id_usuario, fk_id_motivo]);
             
             if (registroInsertado[0].affectedRows >= 1) {
                 return res.json({msg: 'Registro insertado correctamente'});
@@ -50,7 +50,7 @@ class RegistrosController {
     }
 
     public async getRegistros(req: Request, res: Response) {
-        const listRegistros = await pool.query('SELECT * FROM registro_huesped');
+        const listRegistros = await pool.query('SELECT rh.id, rh.fecha_ingreso, rh.fecha_salida, rh.ciudad_huesped, rh.costo_estancia, rh.fk_id_habitacion_hotel, rh.fk_id_usuario, rh.fk_id_motivo, mv.motivo, th.tipo_habitacion FROM registro_huesped rh LEFT JOIN motivo_visita as mv on mv.id = rh.fk_id_motivo LEFT JOIN habitacion_hotel as hh on hh.id = rh.fk_id_habitacion_hotel LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion');
         return res.json(listRegistros[0]);
     }
 
