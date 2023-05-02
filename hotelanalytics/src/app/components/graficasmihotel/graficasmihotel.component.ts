@@ -131,6 +131,10 @@ export class GraficasmihotelComponent implements OnInit {
     this.router.navigate(['/graficasmihotel']);
   }
 
+  habitaciones(){
+    this.router.navigate(['/datoshotel']);
+  }
+  
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
