@@ -16,15 +16,16 @@ export class GraficasgeneralesComponent implements OnInit {
 
   fechaSelect = "";
   tipoGrafica = "";
-  fechaInicio = "";
-  fechaFin = "";
+  fechaInicio:any = "";
+  fechaFin:any = "";
   estrellas = "";
   idHotel = "";
 
   hoteles: Hotel[] = [];
   motivo: any;
+  registros: any;
 
-  data_Motivo: any;
+  parametros: any;
 
   constructor(
     private router: Router,
@@ -45,6 +46,8 @@ export class GraficasgeneralesComponent implements OnInit {
   }
 
   consultar() {
+
+    const hoy = new Date();
 
     if (this.tipoGrafica == "-1") {
       return this.toastr.error('Seleccione un tipo de gráfica', 'Error');
@@ -70,7 +73,42 @@ export class GraficasgeneralesComponent implements OnInit {
       return this.toastr.error('Seleccione un hotel', 'Error');
     }
 
-    this.data_Motivo = {
+    if (this.fechaSelect == "1") { //Este día
+      this.fechaInicio = hoy;
+      this.fechaFin = hoy;
+    }
+    if (this.fechaSelect == "2") { //Esta semana
+      this.fechaInicio = new Date(hoy.setDate(hoy.getDate() - hoy.getDay())); //inicio de la semana actual empezando por domingo
+      this.fechaFin = hoy; //NOTA: mandar el último día de la semana
+      this.fechaFin.setDate(this.fechaFin.getDate() + (6 - this.fechaFin.getDay()));
+      this.fechaFin = hoy;
+    }
+    if (this.fechaSelect == "3") { //Este mes
+      this.fechaInicio = new Date(hoy.getFullYear(), hoy.getMonth(), 1); //inicio de mes actual
+      this.fechaFin = new Date(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth() + 1, 0);
+      
+      
+    }
+    if (this.fechaSelect == "4") { //Personalizado
+      if (this.fechaInicio == "" || this.fechaFin == "") {
+        return this.toastr.error('Seleccione fecha inicio y fecha fin correctamente', 'Error');
+      }
+      if (this.fechaInicio > this.fechaFin) {
+        return this.toastr.error('Seleccione fecha inicio y fecha fin correctamente', 'Error');
+      }
+    }
+
+    if (this.tipoGrafica == "1" && this.estrellas == "0") {
+      this.parametros = {
+        "fechaInicio": this.fechaInicio,
+        "fechaFin": this.fechaFin
+      }
+
+      this._dataService.getMotivoGeneral(this.parametros).subscribe(data => { this.motivo = data });
+      this._dataService.getRegistrosGeneral(this.parametros).subscribe(data => { this.registros = data });
+    }
+
+    this.parametros = {
       "tipoGrafica": this.tipoGrafica,
       "fechaSelect": this.fechaSelect,
       "fechaInicio": this.fechaInicio,
@@ -78,12 +116,14 @@ export class GraficasgeneralesComponent implements OnInit {
       "estrellas": this.estrellas,
       "idHotel": this.idHotel
     }
-
-    return this._dataService.getMotivoGeneral(this.data_Motivo).subscribe(data => { this.motivo = data });
+    return true;
   }
 
-  get multi2() {
+  get multi1() {
     return this.motivo;
+  }
+  get multi2() {
+    return this.registros;
   }
 
   view: [number, number] = [700, 400];
@@ -95,9 +135,11 @@ export class GraficasgeneralesComponent implements OnInit {
   showLegend: boolean = true;
   legendPosition: string = 'below';
   showXAxisLabel: boolean = true;
-  yAxisLabel: string = 'Hotel';
+  yAxisLabel1: string = 'Hotel';
+  yAxisLabel2: string = 'Registros';
   showYAxisLabel: boolean = true;
-  xAxisLabel = 'Cantidad';
+  xAxisLabel1 = 'Cantidad';
+  xAxisLabel2 = 'Hotel';
 
   schemeType: string = 'ordinal';
 

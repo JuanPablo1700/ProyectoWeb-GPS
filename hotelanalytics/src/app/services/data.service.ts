@@ -14,6 +14,10 @@ export class DataService {
   getMotivoGeneral(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getMotivoGeneral/`, data);
   }
+  
+  getRegistrosGeneral(data:any): Observable<any[]> {
+    return this.http.post<any[]>(`http://localhost:3000/api/data/getRegistrosGeneral/`, data);
+  }
 
   //Por categoria
   getMotivoCategoria(data:any): Observable<any[]> {

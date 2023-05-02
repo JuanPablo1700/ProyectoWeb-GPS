@@ -13,6 +13,7 @@ class DataRoutes {
     config(): void {
         //Generales
         this.router.post('/api/data/getMotivoGeneral', dataController.getMotivoGeneral);
+        this.router.post('/api/data/getRegistrosGeneral', dataController.getRegistrosGeneral);
         
         //Por categoría
         this.router.post('/api/data/getMotivoCategoria', dataController.getMotivoCategoria);

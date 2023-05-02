@@ -9,6 +9,14 @@ interface Hotel_motivo {
   }[];
 }
 
+interface DataRegistros {
+  name: string;
+  series: {
+    name: string;
+    value: number;
+  }[];
+}
+
 interface DatosHotel {
   name: {
     name: string;
@@ -20,40 +28,24 @@ class DataController {
   //Generales
   public async getMotivoGeneral(req: Request, res: Response) {
     const formulario = req.body;
-    let fechaInicio: Date;
-    let fechaFin: Date;
-    const hoy = new Date();
-    console.log(hoy);
-    console.log(formulario.tipoGrafica);
-    console.log(formulario.fechaSelect);
-    console.log(formulario.fechaInicio);
-    console.log(formulario.fechaFin);
-    console.log(formulario.estrellas);
-    console.log(formulario.idHotel);
+    let fechaInicio: any = new Date(formulario.fechaInicio);
+    let fechaFin: any = new Date(formulario.fechaFin);
 
-    if (formulario.fechaSelect == "1") {
-      // Este día
-      fechaFin = hoy;
+    fechaInicio = fechaInicio.getFullYear() + "-" + ("0" + (fechaInicio.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaInicio.getDate()).slice(-2);
+    fechaFin = fechaFin.getFullYear() + "-" + ("0" + (fechaFin.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaFin.getDate()).slice(-2);
+    
+    console.log(fechaInicio);
+    console.log(fechaFin);
 
-      hoy.setDate(hoy.getDate() - 1); // restar un día
-      fechaInicio = hoy;
+    const query = "SELECT h.nombre, mv.motivo, COUNT(*) AS cantidad, rg.fecha_ingreso, rg.fecha_salida FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN motivo_visita AS mv ON mv.id = rg.fk_id_motivo WHERE rg.fecha_ingreso >= '" +
+    fechaInicio +
+    "' AND rg.fecha_ingreso <= '" +
+    fechaFin +
+    "' GROUP BY h.nombre, mv.motivo";
 
-      console.log(fechaInicio); // mostrar la fecha resultante
-      console.log(fechaFin); // mostrar la fecha resultante
-    }
-    if (formulario.fechaSelect == "2") {
-      // Esta semana
-    }
-    if (formulario.fechaSelect == "3") {
-      // Este mes
-    }
-    if (formulario.fechaSelect == "4") {
-      // Personalizado
-    }
-
-    const datos: any[] = await pool.query(
-      "SELECT h.nombre, mv.motivo, COUNT(*) as cantidad FROM registro_huesped as rg LEFT JOIN habitacion_hotel as hh on hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel as h on h.id = hh.fk_id_hotel LEFT JOIN motivo_visita as mv on mv.id = rg.fk_id_motivo GROUP BY h.nombre, mv.motivo ORDER BY h.nombre"
-    );
+    console.log(query);
+    
+    const datos: any[] = await pool.query(query);
 
     const hoteles: Hotel_motivo[] = [];
     const mapaHoteles = new Map<string, Hotel_motivo>();
@@ -84,9 +76,34 @@ class DataController {
   }
 
   public async getCiudadVisitaGeneral(req: Request, res: Response) {
-    const datos: any[] = await pool.query(
-      "SELECT h.nombre, mv.motivo, COUNT(*) as cantidad FROM registro_huesped as rg LEFT JOIN habitacion_hotel as hh on hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel as h on h.id = hh.fk_id_hotel LEFT JOIN motivo_visita as mv on mv.id = rg.fk_id_motivo GROUP BY h.nombre, mv.motivo ORDER BY h.nombre"
-    );
+    
+     const query = "";/*"SELECT
+    h.nombre,
+    rg.ciudad_huesped AS ciudad,
+    COUNT(*) AS cantidad
+FROM
+    registro_huesped AS rg
+LEFT JOIN habitacion_hotel AS hh
+ON
+    hh.id = rg.fk_id_habitacion_hotel
+LEFT JOIN hotel AS h
+ON
+    h.id = hh.fk_id_hotel
+LEFT JOIN motivo_visita AS mv
+ON
+    mv.id = rg.fk_id_motivo
+WHERE
+        rg.fecha_ingreso >= '" +
+      fechaInicio +
+      "' AND rg.fecha_ingreso <= '" +
+      fechaFin +
+      "'
+GROUP BY
+    h.nombre,
+    rg.ciudad_huesped
+ORDER BY h.nombre" */
+    
+    const datos: any[] = await pool.query(query);
 
     const hoteles: Hotel_motivo[] = [];
     const mapaHoteles = new Map<string, Hotel_motivo>();
@@ -114,6 +131,56 @@ class DataController {
     });
 
     return res.json(hoteles);
+  }
+
+  public async getRegistrosGeneral(req: Request, res: Response) {
+    const formulario = req.body;
+    let fechaInicio: any = new Date(formulario.fechaInicio);
+    let fechaFin: any = new Date(formulario.fechaFin);
+
+    fechaInicio = fechaInicio.getFullYear() + "-" + ("0" + (fechaInicio.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaInicio.getDate()).slice(-2);
+    fechaFin = fechaFin.getFullYear() + "-" + ("0" + (fechaFin.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaFin.getDate()).slice(-2);
+    
+    console.log(fechaInicio);
+    console.log(fechaFin);
+
+    const query = "SELECT h.nombre, COUNT(*) AS cantidad, rg.fecha_ingreso, rg.fecha_salida FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel WHERE rg.fecha_ingreso >= '" + fechaInicio + "' AND rg.fecha_ingreso <= '" + fechaFin + "'GROUP BY h.nombre, rg.fecha_ingreso ORDER BY rg.fecha_ingreso";
+
+    console.log(query);
+    
+    const datos: any[] = await pool.query(query);
+
+    const registros: DataRegistros[] = [];
+    const mapaRegistros = new Map<string, DataRegistros>();
+
+    datos[0].forEach((dato: any) => {
+
+      let fechaIngreso: any = new Date(dato.fecha_ingreso);
+
+      fechaIngreso = fechaIngreso.getFullYear() + "-" + ("0" + (fechaIngreso.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaIngreso.getDate()).slice(-2);
+
+      const registro = mapaRegistros.get(dato.nombre);
+      if (registro) {
+        registro.series.push({
+          name: fechaIngreso,
+          value: dato.cantidad,
+        });
+      } else {
+        const nuevoHotel: Hotel_motivo = {
+          name: dato.nombre,
+          series: [
+            {
+              name: fechaIngreso,
+              value: dato.cantidad,
+            },
+          ],
+        };
+        mapaRegistros.set(dato.nombre, nuevoHotel);
+        registros.push(nuevoHotel);
+      }
+    });
+
+    return res.json(registros);
   }
 
   //Por Categoría
