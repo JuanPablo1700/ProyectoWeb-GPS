@@ -15,7 +15,7 @@ class RegistrosRoutes {
         this.router.get('/api/registros/getRegistros', validateToken, registrosController.getRegistros);
         this.router.get('/api/registros/getRegistro/:id', validateToken, registrosController.getRegistro);
         this.router.put('/api/registros/actualizar/:id', validateToken, registrosController.actualizar);
-        this.router.delete('/api/registros/eliminar/:id', registrosController.eliminar);
+        this.router.delete('/api/registros/eliminar/:id', validateToken, registrosController.eliminar);
         
         this.router.get('/api/habitacion/getHabitacionesHotel/:id', validateToken, registrosController.getTipoHabitacion);
         this.router.get('/api/getMotivosVisita', validateToken, registrosController.getMotivos);

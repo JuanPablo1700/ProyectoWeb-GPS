@@ -43,7 +43,7 @@ export class InicioComponent {
           if (tipo_usuario === "admin") {
             this.router.navigate(['/principaldirector']);
           } else if (tipo_usuario === "gerente") {
-            this.router.navigate(['/graficasxhotel']);
+            this.router.navigate(['/graficasmihotel']);
           } else if (tipo_usuario === "recepcionista") {
             this.router.navigate(['/registros']);
           }

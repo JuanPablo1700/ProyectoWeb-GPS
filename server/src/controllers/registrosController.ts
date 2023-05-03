@@ -6,7 +6,7 @@ class RegistrosController {
     public async getTipoHabitacion(req: Request, res: Response) {
         const id = req.params.id;
 
-        const habitaciones: any = await pool.query("SELECT * FROM habitacion_hotel hh LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion WHERE hh.fk_id_hotel = 36", [id]);
+        const habitaciones: any = await pool.query("SELECT * FROM habitacion_hotel hh LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion WHERE hh.fk_id_hotel = ?", [id]);
 
         return res.json(habitaciones[0]);
     }
