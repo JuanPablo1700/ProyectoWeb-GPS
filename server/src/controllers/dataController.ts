@@ -92,10 +92,10 @@ class DataController {
     fechaFin = fechaFin.getFullYear() + "-" + ("0" + (fechaFin.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaFin.getDate()).slice(-2);
 
     const query = "SELECT h.nombre, rg.ciudad_huesped AS ciudad, COUNT(*) AS cantidad FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN motivo_visita AS mv ON mv.id = rg.fk_id_motivo WHERE rg.fecha_ingreso >= '" +
-    fechaInicio +
-    "' AND rg.fecha_ingreso <= '" +
-    fechaFin +
-    "' GROUP BY h.nombre, rg.ciudad_huesped ORDER BY h.nombre";
+      fechaInicio +
+      "' AND rg.fecha_ingreso <= '" +
+      fechaFin +
+      "' GROUP BY h.nombre, rg.ciudad_huesped ORDER BY h.nombre";
 
     const datos: any[] = await pool.query(query);
 
@@ -235,6 +235,56 @@ class DataController {
     });
 
     return res.json(hoteles);
+  }
+
+  public async getRegistrosCategoria(req: Request, res: Response) {
+    const form = req.body;
+    console.log(form);
+    let fechaInicio: any = new Date(form.fechaInicio);
+    let fechaFin: any = new Date(form.fechaFin);
+    fechaInicio =
+      fechaInicio.getFullYear() + "-" +
+      ("0" + (fechaInicio.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + fechaInicio.getDate()).slice(-2);
+    fechaFin =
+      fechaFin.getFullYear() +
+      "-" +
+      ("0" + (fechaFin.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + fechaFin.getDate()).slice(-2);
+    console.log(fechaInicio);
+    console.log(fechaFin);
+    const estrellas = form.estrellas;
+    const query = "SELECT h.nombre, COUNT(*) AS cantidad, rg.fecha_ingreso, rg.fecha_salida FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel WHERE rg.fecha_ingreso >= '" + fechaInicio + "' AND h.estrellas = " + estrellas + " AND rg.fecha_ingreso <= '" + fechaFin + "'GROUP BY h.nombre, rg.fecha_ingreso ORDER BY rg.fecha_ingreso";
+    console.log(query);
+    const datos: any[] = await pool.query(query);
+    const registros: DataRegistros[] = [];
+    const mapaRegistros = new Map<string, Hotel_motivo>();
+    datos[0].forEach((dato: any) => {
+      let fechaIngreso: any = new Date(dato.fecha_ingreso);
+      fechaIngreso = fechaIngreso.getFullYear() + "-" + ("0" + (fechaIngreso.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaIngreso.getDate()).slice(-2);
+      const registro = mapaRegistros.get(dato.nombre);
+      if (registro) {
+        registro.series.push({
+          name: fechaIngreso,
+          value: dato.cantidad,
+        });
+      } else {
+        const nuevoHotel: Hotel_motivo = {
+          name: dato.nombre,
+          series: [
+            {
+              name: fechaIngreso,
+              value: dato.cantidad,
+            },
+          ],
+        };
+        mapaRegistros.set(dato.nombre, nuevoHotel);
+        registros.push(nuevoHotel);
+      }
+    });
+    return res.json(registros);
   }
 
   //Por Hotel
