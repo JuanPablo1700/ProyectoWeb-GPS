@@ -128,6 +128,25 @@
                 (deactivate)="onDeactivate($event)"
                 >
             </ngx-charts-bar-vertical-2d>
+            <ngx-charts-bar-horizontal-2d *ngIf="motivo" class="mb-10"
+                [view]="view"
+                scheme="cool"
+                [schemeType]="schemeType"
+                [results]="multi4"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
+                [legendPosition]="legendPosition"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel4"
+                [yAxisLabel]="yAxisLabel4"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+                >
+            </ngx-charts-bar-horizontal-2d>
         </div>
         <button *ngIf="motivo" class="bg-verde text-white text-2xl px-20 py-2 mt-8 rounded-lg">
             Generar PDF

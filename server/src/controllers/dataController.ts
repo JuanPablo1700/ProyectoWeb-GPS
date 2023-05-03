@@ -83,6 +83,40 @@ class DataController {
     return res.json(hoteles);
   }
 
+  public async getCostosHabitacionGeneral(req: Request, res: Response) {
+
+    const query = "SELECT h.nombre, th.tipo_habitacion, hh.precio FROM habitacion_hotel AS hh LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion GROUP BY th.tipo_habitacion, hh.precio ORDER BY h.nombre";
+
+    const datos: any[] = await pool.query(query);
+
+    const hoteles: Hotel_motivo[] = [];
+    const mapaHoteles = new Map<string, Hotel_motivo>();
+
+    datos[0].forEach((dato: any) => {
+      const motivo = mapaHoteles.get(dato.nombre);
+      if (motivo) {
+        motivo.series.push({
+          name: dato.tipo_habitacion,
+          value: dato.precio,
+        });
+      } else {
+        const nuevoHotel: Hotel_motivo = {
+          name: dato.nombre,
+          series: [
+            {
+              name: dato.tipo_habitacion,
+              value: dato.precio,
+            },
+          ],
+        };
+        mapaHoteles.set(dato.nombre, nuevoHotel);
+        hoteles.push(nuevoHotel);
+      }
+    });
+
+    return res.json(hoteles);
+  }
+
   public async getCiudadVisitaGeneral(req: Request, res: Response) {
     const formulario = req.body;
     let fechaInicio: any = new Date(formulario.fechaInicio);

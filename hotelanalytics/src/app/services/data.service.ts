@@ -22,6 +22,10 @@ export class DataService {
   getCiudadVisitaGeneral(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getCiudadVisitaGeneral/`, data);
   }
+  
+  getCostosHabitacionGeneral(): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:3000/api/data/getCostosHabitacionGeneral/`);
+  }
 
   //Por categoria
   getMotivoCategoria(data:any): Observable<any[]> {

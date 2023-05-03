@@ -25,6 +25,7 @@ export class GraficasgeneralesComponent implements OnInit {
   motivo: any;
   registros: any;
   ciudades: any;
+  costos: any;
 
   parametros: any;
 
@@ -108,6 +109,7 @@ export class GraficasgeneralesComponent implements OnInit {
       this._dataService.getMotivoGeneral(this.parametros).subscribe(data => { this.motivo = data });
       this._dataService.getRegistrosGeneral(this.parametros).subscribe(data => { this.registros = data });
       this._dataService.getCiudadVisitaGeneral(this.parametros).subscribe(data => { this.ciudades = data });
+      this._dataService.getCostosHabitacionGeneral().subscribe(data => { this.costos = data });
     }
 
     this.parametros = {
@@ -130,6 +132,9 @@ export class GraficasgeneralesComponent implements OnInit {
   get multi3() {
     return this.ciudades;
   }
+  get multi4() {
+    return this.costos;
+  }
 
   view: [number, number] = [700, 400];
 
@@ -150,6 +155,9 @@ export class GraficasgeneralesComponent implements OnInit {
   
   yAxisLabel3: string = 'Cantidad por ciudad';
   xAxisLabel3 = 'Hotel';
+  
+  yAxisLabel4: string = 'Hotel';
+  xAxisLabel4 = 'Costo por habitación';
 
   schemeType: string = 'ordinal';
 
