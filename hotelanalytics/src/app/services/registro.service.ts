@@ -33,8 +33,8 @@ export class RegistroService {
     return this.http.get<Registro>(`${this.myAppUrl}${this.myApiUrlRegistros}/getRegistro/${id}`);
   }
 
-  deleteRegistro(id:number):Observable<Registro> {
-    return this.http.delete<Registro>(`${this.myAppUrl}${this.myApiUrlRegistros}/eliminar/${id}`);
+  deleteRegistro(id:number):Observable<string> {
+    return this.http.delete<string>(`${this.myAppUrl}${this.myApiUrlRegistros}/eliminar/${id}`);
   }
   
   actualizar(id: number, registro:Registro): Observable<Registro> {

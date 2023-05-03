@@ -149,7 +149,6 @@ export class RegistrosComponent implements OnInit {
   }
 
   eliminar(id: any) {
-
     Swal.fire({
       title: '¿Estás seguro de eliminar?',
       text: "No podrás revertir esto",
@@ -161,14 +160,19 @@ export class RegistrosComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         // Aquí pones la lógica para eliminar el elemento
-        this._registroService.deleteRegistro(id);
-        console.log(id);
-        Swal.fire(
-          'Eliminado!',
-          'El registro ha sido eliminado.',
-          'success'
-        )
-        location.reload();
+        this._registroService.deleteRegistro(id).subscribe({
+          next: (resp) => {
+            Swal.fire(
+              'Eliminado!',
+              resp,
+              'success'
+            )
+            location.reload();
+          },
+          error: (error: HttpErrorResponse) => {
+            this._errorService.msjError(error);
+          },
+        });
       }
     })
   }

@@ -64,9 +64,8 @@ class RegistrosController {
     public async eliminar(req: Request, res: Response) {
         const id = req.params.id;
         const idInt = parseInt(id);
-        const response: any = await pool.query('DELETE FROM registro_huesped WHERE id = ?', [idInt]);
-        const registro = response[0][0];
-        return res.json(registro);
+        await pool.query('DELETE FROM registro_huesped WHERE id = ?', [idInt]);
+        return res.json("Eliminado correctamente");
     }
 
     public async actualizar(req: Request, res: Response) {
