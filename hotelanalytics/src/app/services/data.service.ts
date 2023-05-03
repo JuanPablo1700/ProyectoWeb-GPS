@@ -52,4 +52,7 @@ export class DataService {
   getRegistrosHotel(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getRegistrosHotel/`, data);
   }
+  getHabitacionesHotel(data:any): Observable<any[]> {
+    return this.http.post<any[]>(`http://localhost:3000/api/data/getHabitacionesHotel/`, data);
+  }
 }

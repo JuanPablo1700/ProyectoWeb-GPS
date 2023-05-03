@@ -211,6 +211,11 @@ class DataController {
     return res.json(registros);
   }
 
+  /**
+   * Para ver habitaciones por hotel
+   * SELECT h.nombre as hotel, th.tipo_habitacion as habitacion, COUNT(*) AS cantidad FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN tipo_habitacion as th ON hh.fk_id_tipoHabitacion = th.id GROUP by th.tipo_habitacion, hotel;
+   */
+
   /****************************************************************************************************************************** */
   //Por Categoría
   public async getMotivoCategoria(req: Request, res: Response) {
@@ -512,6 +517,48 @@ class DataController {
       }
     });
     return res.json(registros);
+  }
+
+  public async getHabitacionesHotel(req: Request, res: Response) {
+    const form = req.body;
+    //console.log(form);
+    let fechaInicio: any = new Date(form.fechaInicio);
+    let fechaFin: any = new Date(form.fechaFin);
+    const idHotel = form.fk_id_hotel;
+
+    fechaInicio =
+      fechaInicio.getFullYear() +
+      "-" +
+      ("0" + (fechaInicio.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + fechaInicio.getDate()).slice(-2);
+    fechaFin =
+      fechaFin.getFullYear() +
+      "-" +
+      ("0" + (fechaFin.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + fechaFin.getDate()).slice(-2);
+    const query = "SELECT h.nombre as hotel, th.tipo_habitacion as habitacion, COUNT(*) AS cantidad FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN tipo_habitacion as th ON hh.fk_id_tipoHabitacion = th.id WHERE h.id = " +
+    idHotel +
+    " AND ( rg.fecha_ingreso >= '" +
+    fechaInicio +
+    "' AND rg.fecha_ingreso <= '" +
+    fechaFin +
+    "') GROUP by th.tipo_habitacion, hotel"
+   // console.log(query);
+    const datos: any[] = await pool.query(query);
+   // console.log(datos[0]);
+    const habitaciones = [];
+
+    for (const dato of datos[0]) {
+      habitaciones.push({
+        name: dato.habitacion,
+        value: dato.cantidad,
+      });
+    }
+
+    //console.log("ciudad" + ciudad);
+    return res.json(habitaciones);
   }
 }
 

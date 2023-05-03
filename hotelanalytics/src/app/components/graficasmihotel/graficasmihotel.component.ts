@@ -28,6 +28,7 @@ export class GraficasmihotelComponent implements OnInit {
   motivo: any;
   ciudad: any;
   registro: any;
+  habitacion: any;
   parametros: any;
 
   //Gráficas
@@ -42,6 +43,9 @@ export class GraficasmihotelComponent implements OnInit {
   }
   get registros() {
     return this.registro;
+  }
+  get habitacions() {
+    return this.habitacion;
   }
 
   consultar() {
@@ -102,14 +106,17 @@ export class GraficasmihotelComponent implements OnInit {
 
     this.graficasVisibles = 1;
 
-    this.ciudad = this.dataService.getCiudadHotel(this.parametros).subscribe(data => {
+    this.dataService.getCiudadHotel(this.parametros).subscribe((data) => {
       this.ciudad = data;
-      });
+    });
     this.dataService.getMotivoHotel(this.parametros).subscribe((data) => {
       this.motivo = data;
     });
     this.dataService.getRegistrosHotel(this.parametros).subscribe((data) => {
       this.registro = data;
+    });
+    this.dataService.getHabitacionesHotel(this.parametros).subscribe((data) => {
+      this.habitacion = data;
     });
     return true;
   }
@@ -119,20 +126,19 @@ export class GraficasmihotelComponent implements OnInit {
   showLegend: boolean = true;
   showLabels: boolean = true;
   isDoughnut: boolean = false;
-  showDataLabel:boolean=true;
+  showDataLabel: boolean = true;
 
-    //Para gráfica registros
-    showXAxis: boolean = true;
-    showYAxis: boolean = true;
-    legendPosition: string = 'below';
-    showXAxisLabel: boolean = true;
-    showYAxisLabel: boolean = true;
-    schemeType: string = 'ordinal';
-    roundDomains: boolean = false;
-    legendTitleR:string='Fechas';
-    xAxisLabelR = 'Fechas';
-    yAxisLabelR: string = 'Registros';
-    
+  //Para gráfica registros
+  showXAxis: boolean = true;
+  showYAxis: boolean = true;
+  legendPosition: string = 'below';
+  showXAxisLabel: boolean = true;
+  showYAxisLabel: boolean = true;
+  schemeType: string = 'ordinal';
+  roundDomains: boolean = false;
+  legendTitleR: string = 'Fechas';
+  xAxisLabelR = 'Fechas';
+  yAxisLabelR: string = 'Registros';
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
