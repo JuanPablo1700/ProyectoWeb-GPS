@@ -271,6 +271,61 @@ class DataController {
     return res.json(hoteles);
   }
 
+  public async getCiudadCategoria(req: Request, res: Response) {
+    const form = req.body;
+    console.log(form);
+    let fechaInicio: any = new Date(form.fechaInicio);
+    let fechaFin: any = new Date(form.fechaFin);
+    fechaInicio =
+      fechaInicio.getFullYear() +
+      "-" +
+      ("0" + (fechaInicio.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + fechaInicio.getDate()).slice(-2);
+    fechaFin =
+      fechaFin.getFullYear() +
+      "-" +
+      ("0" + (fechaFin.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + fechaFin.getDate()).slice(-2);
+    console.log(fechaInicio);
+    console.log(fechaFin);
+    const estrellas = form.estrellas;
+    const query= "SELECT h.nombre, rg.ciudad_huesped AS ciudad, COUNT(*) AS cantidad FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN motivo_visita AS mv ON mv.id = rg.fk_id_motivo WHERE rg.fecha_ingreso >= '" +
+    fechaInicio +
+    "' AND rg.fecha_ingreso <= '" +
+    fechaFin +
+    "' AND h.estrellas = " + estrellas + " GROUP BY h.nombre, rg.ciudad_huesped ORDER BY h.nombre";
+    console.log('ciudad categoria: ' + query);
+    
+    const datos: any[] = await pool.query(query);
+    const ciudades: Hotel_motivo[] = [];
+    const mapaHoteles = new Map<string, Hotel_motivo>();
+    datos[0].forEach((dato: any) => {
+      const motivo = mapaHoteles.get(dato.nombre);
+      if (motivo) {
+        motivo.series.push({
+          name: dato.motivo,
+          value: dato.cantidad,
+        });
+      } else {
+        const ciudad: Hotel_motivo = {
+          name: dato.nombre,
+          series: [
+            {
+              name: dato.motivo,
+              value: dato.cantidad,
+            },
+          ],
+        };
+        mapaHoteles.set(dato.nombre, ciudad);
+        ciudades.push(ciudad);
+      }
+    });
+    return res.json(ciudades);
+  }
+
+
   public async getRegistrosCategoria(req: Request, res: Response) {
     const form = req.body;
     console.log(form);

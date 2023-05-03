@@ -74,17 +74,29 @@
                         >
                     </ngx-charts-bar-horizontal-2d>
                 </div>
-
                 
-                <!-- Precio por tipo de habitación -->
-
-                <!-- <div class="ciudad flex border-2 p-5">
+                <div class="ciudad flex border-2 p-5">
                     <h2 class="block text-center font-bold">Ciudades</h2>
-                    <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="single2"
-                        [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
-                        (deactivate)="onDeactivate($event)">
-                    </ngx-charts-advanced-pie-chart>
-                </div>-->
+                    <ngx-charts-bar-horizontal-2d 
+                    [view]="view"
+                    scheme="cool"
+                    [schemeType]="schemeType"
+                    [results]="multi3"
+                        [gradient]="gradient"
+                        [xAxis]="showXAxis"
+                        [yAxis]="showYAxis"
+                        [legend]="showLegend"
+                        [legendPosition]="legendPosition"
+                        [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel"
+                        [xAxisLabel]="xAxisLabel"
+                        [yAxisLabel]="yAxisLabel"
+                        (select)="onSelect($event)"
+                        (activate)="onActivate($event)"
+                        (deactivate)="onDeactivate($event)"
+                        >
+                    </ngx-charts-bar-horizontal-2d>
+                </div>
                 <div class="ciudad flex border-2 p-5">
                     <h2 class="block text-center font-bold">Registros</h2>
                     <ngx-charts-bar-vertical-2d *ngIf="motivo" class="mb-10"
@@ -106,7 +118,8 @@
                     (deactivate)="onDeactivate($event)"
                     >
                 </ngx-charts-bar-vertical-2d>
-                </div> 
+            </div> 
+            <!-- Precio por tipo de habitación -->
             </div>
         </div>
         <div *ngIf="graficasVisibles==1" class="flex justify-center items-baseline mt-2">

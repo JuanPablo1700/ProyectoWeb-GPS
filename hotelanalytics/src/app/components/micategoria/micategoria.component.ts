@@ -23,7 +23,7 @@ export class MicategoriaComponent implements OnInit {
   graficasVisibles = 0;
 
   motivo: any;
-  ciudad: any;
+  ciudades: any;
   registros:any;
   parametros: any;
 
@@ -73,9 +73,9 @@ export class MicategoriaComponent implements OnInit {
     this.dataService.getMotivoCategoria(this.parametros).subscribe(data => {
       this.motivo = data;
     })
-    /* this.dataService.getCiudadCategoria(this.parametros).subscribe(data => {
-      this.ciudad = data;
-    }) */
+    this.dataService.getCiudadCategoria(this.parametros).subscribe(data => {
+      this.ciudades = data;
+    })
 
     this.dataService.getRegistrosCategoria(this.parametros).subscribe(data => {
       this.registros = data;
@@ -96,8 +96,10 @@ export class MicategoriaComponent implements OnInit {
   legendPosition: string = 'below';
   showXAxisLabel: boolean = true;
   showYAxisLabel: boolean = true;
+  
   xAxisLabel = 'Cantidad';
   yAxisLabel: string = 'Hotel';
+  
   xAxisLabel2 = 'Hotel';
   yAxisLabel2: string = 'Registros';
 
@@ -108,6 +110,9 @@ export class MicategoriaComponent implements OnInit {
   }
   get multi2() {
     return this.registros;
+  }
+  get multi3() {
+    return this.ciudades;
   }
 
   colorScheme = {

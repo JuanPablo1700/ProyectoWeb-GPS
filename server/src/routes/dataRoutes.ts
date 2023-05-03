@@ -20,6 +20,7 @@ class DataRoutes {
         //Por categoría
         this.router.post('/api/data/getMotivoCategoria', dataController.getMotivoCategoria);
         this.router.post('/api/data/getRegistrosCategoria', dataController.getRegistrosCategoria);
+        this.router.post('/api/data/getCiudadCategoria', dataController.getCiudadCategoria);
 
         //Por hotel
         this.router.post('/api/data/getMotivoHotel', dataController.getMotivoHotel);

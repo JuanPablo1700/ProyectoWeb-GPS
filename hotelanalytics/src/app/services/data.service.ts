@@ -32,6 +32,10 @@ export class DataService {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getMotivoCategoria/`, data);
   }
 
+  getCiudadCategoria(data:any): Observable<any[]> {
+    return this.http.post<any[]>(`http://localhost:3000/api/data/getCiudadCategoria/`, data);
+  }
+  
   getRegistrosCategoria(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getRegistrosCategoria/`, data);
   }
