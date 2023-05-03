@@ -25,6 +25,7 @@ class DataRoutes {
         //Por hotel
         this.router.post('/api/data/getMotivoHotel', dataController.getMotivoHotel);
         this.router.post('/api/data/getCiudadHotel', dataController.getCiudadHotel);
+        this.router.post('/api/data/getRegistrosHotel', dataController.getRegistrosHotel);
     }
 }
 

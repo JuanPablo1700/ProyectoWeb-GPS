@@ -9,50 +9,39 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./graficasmihotel.component.css'],
 })
 export class GraficasmihotelComponent implements OnInit {
-  constructor(private router: Router, private toastr: ToastrService, private dataService: DataService) { }
+  constructor(
+    private router: Router,
+    private toastr: ToastrService,
+    private dataService: DataService
+  ) {}
 
   ngOnInit(): void {
     this.filtroConsulta = -1;
   }
 
   filtroConsulta: number = 0;
-  fechaInicio: any = "";
-  fechaFin: any = "";
+  fechaInicio: any = '';
+  fechaFin: any = '';
 
   graficasVisibles = 0;
 
   motivo: any;
   ciudad: any;
+  registro: any;
   parametros: any;
-
-  /* motivo = [
-   {
-     "name": "Germany",
-     "value": 8940000
-   },
-   {
-     "name": "USA",
-     "value": 5000000
-   },
-   {
-     "name": "France",
-     "value": 7200000
-   },
-     {
-     "name": "UK",
-     "value": 6200000
-   }
- ]; */
 
   //Gráficas
   // motivo: any;
   view: [number, number] = [750, 400];
 
-  get single() {
+  get motivos() {
     return this.motivo;
   }
-  get single2() {
+  get ciudades() {
     return this.ciudad;
+  }
+  get registros() {
+    return this.registro;
   }
 
   consultar() {
@@ -62,57 +51,88 @@ export class GraficasmihotelComponent implements OnInit {
       this.graficasVisibles = 0;
       return this.toastr.error('Seleccione un tipo de gráfica', 'Error');
     }
-    if (this.filtroConsulta == 1) { //Este día
+    if (this.filtroConsulta == 1) {
+      //Este día
       this.fechaInicio = hoy;
       this.fechaFin = hoy;
     }
-    if (this.filtroConsulta == 2) { //Esta semana
+    if (this.filtroConsulta == 2) {
+      //Esta semana
       this.fechaInicio = new Date(hoy.setDate(hoy.getDate() - hoy.getDay())); //inicio de la semana actual empezando por domingo
       this.fechaFin = hoy; //NOTA: mandar el último día de la semana
-      this.fechaFin.setDate(this.fechaFin.getDate() + (6 - this.fechaFin.getDay()));
+      this.fechaFin.setDate(
+        this.fechaFin.getDate() + (6 - this.fechaFin.getDay())
+      );
       console.log(this.fechaFin);
     }
-    if (this.filtroConsulta == 3) { //Este mes
+    if (this.filtroConsulta == 3) {
+      //Este mes
       this.fechaInicio = new Date(hoy.getFullYear(), hoy.getMonth(), 1); //inicio de mes actual
-      this.fechaFin = new Date(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth() + 1, 0);
+      this.fechaFin = new Date(
+        this.fechaInicio.getFullYear(),
+        this.fechaInicio.getMonth() + 1,
+        0
+      );
     }
-    if (this.filtroConsulta == 4) { //Personalizado
-      if (this.fechaInicio == "" || this.fechaFin == "") {
+    if (this.filtroConsulta == 4) {
+      //Personalizado
+      if (this.fechaInicio == '' || this.fechaFin == '') {
         this.graficasVisibles = 0;
-        return this.toastr.error('Seleccione fecha inicio y fecha fin correctamente', 'Error');
+        return this.toastr.error(
+          'Seleccione fecha inicio y fecha fin correctamente',
+          'Error'
+        );
       }
       if (this.fechaInicio > this.fechaFin) {
         this.graficasVisibles = 0;
-        return this.toastr.error('Seleccione fecha inicio y fecha fin correctamente', 'Error');
+        return this.toastr.error(
+          'Seleccione fecha inicio y fecha fin correctamente',
+          'Error'
+        );
       }
     }
     console.log('inicio: ' + this.fechaInicio);
     console.log('fin: ' + this.fechaFin);
 
     this.parametros = {
-      "fechaInicio": this.fechaInicio,
-      "fechaFin": this.fechaFin,
-      "fk_id_hotel": localStorage.getItem('fk_id_hotel')
-    }
-    
+      fechaInicio: this.fechaInicio,
+      fechaFin: this.fechaFin,
+      fk_id_hotel: localStorage.getItem('fk_id_hotel'),
+    };
+
     this.graficasVisibles = 1;
 
     this.ciudad = this.dataService.getCiudadHotel(this.parametros).subscribe(data => {
       this.ciudad = data;
-    })
-
-    console.log(this.ciudad);
-    
-    return this.dataService.getMotivoHotel(this.parametros).subscribe(data => {
+      });
+    this.dataService.getMotivoHotel(this.parametros).subscribe((data) => {
       this.motivo = data;
-    })
+    });
+    this.dataService.getRegistrosHotel(this.parametros).subscribe((data) => {
+      this.registro = data;
+    });
+    return true;
   }
 
   // options
-  gradient: boolean = true;
+  gradient: boolean = false;
   showLegend: boolean = true;
   showLabels: boolean = true;
   isDoughnut: boolean = false;
+  showDataLabel:boolean=true;
+
+    //Para gráfica registros
+    showXAxis: boolean = true;
+    showYAxis: boolean = true;
+    legendPosition: string = 'below';
+    showXAxisLabel: boolean = true;
+    showYAxisLabel: boolean = true;
+    schemeType: string = 'ordinal';
+    roundDomains: boolean = false;
+    legendTitleR:string='Fechas';
+    xAxisLabelR = 'Fechas';
+    yAxisLabelR: string = 'Registros';
+    
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
@@ -135,10 +155,10 @@ export class GraficasmihotelComponent implements OnInit {
     this.router.navigate(['/graficasmihotel']);
   }
 
-  habitaciones(){
+  habitaciones() {
     this.router.navigate(['/datoshotel']);
   }
-  micategoria(){
+  micategoria() {
     this.router.navigate(['/micategoria']);
   }
 
@@ -151,6 +171,4 @@ export class GraficasmihotelComponent implements OnInit {
     localStorage.removeItem('id_usuario');
     this.router.navigate(['/login']);
   }
-
 }
-

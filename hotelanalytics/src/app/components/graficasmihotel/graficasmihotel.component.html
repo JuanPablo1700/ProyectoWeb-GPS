@@ -55,25 +55,43 @@
             <div *ngIf="graficasVisibles==1"  class="graficas"> <!-- Se muestran los datos que se ingresen en el rango seleccionado -->
                 <div class="motivo flex border-2 p-5">
                     <h2 class="block text-center font-bold">Motivos</h2>
-                    <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="single"
+                    <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="motivos"
                         [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)">
                     </ngx-charts-advanced-pie-chart>
                 </div>
                 <div class="ciudad flex border-2 p-5">
                     <h2 class="block text-center font-bold">Ciudades</h2>
-                    <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="single2"
+                    <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="ciudades"
                         [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)">
                     </ngx-charts-advanced-pie-chart>
                 </div>
                 <div class="ciudad flex border-2 p-5">
                     <h2 class="block text-center font-bold">Registros</h2> <!-- Mostrar los registros por día -->
-                    <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="single2"
-                        [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
-                        (deactivate)="onDeactivate($event)">
-                    </ngx-charts-advanced-pie-chart>
-                </div>
+                        <ngx-charts-bar-vertical-2d *ngIf="motivo"
+                        [view]="view"
+                        scheme="cool"
+                        [scheme]="colorScheme"
+                        [results]="registros"
+                        [gradient]="gradient"
+                        [xAxis]="showXAxis"
+                        [yAxis]="showYAxis"
+                        [legend]="showLegend"
+                        [legendPosition]="legendPosition"
+                        [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel"
+                        [xAxisLabel]="xAxisLabelR"
+                        [yAxisLabel]="yAxisLabelR"
+                        [roundDomains]="roundDomains"
+                        [legendTitle]="legendTitleR"
+                        [showDataLabel]="showDataLabel"
+                        (select)="onSelect($event)"
+                        (activate)="onActivate($event)"
+                        (deactivate)="onDeactivate($event)"
+                        >
+                    </ngx-charts-bar-vertical-2d>
+               
             </div>
         </div>
         <div *ngIf="graficasVisibles==1" class="flex justify-center items-baseline mt-2">
