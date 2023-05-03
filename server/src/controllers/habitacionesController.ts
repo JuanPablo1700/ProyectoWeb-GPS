@@ -6,7 +6,22 @@ class HabitacionesController {
     public async getTipoHabitacion(req: Request, res: Response) {
         const id = req.params.id;
 
-        const habitaciones: any = await pool.query("SELECT * FROM habitacion_hotel hh LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion WHERE hh.fk_id_hotel = ?", [id]);
+        const habitaciones: any = await pool.query("SELECT hh.id, hh.cantidad, hh.disponible, hh.precio, hh.fk_id_tipoHabitacion, hh.fk_id_hotel, th.tipo_habitacion FROM habitacion_hotel hh LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion WHERE hh.fk_id_hotel = ?", [id]);
+
+        return res.json(habitaciones[0]);
+    }
+    
+    public async getHabitacionById(req: Request, res: Response) {
+        const id = req.params.id;
+
+        const habitaciones: any = await pool.query("SELECT hh.id, hh.cantidad, hh.disponible, hh.precio, hh.fk_id_tipoHabitacion, hh.fk_id_hotel, th.tipo_habitacion FROM habitacion_hotel hh LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion WHERE hh.id = ?", [id]);
+
+        return res.json(habitaciones[0][0]);
+    }
+    
+    public async getTiposHabitaciones(req: Request, res: Response) {
+
+        const habitaciones: any = await pool.query("SELECT * FROM tipo_habitacion");
 
         return res.json(habitaciones[0]);
     }

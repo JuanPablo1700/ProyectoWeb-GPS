@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TipoHabitacion } from 'src/app/interfaces/tipoHabitacion';
 import { ErrorService } from 'src/app/services/error.service';
 import { HabitacionService } from 'src/app/services/habitacion.service';
 
@@ -10,25 +11,58 @@ import { HabitacionService } from 'src/app/services/habitacion.service';
   templateUrl: './datoshotel.component.html',
   styleUrls: ['./datoshotel.component.css']
 })
-export class DatoshotelComponent {
+export class DatoshotelComponent implements OnInit{
+
+  id_hotel: any;
+  nuevoTipoHabitacion= "";
+  tipoHabitacion: string = "";
+  listaTipoHabitacion: any[] = [];
+  listaHabitaciones: any[] = [];
+  datosHabitacion: any;
+  costo=0;
+  cantidad=0;
+
   constructor(
     private router: Router,
     private toastr: ToastrService,
     private _errorService: ErrorService,
     private _habitacionService: HabitacionService
   ){}
+  ngOnInit(): void {
+    this.tipoHabitacion = "-1";
+    this.id_hotel = localStorage.getItem('fk_id_hotel');
+    this.getHabitaciones(this.id_hotel);
+    this.getTiposHabitaciones();
+  }
 
-  nuevoTipoHabitacion= "";
-  tipoHabitacion="";
-  costo=0;
-  cantidad=0;
-  
   principal() {
     this.router.navigate(['/graficasmihotel']);
   }
 
   habitaciones() {
     this.router.navigate(['/datoshotel']);
+  }
+
+  getHabitaciones(id_hotel: number) {
+    this._habitacionService.getHabitacionesHotel(id_hotel).subscribe({
+      next: (data) => {
+        this.listaHabitaciones = data;
+      },
+      error: (error: HttpErrorResponse) => {
+        this._errorService.msjError(error);
+      },
+    });
+  }
+
+  getTiposHabitaciones() {
+    this._habitacionService.getTiposHabitaciones().subscribe({
+      next: (data) => {
+        this.listaTipoHabitacion = data;
+      },
+      error: (error: HttpErrorResponse) => {
+        this._errorService.msjError(error);
+      },
+    });
   }
 
   nuevo_tipo_habitacion() {
@@ -47,6 +81,19 @@ export class DatoshotelComponent {
         },
       });
     }
+  }
+//Revisar aquí
+  actualizar(id:number) {
+    this._habitacionService.getHabitacionById(id).subscribe({
+      next: (data: TipoHabitacion) => {
+        this.tipoHabitacion = data.fk_id_tipoHabitacion + "";
+      },
+      error: (error: HttpErrorResponse) => {
+        this._errorService.msjError(error);
+      },
+    });
+
+    this.tipoHabitacion = this.datosHabitacion.fk_id_tipoHabitacion;
   }
 
   validarNuevoTipoHabitacion() {

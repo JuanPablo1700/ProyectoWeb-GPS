@@ -21,9 +21,17 @@ export class HabitacionService {
     return this.http.post<string>(`${this.myAppUrl}${this.myApiUrlhabitacion}/nuevo`, tipo_habitacion);
   }
 
-
   getHabitacionesHotel(id: number): Observable<TipoHabitacion[]> {
     return this.http.get<TipoHabitacion[]>(`${this.myAppUrl}${this.myApiUrlhabitacion}/getHabitacionesHotel/${id}`);
   }
+  
+  getHabitacionById(id: number): Observable<TipoHabitacion> {
+    return this.http.get<TipoHabitacion>(`${this.myAppUrl}${this.myApiUrlhabitacion}/getHabitacionById/${id}`);
+  }
+  
+  getTiposHabitaciones(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrlhabitacion}/getTiposHabitaciones/`);
+  }
+  
 
 }

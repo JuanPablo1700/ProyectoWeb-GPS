@@ -31,14 +31,49 @@
                     Agregar
                 </button>
             </div>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Tipo de habitación
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Cantidad
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Precio
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Edit</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let habitacion of listaHabitaciones" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{habitacion.tipo_habitacion}}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{habitacion.cantidad}}
+                            </td>
+                            <td class="px-6 py-4">
+                                $ {{habitacion.precio}}
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button (click)="actualizar(habitacion.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 mt-32 w-full gap-4">
                 <div class="">
                     <p class="font-bold">Tipo de habitación</p>
                     <select id="tipoHabitacion" [(ngModel)]="tipoHabitacion"
                         class="block w-full h-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
-                        <option value="opcion1" selected> Simple</option>
-                        <option value="opcion2">Doble</option>
-                        <option value="opcion2">Suite</option>
+                        <option value="-1" selected> Seleccione un tipo de habitación </option>
+                        <option *ngFor="let tipo of listaTipoHabitacion" value="{{tipo.id}}" selected> {{tipo.tipo_habitacion}} </option>
                     </select>
                 </div>
                 <div class="">
