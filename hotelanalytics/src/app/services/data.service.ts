@@ -28,6 +28,9 @@ export class DataService {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getMotivoCategoria/`, data);
   }
 
+  getRegistrosCategoria(data:any): Observable<any[]> {
+    return this.http.post<any[]>(`http://localhost:3000/api/data/getRegistrosCategoria/`, data);
+  }
   
   //Individuales
   getMotivoHotel(data:any): Observable<any[]> {

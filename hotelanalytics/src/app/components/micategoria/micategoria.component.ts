@@ -24,6 +24,7 @@ export class MicategoriaComponent implements OnInit {
 
   motivo: any;
   ciudad: any;
+  registros:any;
   parametros: any;
 
   consultar() {
@@ -46,8 +47,6 @@ export class MicategoriaComponent implements OnInit {
     if (this.filtroConsulta == 3) { //Este mes
       this.fechaInicio = new Date(hoy.getFullYear(), hoy.getMonth(), 1); //inicio de mes actual
       this.fechaFin = new Date(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth() + 1, 0);
-      
-      
     }
     if (this.filtroConsulta == 4) { //Personalizado
       if (this.fechaInicio == "" || this.fechaFin == "") {
@@ -71,9 +70,18 @@ export class MicategoriaComponent implements OnInit {
     console.log(this.parametros);
     this.graficasVisibles = 1;
 
-    return this.dataService.getMotivoCategoria(this.parametros).subscribe(data => {
+    this.dataService.getMotivoCategoria(this.parametros).subscribe(data => {
       this.motivo = data;
     })
+    /* this.dataService.getCiudadCategoria(this.parametros).subscribe(data => {
+      this.ciudad = data;
+    }) */
+
+    this.dataService.getRegistrosCategoria(this.parametros).subscribe(data => {
+      this.registros = data;
+    })
+
+    return true;
   }
 
   //Gráficas
@@ -87,14 +95,19 @@ export class MicategoriaComponent implements OnInit {
   showLegend: boolean = true;
   legendPosition: string = 'below';
   showXAxisLabel: boolean = true;
-  yAxisLabel: string = 'Hotel';
   showYAxisLabel: boolean = true;
   xAxisLabel = 'Cantidad';
+  yAxisLabel: string = 'Hotel';
+  xAxisLabel2 = 'Hotel';
+  yAxisLabel2: string = 'Registros';
 
   schemeType: string = 'ordinal';
 
   get multi() {
     return this.motivo;
+  }
+  get multi2() {
+    return this.registros;
   }
 
   colorScheme = {
