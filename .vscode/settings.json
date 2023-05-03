@@ -1,9 +1,4 @@
 {
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#4D2108",
-        "titleBar.activeBackground": "#6B2E0C",
-        "titleBar.activeForeground": "#FEF9F6"
-    },
     "cSpell.words": [
         "validar"
     ]

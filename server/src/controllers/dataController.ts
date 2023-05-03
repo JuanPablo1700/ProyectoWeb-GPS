@@ -302,10 +302,10 @@ class DataController {
     const ciudades: Hotel_motivo[] = [];
     const mapaHoteles = new Map<string, Hotel_motivo>();
     datos[0].forEach((dato: any) => {
-      const motivo = mapaHoteles.get(dato.nombre);
-      if (motivo) {
-        motivo.series.push({
-          name: dato.motivo,
+      const ciudad = mapaHoteles.get(dato.nombre);
+      if (ciudad) {
+        ciudad.series.push({
+          name: dato.ciudad,
           value: dato.cantidad,
         });
       } else {
@@ -313,7 +313,7 @@ class DataController {
           name: dato.nombre,
           series: [
             {
-              name: dato.motivo,
+              name: dato.ciudad,
               value: dato.cantidad,
             },
           ],
