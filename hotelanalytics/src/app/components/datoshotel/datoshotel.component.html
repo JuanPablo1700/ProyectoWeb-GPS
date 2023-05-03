@@ -23,11 +23,11 @@
         <div class=" fixed flex flex-col items-center justify-evenly bg-white w-auto h-asociados rounded-lg  p-5">
             <h1 class=" text-titulo text-2xl mt-5 font-bold  flex-grow-0 flex-shrink-0">Datos del hotel</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full items-center gap-4 justify-items-center ">
-                <p class="font-bold">Tipo de habitación</p>
+                <p class="font-bold">Nuevo Tipo de habitación</p>
                 <input type="text" id="nuevoTipoHabitacion" name="nuevoTipoHabitacion" [(ngModel)]="nuevoTipoHabitacion"
                     class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
                     placeholder=" " />
-                <button class="bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg col-span-2 lg:col-span-1 w-full ">
+                <button (click)="nuevo_tipo_habitacion()" class="bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg col-span-2 lg:col-span-1 w-full ">
                     Agregar
                 </button>
             </div>
