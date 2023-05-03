@@ -18,6 +18,10 @@ export class DataService {
   getRegistrosGeneral(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getRegistrosGeneral/`, data);
   }
+  
+  getCiudadVisitaGeneral(data:any): Observable<any[]> {
+    return this.http.post<any[]>(`http://localhost:3000/api/data/getCiudadVisitaGeneral/`, data);
+  }
 
   //Por categoria
   getMotivoCategoria(data:any): Observable<any[]> {

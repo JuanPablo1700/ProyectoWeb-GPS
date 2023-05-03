@@ -24,6 +24,7 @@ export class GraficasgeneralesComponent implements OnInit {
   hoteles: Hotel[] = [];
   motivo: any;
   registros: any;
+  ciudades: any;
 
   parametros: any;
 
@@ -106,6 +107,7 @@ export class GraficasgeneralesComponent implements OnInit {
 
       this._dataService.getMotivoGeneral(this.parametros).subscribe(data => { this.motivo = data });
       this._dataService.getRegistrosGeneral(this.parametros).subscribe(data => { this.registros = data });
+      this._dataService.getCiudadVisitaGeneral(this.parametros).subscribe(data => { this.ciudades = data });
     }
 
     this.parametros = {
@@ -125,6 +127,9 @@ export class GraficasgeneralesComponent implements OnInit {
   get multi2() {
     return this.registros;
   }
+  get multi3() {
+    return this.ciudades;
+  }
 
   view: [number, number] = [700, 400];
 
@@ -135,11 +140,16 @@ export class GraficasgeneralesComponent implements OnInit {
   showLegend: boolean = true;
   legendPosition: string = 'below';
   showXAxisLabel: boolean = true;
-  yAxisLabel1: string = 'Hotel';
-  yAxisLabel2: string = 'Registros';
   showYAxisLabel: boolean = true;
+
+  yAxisLabel1: string = 'Hotel';
   xAxisLabel1 = 'Cantidad';
+  
+  yAxisLabel2: string = 'Registros';
   xAxisLabel2 = 'Hotel';
+  
+  yAxisLabel3: string = 'Cantidad por ciudad';
+  xAxisLabel3 = 'Hotel';
 
   schemeType: string = 'ordinal';
 
