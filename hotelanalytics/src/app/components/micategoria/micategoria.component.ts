@@ -25,6 +25,7 @@ export class MicategoriaComponent implements OnInit {
   motivo: any;
   ciudades: any;
   registros:any;
+  habitacion:any;
   parametros: any;
 
   consultar() {
@@ -76,9 +77,11 @@ export class MicategoriaComponent implements OnInit {
     this.dataService.getCiudadCategoria(this.parametros).subscribe(data => {
       this.ciudades = data;
     })
-
     this.dataService.getRegistrosCategoria(this.parametros).subscribe(data => {
       this.registros = data;
+    })
+    this.dataService.getHabitacionesCategoria(this.parametros).subscribe(data => {
+      this.habitacion = data;
     })
 
     return true;
@@ -113,6 +116,9 @@ export class MicategoriaComponent implements OnInit {
   }
   get multi3() {
     return this.ciudades;
+  }
+  get habitacions() {
+    return this.habitacion;
   }
 
   colorScheme = {

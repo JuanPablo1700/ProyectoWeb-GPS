@@ -25,8 +25,16 @@ interface DataRegistros {
   }[];
 }
 
-interface DatosHotel {
+interface DatosHotelSimple {
   name: {
+    name: string;
+    value: number;
+  }[];
+}
+
+interface DatosHotelMulti {
+  name: string;
+  series: {
     name: string;
     value: number;
   }[];
@@ -331,7 +339,6 @@ class DataController {
     return res.json(ciudades);
   }
 
-
   public async getRegistrosCategoria(req: Request, res: Response) {
     const form = req.body;
     console.log(form);
@@ -380,6 +387,55 @@ class DataController {
       }
     });
     return res.json(registros);
+  }
+  public async getHabitacionesCategoria(req: Request, res: Response) {
+    const form = req.body;
+    console.log(form);
+    let fechaInicio: any = new Date(form.fechaInicio);
+    let fechaFin: any = new Date(form.fechaFin);
+    fechaInicio =
+      fechaInicio.getFullYear() + "-" +
+      ("0" + (fechaInicio.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + fechaInicio.getDate()).slice(-2);
+    fechaFin =
+      fechaFin.getFullYear() +
+      "-" +
+      ("0" + (fechaFin.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + fechaFin.getDate()).slice(-2);
+    console.log(fechaInicio);
+    console.log(fechaFin);
+    const estrellas = form.estrellas;
+    const query = "SELECT h.nombre as hotel, th.tipo_habitacion as habitacion, COUNT(*) AS cantidad FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN tipo_habitacion as th ON hh.fk_id_tipoHabitacion = th.id WHERE rg.fecha_ingreso >= '" + fechaInicio + "' AND h.estrellas = " + estrellas + " AND rg.fecha_ingreso <= '" + fechaFin + "'GROUP by th.tipo_habitacion, hotel";
+    console.log(query);
+    const datos: any[] = await pool.query(query);
+    const habitaciones: DataRegistros[] = [];
+    const mapaRegistros = new Map<string, DatosHotelMulti>();
+    datos[0].forEach((dato: any) => {
+      let fechaIngreso: any = new Date(dato.fecha_ingreso);
+      fechaIngreso = fechaIngreso.getFullYear() + "-" + ("0" + (fechaIngreso.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaIngreso.getDate()).slice(-2);
+      const habitacion = mapaRegistros.get(dato.nombre);
+      if (habitacion) {
+        habitacion.series.push({
+          name: fechaIngreso,
+          value: dato.cantidad,
+        });
+      } else {
+        const nuevoHotel: DatosHotelMulti = {
+          name: dato.nombre,
+          series: [
+            {
+              name: fechaIngreso,
+              value: dato.cantidad,
+            },
+          ],
+        };
+        mapaRegistros.set(dato.nombre, nuevoHotel);
+        habitaciones.push(nuevoHotel);
+      }
+    });
+    return res.json(habitaciones);
   }
 
    /****************************************************************************************************************************** */

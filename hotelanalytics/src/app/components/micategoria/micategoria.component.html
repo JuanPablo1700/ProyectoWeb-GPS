@@ -119,6 +119,28 @@
                     >
                 </ngx-charts-bar-vertical-2d>
             </div> 
+            <div class="motivo flex border-2 p-5">
+                <h2 class="block text-center font-bold">Motivos</h2>
+                <ngx-charts-bar-horizontal-2d 
+                    [view]="view"
+                    scheme="cool"
+                    [schemeType]="schemeType"
+                    [results]="multi"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [legendPosition]="legendPosition"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    (select)="onSelect($event)"
+                    (activate)="onActivate($event)"
+                    (deactivate)="onDeactivate($event)"
+                    >
+                </ngx-charts-bar-horizontal-2d>
+            </div>
             <!-- Precio por tipo de habitación -->
             </div>
         </div>
