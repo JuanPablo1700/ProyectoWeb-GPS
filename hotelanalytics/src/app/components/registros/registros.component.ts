@@ -80,7 +80,7 @@ export class RegistrosComponent implements OnInit {
   }
 
   getRegistros() {
-    this._registroService.getRegistros().subscribe({
+    this._registroService.getRegistros(this.id_hotel).subscribe({
       next: (data) => {
         this.registros = data;
       },

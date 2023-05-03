@@ -25,8 +25,8 @@ export class RegistroService {
     return this.http.post<string>(`${this.myAppUrl}${this.myApiUrlRegistros}/nuevo`, registro);
   }
 
-  getRegistros(): Observable<Registro[]> {
-    return this.http.get<Registro[]>(`${this.myAppUrl}${this.myApiUrlRegistros}/getRegistros`);
+  getRegistros(idHotel: number): Observable<Registro[]> {
+    return this.http.get<Registro[]>(`${this.myAppUrl}${this.myApiUrlRegistros}/getRegistros/${idHotel}`);
   }
   
   getRegistro(id: number): Observable<Registro> {
