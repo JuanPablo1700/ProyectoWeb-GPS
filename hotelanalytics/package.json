@@ -25,6 +25,7 @@
     "rxjs": "~7.8.0",
     "sequelize": "^6.29.2",
     "sequelize-typescript": "^2.1.5",
+    "sweetalert2": "^11.7.3",
     "tailwindcss": "^2.2.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

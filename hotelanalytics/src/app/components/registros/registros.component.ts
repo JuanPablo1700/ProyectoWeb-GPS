@@ -107,7 +107,6 @@ export class RegistrosComponent implements OnInit {
           this.ciudad = '';
           this.habitacion = '-1';
           this.motivo = '-1';
-          //this.router.navigate(['/registros']);
           location.reload();
           this.toastr.success('Hotel registrado correctamente', 'Correcto');
         },
@@ -134,11 +133,11 @@ export class RegistrosComponent implements OnInit {
       this.toastr.error('Campo habitación obligatorio', 'Error');
       return false;
     }
-    if(this.fecha_ingreso == "" || this.fecha_salida == ""){
+    if (this.fecha_ingreso == "" || this.fecha_salida == "") {
       this.toastr.error('Seleccione fecha ingreso y fecha salida correctamente', 'Error');
       return false;
     }
-    if(this.fecha_ingreso > this.fecha_salida){
+    if (this.fecha_ingreso > this.fecha_salida) {
       this.toastr.error('Seleccione fecha ingreso y fecha salida correctamente', 'Error');
       return false;
     }
@@ -148,9 +147,9 @@ export class RegistrosComponent implements OnInit {
   actualizar(id: any) {
     this.router.navigate(['/editarregistros', id]);
   }
-  
+
   eliminar(id: any) {
-    
+
     Swal.fire({
       title: '¿Estás seguro de eliminar?',
       text: "No podrás revertir esto",
@@ -162,15 +161,16 @@ export class RegistrosComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         // Aquí pones la lógica para eliminar el elemento
-        this.router.navigate(['/editarregistros', id]);
+        this._registroService.deleteRegistro(id);
+        console.log(id);
         Swal.fire(
           'Eliminado!',
           'El registro ha sido eliminado.',
           'success'
         )
+        location.reload();
       }
     })
-    
   }
 
 
