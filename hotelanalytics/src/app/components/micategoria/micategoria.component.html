@@ -21,7 +21,7 @@
     </div>
     <div class="contenedor ml-32 flex h-full flex-col justify-center flex-grow items-center">
         <div class="mx-10 mt-10 flex flex-col items-center bg-white w-3/4 min-w-min h-full rounded-lg overflow-auto">
-            <h1 class="text-titulo text-2xl font-bold items-center mt-6">Graficas de mi categoría</h1>
+            <h1 class="text-titulo text-2xl font-bold items-center mt-6">Gráficas de mi categoría</h1>
             <div class="flex flex-col justify-items-center grid-rows-3 gap-3 items-center mt-3">
 
                 <select id="filtroConsulta" [(ngModel)]="filtroConsulta"
@@ -63,11 +63,12 @@
                         [xAxis]="showXAxis"
                         [yAxis]="showYAxis"
                         [legend]="showLegend"
+                        legendTitle="Motivos"
                         [legendPosition]="legendPosition"
                         [showXAxisLabel]="showXAxisLabel"
                         [showYAxisLabel]="showYAxisLabel"
-                        [xAxisLabel]="xAxisLabel"
-                        [yAxisLabel]="yAxisLabel"
+                        [xAxisLabel]="xAxisLabelMotivo"
+                        [yAxisLabel]="yAxisLabelMotivo"
                         (select)="onSelect($event)"
                         (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)"
@@ -86,11 +87,12 @@
                         [xAxis]="showXAxis"
                         [yAxis]="showYAxis"
                         [legend]="showLegend"
+                        legendTitle="Ciudades"
                         [legendPosition]="legendPosition"
                         [showXAxisLabel]="showXAxisLabel"
                         [showYAxisLabel]="showYAxisLabel"
-                        [xAxisLabel]="xAxisLabel"
-                        [yAxisLabel]="yAxisLabel"
+                        [xAxisLabel]="xAxisLabelMotivo"
+                        [yAxisLabel]="yAxisLabelMotivo"
                         (select)="onSelect($event)"
                         (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)"
@@ -108,6 +110,7 @@
                     [xAxis]="showXAxis"
                     [yAxis]="showYAxis"
                     [legend]="showLegend"
+                    legendTitle="Fechas"
                     [legendPosition]="legendPosition"
                     [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel"
@@ -120,26 +123,27 @@
                 </ngx-charts-bar-vertical-2d>
             </div> 
             <div class="motivo flex border-2 p-5">
-                <h2 class="block text-center font-bold">Motivos</h2>
+                <h2 class="block text-center font-bold">Tipos de habitaciones</h2>
                 <ngx-charts-bar-horizontal-2d 
-                    [view]="view"
-                    scheme="cool"
-                    [schemeType]="schemeType"
-                    [results]="multi"
-                    [gradient]="gradient"
-                    [xAxis]="showXAxis"
-                    [yAxis]="showYAxis"
-                    [legend]="showLegend"
-                    [legendPosition]="legendPosition"
-                    [showXAxisLabel]="showXAxisLabel"
-                    [showYAxisLabel]="showYAxisLabel"
-                    [xAxisLabel]="xAxisLabel"
-                    [yAxisLabel]="yAxisLabel"
-                    (select)="onSelect($event)"
-                    (activate)="onActivate($event)"
-                    (deactivate)="onDeactivate($event)"
-                    >
-                </ngx-charts-bar-horizontal-2d>
+                        [view]="view"
+                        scheme="cool"
+                        [schemeType]="schemeType"
+                        [results]="habitacions"
+                        [gradient]="gradient"
+                        [xAxis]="showXAxis"
+                        [yAxis]="showYAxis"
+                        [legend]="showLegend"
+                        legendTitle="Tipo de habitaciones"
+                        [legendPosition]="legendPosition"
+                        [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel"
+                        [xAxisLabel]="xAxisLabelMotivo"
+                        [yAxisLabel]="yAxisLabelMotivo"
+                        (select)="onSelect($event)"
+                        (activate)="onActivate($event)"
+                        (deactivate)="onDeactivate($event)"
+                        >
+                    </ngx-charts-bar-horizontal-2d>
             </div>
             <!-- Precio por tipo de habitación -->
             </div>
