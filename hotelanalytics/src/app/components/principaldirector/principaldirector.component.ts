@@ -11,8 +11,10 @@ import { Hotel } from 'src/app/interfaces/hotel';
   styleUrls: ['./principaldirector.component.css']
 })
 export class PrincipaldirectorComponent implements OnInit {
-  listHotel: Hotel[] = [];
+  tipoUsuario: any;
 
+  listHotel: Hotel[] = [];
+  
   id: number = 0;
 
   ultimaMod: number = -1;
@@ -24,6 +26,12 @@ export class PrincipaldirectorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.tipoUsuario = localStorage.getItem('user');
+
+    if (this.tipoUsuario != "admin") {
+      this.logOut();
+    }
+
     this.getHotels();
   }
 

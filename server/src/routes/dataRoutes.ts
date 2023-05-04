@@ -12,24 +12,24 @@ class DataRoutes {
 
     config(): void {
         //Generales
-        this.router.post('/api/data/getMotivoGeneral', dataController.getMotivoGeneral);
-        this.router.post('/api/data/getRegistrosGeneral', dataController.getRegistrosGeneral);
-        this.router.post('/api/data/getCiudadVisitaGeneral', dataController.getCiudadVisitaGeneral);
-        this.router.get('/api/data/getCostosHabitacionGeneral', dataController.getCostosHabitacionGeneral);
-        this.router.post('/api/data/getHabitacionesGeneral', dataController.getHabitacionesGeneral);
+        this.router.post('/api/data/getMotivoGeneral', validateToken, dataController.getMotivoGeneral);
+        this.router.post('/api/data/getRegistrosGeneral', validateToken, dataController.getRegistrosGeneral);
+        this.router.post('/api/data/getCiudadVisitaGeneral', validateToken, dataController.getCiudadVisitaGeneral);
+        this.router.get('/api/data/getCostosHabitacionGeneral', validateToken, dataController.getCostosHabitacionGeneral);
+        this.router.post('/api/data/getHabitacionesGeneral', validateToken, dataController.getHabitacionesGeneral);
         
         //Por categoría
-        this.router.post('/api/data/getMotivoCategoria', dataController.getMotivoCategoria);
-        this.router.post('/api/data/getRegistrosCategoria', dataController.getRegistrosCategoria);
-        this.router.post('/api/data/getCiudadCategoria', dataController.getCiudadCategoria);
-        this.router.post('/api/data/getHabitacionesCategoria', dataController.getHabitacionesCategoria);
-        this.router.get('/api/data/getCostosHabitacionCategoria/:estrellas', dataController.getCostosHabitacionCategoria);
+        this.router.post('/api/data/getMotivoCategoria', validateToken, dataController.getMotivoCategoria);
+        this.router.post('/api/data/getRegistrosCategoria', validateToken, dataController.getRegistrosCategoria);
+        this.router.post('/api/data/getCiudadCategoria', validateToken, dataController.getCiudadCategoria);
+        this.router.post('/api/data/getHabitacionesCategoria', validateToken, dataController.getHabitacionesCategoria);
+        this.router.get('/api/data/getCostosHabitacionCategoria/:estrellas', validateToken, dataController.getCostosHabitacionCategoria);
 
         //Por hotel
-        this.router.post('/api/data/getMotivoHotel', dataController.getMotivoHotel);
-        this.router.post('/api/data/getCiudadHotel', dataController.getCiudadHotel);
-        this.router.post('/api/data/getRegistrosHotel', dataController.getRegistrosHotel);
-        this.router.post('/api/data/getHabitacionesHotel', dataController.getHabitacionesHotel);
+        this.router.post('/api/data/getMotivoHotel', validateToken, dataController.getMotivoHotel);
+        this.router.post('/api/data/getCiudadHotel', validateToken, dataController.getCiudadHotel);
+        this.router.post('/api/data/getRegistrosHotel', validateToken, dataController.getRegistrosHotel);
+        this.router.post('/api/data/getHabitacionesHotel', validateToken, dataController.getHabitacionesHotel);
     }
 }
 

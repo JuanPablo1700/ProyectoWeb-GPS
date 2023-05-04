@@ -13,6 +13,7 @@ import { ErrorService } from 'src/app/services/error.service';
   styleUrls: ['./nuevohotel.component.css']
 })
 export class NuevohotelComponent implements OnInit {
+  tipoUsuario: any;
   listHotel: Hotel[] = [];
 
   id: number = 0;
@@ -32,6 +33,11 @@ export class NuevohotelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.tipoUsuario = localStorage.getItem('user');
+
+    if (this.tipoUsuario != "admin") {
+      this.logOut();
+    }
     this.getHotels();
   }
 
