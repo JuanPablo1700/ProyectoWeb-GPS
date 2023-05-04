@@ -61,7 +61,7 @@
                                 $ {{habitacion.precio}}
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <button (click)="actualizar(habitacion.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
+                                <button (click)="actualizar(habitacion.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</button>
                             </td>
                         </tr>
                     </tbody>
@@ -77,16 +77,16 @@
                     </select>
                 </div>
                 <div class="">
-                    <label for="costo" class="font-bold text-center">Costo</label>
-                    <input type="text" id="costo" name="costo" [(ngModel)]="costo"
-                        class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer">
-                </div>
-                <div class="">
                     <label for="cantidad" class="font-bold">Cantidad existente</label>
                     <input type="text" id="cantidad" name="cantidad" [(ngModel)]="cantidad"
                         class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer">
                 </div>
-                <button class="bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
+                <div class="">
+                    <label for="costo" class="font-bold text-center">Costo</label>
+                    <input type="text" id="costo" name="costo" [(ngModel)]="costo"
+                        class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer">
+                </div>
+                <button (click)="guardar()" class="bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
                     Guardar
                 </button>
             </div>

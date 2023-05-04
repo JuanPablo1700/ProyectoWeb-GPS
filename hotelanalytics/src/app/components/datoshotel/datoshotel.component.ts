@@ -74,7 +74,7 @@ export class DatoshotelComponent implements OnInit{
         next: () => {
           this.nuevoTipoHabitacion = '';
           location.reload();
-          this.toastr.success('Hotel registrado correctamente', 'Correcto');
+          this.toastr.success('Tipo de habitación registrado correctamente', 'Correcto');
         },
         error: (error: HttpErrorResponse) => {
           this._errorService.msjError(error);
@@ -85,15 +85,35 @@ export class DatoshotelComponent implements OnInit{
 //Revisar aquí
   actualizar(id:number) {
     this._habitacionService.getHabitacionById(id).subscribe({
-      next: (data: TipoHabitacion) => {
+      next: (data) => {
         this.tipoHabitacion = data.fk_id_tipoHabitacion + "";
+        this.costo = data.precio;
+        this.cantidad = data.cantidad;
       },
       error: (error: HttpErrorResponse) => {
         this._errorService.msjError(error);
       },
     });
+  }
 
-    this.tipoHabitacion = this.datosHabitacion.fk_id_tipoHabitacion;
+  guardar() {
+    this.datosHabitacion = {
+      cantidad: this.cantidad,
+      disponible: this.cantidad,
+      precio: this.costo,
+      fk_id_tipoHabitacion: this.tipoHabitacion,
+      fk_id_hotel: this.id_hotel
+    }
+
+    this._habitacionService.nuevaHabitacion(this.datosHabitacion).subscribe({
+      next: () => {
+        this.tipoHabitacion = '';
+        this.cantidad = 0;
+        this.costo = 0;
+        location.reload();
+        this.toastr.success('Habitación de hotel registrado correctamente', 'Correcto');
+      }
+    })
   }
 
   validarNuevoTipoHabitacion() {

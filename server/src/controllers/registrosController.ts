@@ -6,7 +6,7 @@ class RegistrosController {
     const id = req.params.id;
 
     const habitaciones: any = await pool.query(
-      "SELECT * FROM habitacion_hotel hh LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion WHERE hh.fk_id_hotel = ?",
+      "SELECT hh.id, hh.cantidad, hh.disponible, hh.precio, hh.fk_id_tipoHabitacion, hh.fk_id_hotel, th.tipo_habitacion FROM habitacion_hotel hh LEFT JOIN tipo_habitacion as th on th.id = hh.fk_id_tipoHabitacion WHERE hh.fk_id_hotel = ?",
       [id]
     );
 

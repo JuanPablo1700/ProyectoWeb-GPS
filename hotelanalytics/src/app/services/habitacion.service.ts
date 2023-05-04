@@ -20,6 +20,10 @@ export class HabitacionService {
   nuevo(tipo_habitacion: any): Observable<string> {
     return this.http.post<string>(`${this.myAppUrl}${this.myApiUrlhabitacion}/nuevo`, tipo_habitacion);
   }
+  
+  nuevaHabitacion(habitacion_hotel: any): Observable<string> {
+    return this.http.post<string>(`${this.myAppUrl}${this.myApiUrlhabitacion}/nuevaHabitacion`, habitacion_hotel);
+  }
 
   getHabitacionesHotel(id: number): Observable<TipoHabitacion[]> {
     return this.http.get<TipoHabitacion[]>(`${this.myAppUrl}${this.myApiUrlhabitacion}/getHabitacionesHotel/${id}`);
