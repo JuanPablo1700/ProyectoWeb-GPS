@@ -100,8 +100,8 @@ export class MicategoriaComponent implements OnInit {
   showXAxisLabel: boolean = true;
   showYAxisLabel: boolean = true;
   
-  xAxisLabel = 'Cantidad';
-  yAxisLabel: string = 'Hotel';
+  xAxisLabelMotivo = 'Cantidad';
+  yAxisLabelMotivo: string = 'Hotel';
   
   xAxisLabel2 = 'Hotel';
   yAxisLabel2: string = 'Registros';
@@ -118,6 +118,7 @@ export class MicategoriaComponent implements OnInit {
     return this.ciudades;
   }
   get habitacions() {
+    console.log("habitacion: "+ this.habitacion);
     return this.habitacion;
   }
 
