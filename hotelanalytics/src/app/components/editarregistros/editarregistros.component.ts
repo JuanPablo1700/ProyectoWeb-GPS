@@ -14,6 +14,7 @@ import { RegistroService } from 'src/app/services/registro.service';
   styleUrls: ['./editarregistros.component.css'],
 })
 export class EditarregistrosComponent implements OnInit {
+  tipoUsuario:any;
   ciudad: string = '';
   motivo: string = '';
   habitacion: string = '';
@@ -50,6 +51,12 @@ export class EditarregistrosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tipoUsuario = localStorage.getItem('tipo_usuario');
+
+    if (this.tipoUsuario != "recepcionista") {
+      this.logOut();
+    }
+
     this.id = this.route.snapshot.paramMap.get('id');
     const idInt = parseInt(this.id);
     this.habitacion = '-1';

@@ -12,6 +12,7 @@ import { HabitacionService } from 'src/app/services/habitacion.service';
   styleUrls: ['./datoshotel.component.css']
 })
 export class DatoshotelComponent implements OnInit{
+  tipoUsuario:any;
 
   id_hotel: any;
   nuevoTipoHabitacion= "";
@@ -29,6 +30,12 @@ export class DatoshotelComponent implements OnInit{
     private _habitacionService: HabitacionService
   ){}
   ngOnInit(): void {
+    this.tipoUsuario = localStorage.getItem('tipo_usuario');
+
+    if (this.tipoUsuario != "gerente") {
+      this.logOut();
+    }
+
     this.tipoHabitacion = "-1";
     this.id_hotel = localStorage.getItem('fk_id_hotel');
     this.getHabitaciones(this.id_hotel);
@@ -37,6 +44,10 @@ export class DatoshotelComponent implements OnInit{
 
   principal() {
     this.router.navigate(['/graficasmihotel']);
+  }
+
+  micategoria() {
+    this.router.navigate(['/micategoria']);
   }
 
   habitaciones() {

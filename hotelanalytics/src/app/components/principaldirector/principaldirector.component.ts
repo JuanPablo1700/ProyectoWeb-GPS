@@ -26,7 +26,7 @@ export class PrincipaldirectorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.tipoUsuario = localStorage.getItem('user');
+    this.tipoUsuario = localStorage.getItem('tipo_usuario');
 
     if (this.tipoUsuario != "admin") {
       this.logOut();

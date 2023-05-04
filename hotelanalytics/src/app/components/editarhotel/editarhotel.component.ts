@@ -13,6 +13,8 @@ import { NewHotelService } from 'src/app/services/new-hotel.service';
 })
 export class EditarhotelComponent implements OnInit {
 
+  tipoUsuario:any;
+  
   hotel: Hotel = {
     id: 0,
     nombre: '',
@@ -50,6 +52,12 @@ export class EditarhotelComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tipoUsuario = localStorage.getItem('tipo_usuario');
+
+    if (this.tipoUsuario != "admin") {
+      this.logOut();
+    }
+
     this.id = this.route.snapshot.paramMap.get('id');
 
     const idInt = parseInt(this.id);

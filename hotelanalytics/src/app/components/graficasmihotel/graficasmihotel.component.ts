@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./graficasmihotel.component.css'],
 })
 export class GraficasmihotelComponent implements OnInit {
+  tipoUsuario:any;
   constructor(
     private router: Router,
     private toastr: ToastrService,
@@ -16,6 +17,12 @@ export class GraficasmihotelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.tipoUsuario = localStorage.getItem('tipo_usuario');
+
+    if (this.tipoUsuario != "gerente") {
+      this.logOut();
+    }
+
     this.filtroConsulta = -1;
   }
 

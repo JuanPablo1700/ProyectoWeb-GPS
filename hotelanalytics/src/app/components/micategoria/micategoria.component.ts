@@ -10,9 +10,17 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class MicategoriaComponent implements OnInit {
 
+  tipoUsuario:any;
+
   constructor(private router: Router, private toastr: ToastrService, private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.tipoUsuario = localStorage.getItem('tipo_usuario');
+
+    if (this.tipoUsuario != "gerente") {
+      this.logOut();
+    }
+
     this.filtroConsulta = -1;
   }
 

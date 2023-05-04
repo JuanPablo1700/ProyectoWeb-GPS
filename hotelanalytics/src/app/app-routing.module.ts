@@ -7,7 +7,6 @@ import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.componen
 import { AuthGuard } from './utils/auth.guard';
 import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
 import { GraficasgeneralesComponent } from './components/graficasgenerales/graficasgenerales.component';
-import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxhotel.component';
 import { DatoshotelComponent } from './components/datoshotel/datoshotel.component';
 import { MicategoriaComponent } from './components/micategoria/micategoria.component';
 import { GraficasmihotelComponent } from './components/graficasmihotel/graficasmihotel.component';
@@ -21,15 +20,13 @@ const routes: Routes = [
   { path:"principaldirector",component:PrincipaldirectorComponent, canActivate: [AuthGuard] },
   { path:"nuevohotel",component:NuevohotelComponent, canActivate: [AuthGuard] },
   { path:"editarhotel/:id",component:EditarhotelComponent, canActivate: [AuthGuard] },
-  { path:"graficasgenerales",component:GraficasgeneralesComponent },
-  { path:"graficasxhotel",component:GraficasxhotelComponent },
-  { path:"datoshotel",component:DatoshotelComponent },
-  { path:"micategoria",component:MicategoriaComponent },
-  { path:"graficasmihotel",component:GraficasmihotelComponent },
   { path:"graficasgenerales",component:GraficasgeneralesComponent, canActivate: [AuthGuard] },
-  { path:"graficasxhotel",component:GraficasxhotelComponent, canActivate: [AuthGuard] },
-  {path:"registros",component:RegistrosComponent},
-  {path:"editarregistros/:id",component:EditarregistrosComponent}
+  { path:"datoshotel",component:DatoshotelComponent, canActivate: [AuthGuard] },
+  { path:"micategoria",component:MicategoriaComponent, canActivate: [AuthGuard] },
+  { path:"graficasmihotel",component:GraficasmihotelComponent, canActivate: [AuthGuard] },
+  { path:"graficasgenerales",component:GraficasgeneralesComponent, canActivate: [AuthGuard] },
+  { path:"registros",component:RegistrosComponent, canActivate: [AuthGuard] },
+  { path:"editarregistros/:id",component:EditarregistrosComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

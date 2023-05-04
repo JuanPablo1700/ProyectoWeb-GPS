@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./graficasgenerales.component.css']
 })
 export class GraficasgeneralesComponent implements OnInit {
+  tipoUsuario:any;
 
   fechaSelect = "";
   tipoGrafica = "";
@@ -44,6 +45,12 @@ export class GraficasgeneralesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.tipoUsuario = localStorage.getItem('tipo_usuario');
+
+    if (this.tipoUsuario != "admin") {
+      this.logOut();
+    }
+
     this.tipoGrafica = "-1";
     this.fechaSelect = "-1";
     this.fechaInicio = "";

@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registros.component.css'],
 })
 export class RegistrosComponent implements OnInit {
+  tipoUsuario:any;
   ciudad: string = '';
   motivo: string = '';
   habitacion: string = '';
@@ -49,6 +50,12 @@ export class RegistrosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tipoUsuario = localStorage.getItem('tipo_usuario');
+
+    if (this.tipoUsuario != "recepcionista") {
+      this.logOut();
+    }
+
     this.habitacion = '-1';
     this.motivo = '-1';
     this.id_hotel = localStorage.getItem('fk_id_hotel');

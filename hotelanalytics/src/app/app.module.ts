@@ -17,7 +17,6 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { PrincipaldirectorComponent } from './components/principaldirector/principaldirector.component';
 import { NuevohotelComponent } from './components/nuevohotel/nuevohotel.component';
 import { EditarhotelComponent } from './components/editarhotel/editarhotel.component';
-import { GraficasxhotelComponent } from './components/graficasxhotel/graficasxhotel.component';
 import { DatoshotelComponent } from './components/datoshotel/datoshotel.component';
 import { MicategoriaComponent } from './components/micategoria/micategoria.component';
 import { GraficasmihotelComponent } from './components/graficasmihotel/graficasmihotel.component';
@@ -34,12 +33,10 @@ import { EditarregistrosComponent } from './components/editarregistros/editarreg
     PrincipaldirectorComponent,
     NuevohotelComponent,
     EditarhotelComponent,
-    GraficasxhotelComponent,
     DatoshotelComponent,
     MicategoriaComponent,
     GraficasmihotelComponent,
     GraficasgeneralesComponent,
-    GraficasxhotelComponent,
     RegistrosComponent,
     EditarregistrosComponent
   ],
