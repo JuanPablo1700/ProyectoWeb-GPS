@@ -218,11 +218,47 @@ class DataController {
 
     return res.json(registros);
   }
+  
+  public async getHabitacionesGeneral(req: Request, res: Response) {
+    const formulario = req.body;
+    let fechaInicio: any = new Date(formulario.fechaInicio);
+    let fechaFin: any = new Date(formulario.fechaFin);
 
-  /**
-   * Para ver habitaciones por hotel
-   * SELECT h.nombre as hotel, th.tipo_habitacion as habitacion, COUNT(*) AS cantidad FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN tipo_habitacion as th ON hh.fk_id_tipoHabitacion = th.id GROUP by th.tipo_habitacion, hotel;
-   */
+    fechaInicio = fechaInicio.getFullYear() + "-" + ("0" + (fechaInicio.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaInicio.getDate()).slice(-2);
+    fechaFin = fechaFin.getFullYear() + "-" + ("0" + (fechaFin.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaFin.getDate()).slice(-2);
+
+    const query = "SELECT h.nombre as hotel, th.tipo_habitacion as habitacion, COUNT(*) AS cantidad FROM registro_huesped AS rg LEFT JOIN habitacion_hotel AS hh ON hh.id = rg.fk_id_habitacion_hotel LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN tipo_habitacion as th ON hh.fk_id_tipoHabitacion = th.id WHERE rg.fecha_ingreso >= '" + fechaInicio + "' AND rg.fecha_ingreso <= '" + fechaFin + "' GROUP by habitacion, hotel";
+
+    const datos: any[] = await pool.query(query);
+
+    const registros: DataRegistros[] = [];
+    const mapaRegistros = new Map<string, DataRegistros>();
+
+    datos[0].forEach((dato: any) => {
+
+      const registro = mapaRegistros.get(dato.hotel);
+      if (registro) {
+        registro.series.push({
+          name: dato.habitacion,
+          value: dato.cantidad,
+        });
+      } else {
+        const nuevoHotel: Hotel_motivo = {
+          name: dato.hotel,
+          series: [
+            {
+              name: dato.habitacion,
+              value: dato.cantidad,
+            },
+          ],
+        };
+        mapaRegistros.set(dato.hotel, nuevoHotel);
+        registros.push(nuevoHotel);
+      }
+    });
+
+    return res.json(registros);
+  }
 
   /****************************************************************************************************************************** */
   //Por Categoría
@@ -440,6 +476,42 @@ class DataController {
     return res.json(habitaciones);
   }
 
+  public async getCostosHabitacionCategoria(req: Request, res: Response) {
+
+    const estrellas = req.params.estrellas;
+
+    const query = "SELECT h.nombre, th.tipo_habitacion, hh.precio FROM habitacion_hotel AS hh LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN tipo_habitacion AS th ON th.id = hh.fk_id_tipoHabitacion WHERE h.estrellas = " + estrellas + " GROUP BY th.tipo_habitacion, hh.precio ORDER BY h.nombre";
+
+    const datos: any[] = await pool.query(query);
+
+    const hoteles: Hotel_motivo[] = [];
+    const mapaHoteles = new Map<string, Hotel_motivo>();
+
+    datos[0].forEach((dato: any) => {
+      const motivo = mapaHoteles.get(dato.nombre);
+      if (motivo) {
+        motivo.series.push({
+          name: dato.tipo_habitacion,
+          value: dato.precio,
+        });
+      } else {
+        const nuevoHotel: Hotel_motivo = {
+          name: dato.nombre,
+          series: [
+            {
+              name: dato.tipo_habitacion,
+              value: dato.precio,
+            },
+          ],
+        };
+        mapaHoteles.set(dato.nombre, nuevoHotel);
+        hoteles.push(nuevoHotel);
+      }
+    });
+
+    return res.json(hoteles);
+  }
+
    /****************************************************************************************************************************** */
   //Por Hotel
   public async getMotivoHotel(req: Request, res: Response) {
@@ -618,6 +690,27 @@ class DataController {
     //console.log("ciudad" + ciudad);
     return res.json(habitaciones);
   }
+/* 
+  public async getCostosHabitacionHotel(req: Request, res: Response) {
+
+    const idHotel = req.params.idHotel;
+
+    const query = "SELECT h.nombre, th.tipo_habitacion, hh.precio FROM habitacion_hotel AS hh LEFT JOIN hotel AS h ON h.id = hh.fk_id_hotel LEFT JOIN tipo_habitacion AS th ON th.id = hh.fk_id_tipoHabitacion WHERE h.id = " + idHotel + " GROUP BY th.tipo_habitacion, hh.precio ORDER BY h.nombre";
+
+    const datos: any[] = await pool.query(query);
+
+    const costosHabitacion = [];
+
+    for (const dato of datos[0]) {
+      costosHabitacion.push({
+        name: dato.tipo_habitacion,
+        value: dato.precio,
+      });
+    }
+
+    return res.json(costosHabitacion);
+  } */
+
 }
 
 export const dataController = new DataController();

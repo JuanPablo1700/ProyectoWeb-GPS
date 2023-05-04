@@ -147,8 +147,93 @@
                 (deactivate)="onDeactivate($event)"
                 >
             </ngx-charts-bar-horizontal-2d>
+            <ngx-charts-bar-horizontal-2d *ngIf="motivo" class="mb-10"
+                [view]="view"
+                scheme="cool"
+                [schemeType]="schemeType"
+                [results]="datosHabitaciones"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
+                [legendPosition]="legendPosition"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel5"
+                [yAxisLabel]="yAxisLabel5"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+                >
+            </ngx-charts-bar-horizontal-2d>
+
+            
+            <div class="motivo flex border-2 p-5" *ngIf="motivoH" >
+                <h2 class="block text-center font-bold">Motivos</h2>
+                <ngx-charts-advanced-pie-chart
+                    [view]="view" 
+                    [scheme]="colorScheme" 
+                    [results]="motivosHotel"
+                    [gradient]="gradient" 
+                    (select)="onSelect($event)" 
+                    (activate)="onActivate($event)"
+                    (deactivate)="onDeactivate($event)">
+                </ngx-charts-advanced-pie-chart>
+            </div>
+            
+            <div class="ciudad flex border-2 p-5" *ngIf="ciudadesH">
+                <h2 class="block text-center font-bold">Ciudades</h2>
+                <ngx-charts-advanced-pie-chart 
+                    [view]="view" 
+                    [scheme]="colorScheme" 
+                    [results]="ciudadesHotel"
+                    [gradient]="gradient" 
+                    (select)="onSelect($event)" 
+                    (activate)="onActivate($event)"
+                    (deactivate)="onDeactivate($event)">
+                </ngx-charts-advanced-pie-chart>
+            </div>
+
+            <div class="ciudad flex border-2 p-5" *ngIf="registrosH">
+                <h2 class="block text-center font-bold">Registros</h2> <!-- Mostrar los registros por día -->
+                <ngx-charts-bar-vertical-2d 
+                    [view]="view"
+                    scheme="cool"
+                    [scheme]="colorScheme"
+                    [results]="registrosHotel"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [legendPosition]="legendPosition"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabelR"
+                    [yAxisLabel]="yAxisLabelR"
+                    [roundDomains]="roundDomains"
+                    [legendTitle]="legendTitleR"
+                    [showDataLabel]="showDataLabel"
+                    (select)="onSelect($event)"
+                    (activate)="onActivate($event)"
+                    (deactivate)="onDeactivate($event)"
+                    >
+                </ngx-charts-bar-vertical-2d>
         </div>
-        <button *ngIf="motivo" class="bg-verde text-white text-2xl px-20 py-2 mt-8 rounded-lg">
+
+        <div class="motivo flex border-2 p-5" *ngIf="habitacionesH">
+            <h2 class="block text-center font-bold">Habitaciones reservadas</h2>
+            <ngx-charts-advanced-pie-chart 
+                [view]="view" 
+                [scheme]="colorScheme" 
+                [results]="habitacionHotel"
+                [gradient]="gradient" 
+                (select)="onSelect($event)" 
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)">
+            </ngx-charts-advanced-pie-chart>
+        </div>
+
+        <button *ngIf="motivo || motivoH" class="bg-verde text-white text-2xl px-20 py-2 mt-8 rounded-lg">
             Generar PDF
         </button>
     </div>

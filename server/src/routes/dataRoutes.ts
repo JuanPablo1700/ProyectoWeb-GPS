@@ -16,12 +16,14 @@ class DataRoutes {
         this.router.post('/api/data/getRegistrosGeneral', dataController.getRegistrosGeneral);
         this.router.post('/api/data/getCiudadVisitaGeneral', dataController.getCiudadVisitaGeneral);
         this.router.get('/api/data/getCostosHabitacionGeneral', dataController.getCostosHabitacionGeneral);
+        this.router.post('/api/data/getHabitacionesGeneral', dataController.getHabitacionesGeneral);
         
         //Por categoría
         this.router.post('/api/data/getMotivoCategoria', dataController.getMotivoCategoria);
         this.router.post('/api/data/getRegistrosCategoria', dataController.getRegistrosCategoria);
         this.router.post('/api/data/getCiudadCategoria', dataController.getCiudadCategoria);
         this.router.post('/api/data/getHabitacionesCategoria', dataController.getHabitacionesCategoria);
+        this.router.get('/api/data/getCostosHabitacionCategoria/:estrellas', dataController.getCostosHabitacionCategoria);
 
         //Por hotel
         this.router.post('/api/data/getMotivoHotel', dataController.getMotivoHotel);

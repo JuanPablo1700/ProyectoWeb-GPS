@@ -25,7 +25,13 @@ export class GraficasgeneralesComponent implements OnInit {
   motivo: any;
   registros: any;
   ciudades: any;
+  habitaciones: any;
   costos: any;
+
+  motivoH: any;
+  registrosH: any;
+  ciudadesH: any;
+  habitacionesH: any;
 
   parametros: any;
 
@@ -109,17 +115,40 @@ export class GraficasgeneralesComponent implements OnInit {
       this._dataService.getMotivoGeneral(this.parametros).subscribe(data => { this.motivo = data });
       this._dataService.getRegistrosGeneral(this.parametros).subscribe(data => { this.registros = data });
       this._dataService.getCiudadVisitaGeneral(this.parametros).subscribe(data => { this.ciudades = data });
+      this._dataService.getHabitacionesGeneral(this.parametros).subscribe(data => { this.habitaciones = data });
       this._dataService.getCostosHabitacionGeneral().subscribe(data => { this.costos = data });
     }
+    
+    if (this.tipoGrafica == "1" && this.estrellas != "0") {
+      this.parametros = {
+        "fechaInicio": this.fechaInicio,
+        "fechaFin": this.fechaFin,
+        "estrellas": this.estrellas
+      }
 
-    this.parametros = {
-      "tipoGrafica": this.tipoGrafica,
-      "fechaSelect": this.fechaSelect,
-      "fechaInicio": this.fechaInicio,
-      "fechaFin": this.fechaFin,
-      "estrellas": this.estrellas,
-      "idHotel": this.idHotel
+      let estrellasInt = parseInt(this.estrellas);
+
+      this._dataService.getMotivoCategoria(this.parametros).subscribe(data => { this.motivo = data });
+      this._dataService.getRegistrosCategoria(this.parametros).subscribe(data => { this.registros = data });
+      this._dataService.getCiudadCategoria(this.parametros).subscribe(data => { this.ciudades = data });
+      this._dataService.getHabitacionesCategoria(this.parametros).subscribe(data => { this.habitaciones = data });
+      this._dataService.getCostosHabitacionCategoria(estrellasInt).subscribe(data => { this.costos = data });
     }
+    
+    if (this.tipoGrafica == "2" && this.idHotel != "-1") {
+      this.parametros = {
+        "fechaInicio": this.fechaInicio,
+        "fechaFin": this.fechaFin,
+        "fk_id_hotel": this.idHotel
+      }
+
+      this._dataService.getMotivoHotel(this.parametros).subscribe(data => { this.motivoH = data });
+      this._dataService.getRegistrosHotel(this.parametros).subscribe(data => { this.registrosH = data });
+      this._dataService.getCiudadHotel(this.parametros).subscribe(data => { this.ciudadesH = data });
+      this._dataService.getHabitacionesHotel(this.parametros).subscribe(data => { this.habitacionesH = data });
+    }
+
+
     return true;
   }
 
@@ -134,6 +163,22 @@ export class GraficasgeneralesComponent implements OnInit {
   }
   get multi4() {
     return this.costos;
+  }
+  get datosHabitaciones() {
+    return this.habitaciones;
+  }
+
+  get motivosHotel() {
+    return this.motivoH;
+  }
+  get ciudadesHotel() {
+    return this.ciudadesH;
+  }
+  get registrosHotel() {
+    return this.registrosH;
+  }
+  get habitacionHotel() {
+    return this.habitacionesH;
   }
 
   view: [number, number] = [700, 400];
@@ -158,9 +203,31 @@ export class GraficasgeneralesComponent implements OnInit {
   
   yAxisLabel4: string = 'Hotel';
   xAxisLabel4 = 'Costo por habitación';
+  
+  yAxisLabel5: string = 'Hotel';
+  xAxisLabel5 = 'Cantidad';
 
   schemeType: string = 'ordinal';
 
+  //***************************************************************** */
+  
+  // options
+  showLabels: boolean = true;
+  isDoughnut: boolean = false;
+  showDataLabel: boolean = true;
+
+  //Para gráfica registros
+  roundDomains: boolean = false;
+  legendTitleR: string = 'Fechas';
+  xAxisLabelR = 'Fechas';
+  yAxisLabelR: string = 'Registros';
+
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+  };
+  
+  //***************************************************************** */
+  
   onSelect(data: any): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }

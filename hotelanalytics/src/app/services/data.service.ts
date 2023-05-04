@@ -23,10 +23,14 @@ export class DataService {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getCiudadVisitaGeneral/`, data);
   }
   
+  getHabitacionesGeneral(data:any): Observable<any[]> {
+    return this.http.post<any[]>(`http://localhost:3000/api/data/getHabitacionesGeneral/`, data);
+  }
+  
   getCostosHabitacionGeneral(): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:3000/api/data/getCostosHabitacionGeneral/`);
   }
-
+  //-----------------------------------------------------------------------------------------------------
   //Por categoria
   getMotivoCategoria(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getMotivoCategoria/`, data);
@@ -39,10 +43,16 @@ export class DataService {
   getRegistrosCategoria(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getRegistrosCategoria/`, data);
   }
+  
   getHabitacionesCategoria(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getHabitacionesCategoria/`, data);
   }
   
+  getCostosHabitacionCategoria(estrellas: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:3000/api/data/getCostosHabitacionCategoria/${estrellas}`);
+  }
+  
+  //-----------------------------------------------------------------------------------------------------
   //Individuales
   getMotivoHotel(data:any): Observable<any[]> {
     return this.http.post<any[]>(`http://localhost:3000/api/data/getMotivoHotel/`, data);
