@@ -93,7 +93,7 @@ export class DatoshotelComponent implements OnInit{
       });
     }
   }
-//Revisar aquí
+
   actualizar(id:number) {
     this._habitacionService.getHabitacionById(id).subscribe({
       next: (data) => {
@@ -107,24 +107,42 @@ export class DatoshotelComponent implements OnInit{
     });
   }
 
-  guardar() {
-    this.datosHabitacion = {
-      cantidad: this.cantidad,
-      disponible: this.cantidad,
-      precio: this.costo,
-      fk_id_tipoHabitacion: this.tipoHabitacion,
-      fk_id_hotel: this.id_hotel
+  valida() {
+    if (this.tipoHabitacion == "-1") {
+      this.toastr.error('Seleccione un tipo de habitación', 'Error');
+      return false;
     }
+    if (this.cantidad+"" == "") {
+      this.toastr.error('Ingrese una cantidad', 'Error');
+      return false;
+    }
+    if (this.costo+"" == "") {
+      this.toastr.error('Ingrese un precio', 'Error');
+      return false;
+    }
+    return true;
+  }
 
-    this._habitacionService.nuevaHabitacion(this.datosHabitacion).subscribe({
-      next: () => {
-        this.tipoHabitacion = '';
-        this.cantidad = 0;
-        this.costo = 0;
-        location.reload();
-        this.toastr.success('Habitación de hotel registrado correctamente', 'Correcto');
+  guardar() {
+    if (this.valida()) {
+      this.datosHabitacion = {
+        cantidad: this.cantidad,
+        disponible: this.cantidad,
+        precio: this.costo,
+        fk_id_tipoHabitacion: this.tipoHabitacion,
+        fk_id_hotel: this.id_hotel
       }
-    })
+      
+      this._habitacionService.nuevaHabitacion(this.datosHabitacion).subscribe({
+        next: () => {
+          this.tipoHabitacion = '';
+          this.cantidad = 0;
+          this.costo = 0;
+          location.reload();
+          this.toastr.success('Habitación de hotel registrado correctamente', 'Correcto');
+        }
+      });
+    }
   }
 
   validarNuevoTipoHabitacion() {
