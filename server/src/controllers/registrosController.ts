@@ -46,7 +46,6 @@ class RegistrosController {
       const diferenciaEnDias: number = Math.floor(
         diferenciaEnMilisegundos / (1000 * 3600 * 24)
       );
-
       costo = diferenciaEnDias * habitacion_hotel[0][0].precio;
 
       const registroInsertado: any = await pool.query(

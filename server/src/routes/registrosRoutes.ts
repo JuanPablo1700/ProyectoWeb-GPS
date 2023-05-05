@@ -11,7 +11,7 @@ class RegistrosRoutes {
     }
 
     config(): void {
-        this.router.post('/api/registros/nuevo', validateToken, registrosController.nuevo);
+        this.router.post('/api/registros/nuevo', registrosController.nuevo);
         this.router.get('/api/registros/getRegistros/:idHotel', validateToken, registrosController.getRegistros);
         this.router.get('/api/registros/getRegistro/:id', validateToken, registrosController.getRegistro);
         this.router.put('/api/registros/actualizar/:id', validateToken, registrosController.actualizar);

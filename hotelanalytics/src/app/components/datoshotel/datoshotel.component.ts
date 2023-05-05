@@ -112,11 +112,13 @@ export class DatoshotelComponent implements OnInit{
       this.toastr.error('Seleccione un tipo de habitación', 'Error');
       return false;
     }
-    if (this.cantidad+"" == "") {
+    if (this.cantidad == null) {
+      console.log("cantidad: "+ this.cantidad);
+      
       this.toastr.error('Ingrese una cantidad', 'Error');
       return false;
     }
-    if (this.costo+"" == "") {
+    if (this.costo == null) {
       this.toastr.error('Ingrese un precio', 'Error');
       return false;
     }

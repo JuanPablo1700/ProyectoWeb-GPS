@@ -115,6 +115,14 @@ class NewHotelController {
       return res.status(401).json({ msg: 'Hubo un problema al actualizar los datos.', error });
     }
   }
+
+  public async getUltimaModificacion(req: Request, res: Response) {
+    try {
+      await pool.query('SELECT hh.fk_id_hotel as idHotel, MAX(creado) as max_date FROM registro_huesped as rh left join habitacion_hotel as hh on hh.id = rh.fk_id_habitacion_hotel group by hh.fk_id_hotel');
+    } catch (error) {
+      return res.status(401).json({ msg: 'Hubo un problema al actualizar los datos.', error });
+    }
+  }
 }
 
 export const newHotelController = new NewHotelController();

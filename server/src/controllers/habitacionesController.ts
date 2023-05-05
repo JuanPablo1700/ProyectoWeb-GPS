@@ -62,7 +62,7 @@ class HabitacionesController {
         const existeHabitacion: any = await pool.query('SELECT * FROM habitacion_hotel WHERE fk_id_tipoHabitacion = ? and fk_id_hotel = ?', [fk_id_tipoHabitacion, fk_id_hotel]);
 
         if (existeHabitacion[0] == "") {
-            return res.json(existeHabitacion[0]);
+            
             const habitacionInsertada: any = await pool.query('INSERT INTO habitacion_hotel (cantidad, disponible, precio, fk_id_tipoHabitacion, fk_id_hotel) values (?,?,?,?,?)', [cantidad, disponible, precio, fk_id_tipoHabitacion, fk_id_hotel]);
 
             if (habitacionInsertada[0].affectedRows >= 1) {
