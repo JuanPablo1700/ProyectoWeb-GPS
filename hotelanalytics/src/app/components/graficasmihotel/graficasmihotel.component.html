@@ -22,7 +22,7 @@
 
     <div class="contenedor ml-32 flex h-full flex-col justify-center flex-grow items-center">
         <div class="mx-10 mt-10 flex flex-col items-center bg-white w-3/4 min-w-min h-full rounded-lg overflow-auto">
-            <h1 class="text-titulo text-2xl font-bold items-center mt-6">Graficas de mi hotel</h1>
+            <h1 class="text-titulo text-2xl font-bold items-center mt-6">Gráficas de mi hotel</h1>
             <div class="flex flex-col justify-items-center grid-rows-3 gap-3 items-center mt-3">
 
                 <select id="filtroConsulta" [(ngModel)]="filtroConsulta"
@@ -67,38 +67,38 @@
                         (deactivate)="onDeactivate($event)">
                     </ngx-charts-advanced-pie-chart>
                 </div>
-                <div class="ciudad flex border-2 p-5">
-                    <h2 class="block text-center font-bold">Registros</h2> <!-- Mostrar los registros por día -->
-                        <ngx-charts-bar-vertical-2d *ngIf="motivo"
-                        [view]="view"
-                        scheme="cool"
-                        [scheme]="colorScheme"
-                        [results]="registros"
-                        [gradient]="gradient"
-                        [xAxis]="showXAxis"
-                        [yAxis]="showYAxis"
-                        [legend]="showLegend"
-                        [legendPosition]="legendPosition"
-                        [showXAxisLabel]="showXAxisLabel"
-                        [showYAxisLabel]="showYAxisLabel"
-                        [xAxisLabel]="xAxisLabelR"
-                        [yAxisLabel]="yAxisLabelR"
-                        [roundDomains]="roundDomains"
-                        [legendTitle]="legendTitleR"
-                        [showDataLabel]="showDataLabel"
-                        (select)="onSelect($event)"
-                        (activate)="onActivate($event)"
-                        (deactivate)="onDeactivate($event)"
-                        >
-                    </ngx-charts-bar-vertical-2d>
-            </div>
-            <div class="motivo flex border-2 p-5">
-                <h2 class="block text-center font-bold">Habitaciones reservadas</h2>
-                <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="habitacions"
+                <div class="habitaciones flex border-2 p-5">
+                    <h2 class="block text-center font-bold">Habitaciones reservadas</h2>
+                    <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="habitacions"
                     [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)">
                 </ngx-charts-advanced-pie-chart>
             </div>
+            <div class="registros flex border-2 p-5">
+                <h2 class="block text-center font-bold">Registros</h2> <!-- Mostrar los registros por día -->
+                    <ngx-charts-bar-vertical-2d *ngIf="motivo"
+                    [view]="view"
+                    scheme="cool"
+                    [scheme]="colorScheme"
+                    [results]="registros"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [legendPosition]="legendPosition"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabelR"
+                    [yAxisLabel]="yAxisLabelR"
+                    [roundDomains]="roundDomains"
+                    [legendTitle]="legendTitleR"
+                    [showDataLabel]="showDataLabel"
+                    (select)="onSelect($event)"
+                    (activate)="onActivate($event)"
+                    (deactivate)="onDeactivate($event)"
+                    >
+                </ngx-charts-bar-vertical-2d>
+        </div>
         </div>
         <div *ngIf="graficasVisibles==1" class="flex justify-center items-baseline mt-2">
             <button class="hover:bg-verde text-white text-xl px-10 py-1 rounded-lg bg-green-600 focus:border-verde ">

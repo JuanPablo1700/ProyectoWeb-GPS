@@ -1,5 +1,4 @@
 <div>
-
     <div class="barra fixed bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
         <div>
             <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2">
@@ -18,9 +17,9 @@
         </div>
     </div>
 
-    <div class="contenedor  ml-32 flex flex-col justify-center flex-grow items-center">
-        <h1 class="  text-titulo text-2xl font-bold my-12">Graficas Generales</h1>
-        <div class="flex flex-col items-center bg-white w-4/5 rounded-lg">
+    <div class="contenedor h-screen  ml-32 flex flex-col justify-center flex-grow items-center">
+        <h1 class="text-titulo text-2xl font-bold items-center mt-6 mb-3">Graficas Generales</h1>
+        <div class="flex flex-col items-center mb-20 bg-white w-4/5 rounded-lg h-full overflow-auto">
             <select [(ngModel)]="tipoGrafica" id="tipoGrafica" name="tipoGrafica"
                 class="my-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                 <option value="-1"> Seleccione un tipo de gráfica </option>

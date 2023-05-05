@@ -148,7 +148,8 @@ export class GraficasmihotelComponent implements OnInit {
   yAxisLabelR: string = 'Registros';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+    //domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+    domain: ['#0081A7', '#FED9B7','#00AFB9', '#F7A58F' , '#F07167', '#7FC4B8', '#0098B0'],
   };
 
   onSelect(data: any): void {
