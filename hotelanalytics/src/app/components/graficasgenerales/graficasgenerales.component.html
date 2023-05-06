@@ -5,20 +5,20 @@
         </div>
         <div class="botones flex flex-col justify-between items-center h-full flex-grow mt-9">
             <button (click)="principaldirector()">
-                <img src="../../../assets/img/usuarios.png" class="w-60 h-auto">
+                <img src="../../../assets/img/usuarios.png" class="w-60 h-auto transform hover:scale-110">
             </button>
-            <button class="">
-                <img src="../../../assets/img/grafico-histograma.png" class="w-60 h-auto">
+            <button >
+                <img src="../../../assets/img/grafico-histograma.png" class="w-60 h-auto transform hover:scale-110">
             </button>
             <button (click)="logOut()" class="flex flex-col items-center">
-                <img src="../../../assets/img/salida.png" class="w-60 h-auto">
+                <img src="../../../assets/img/salida.png" class="w-60 h-auto transform hover:scale-110">
                 Cerrar Sesión
             </button>
         </div>
     </div>
 
     <div class="contenedor h-screen  ml-32 flex flex-col justify-center flex-grow items-center">
-        <h1 class="text-titulo text-2xl font-bold items-center mt-6 mb-3">Graficas Generales</h1>
+        <h1 class="text-titulo text-2xl font-bold items-center mt-6 mb-3">Gráficas Generales</h1>
         <div class="flex flex-col items-center mb-20 bg-white w-4/5 rounded-lg h-full overflow-auto">
             <select [(ngModel)]="tipoGrafica" id="tipoGrafica" name="tipoGrafica"
                 class="my-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
@@ -175,6 +175,7 @@
                     [yAxis]="showYAxis"
                     [legend]="showLegend"
                     legendTitle="Habitaciones"
+                    [showDataLabel]="showDataLabel"
                     [legendPosition]="legendPosition"
                     [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel"
@@ -201,7 +202,7 @@
                 </ngx-charts-advanced-pie-chart>
             </div>
             
-            <div *ngIf="mostrarGraficas=='individuales'" class="motivo flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='individuales'" class="ciudades flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Ciudades</h2>
                 <ngx-charts-advanced-pie-chart 
                     [view]="view" 
@@ -214,7 +215,7 @@
                 </ngx-charts-advanced-pie-chart>
             </div>
 
-            <div *ngIf="mostrarGraficas=='individuales'" class="motivo flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='individuales'" class="registros flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros</h2> <!-- Mostrar los registros por día -->
                 <ngx-charts-bar-vertical-2d 
                     [view]="view"
@@ -225,6 +226,7 @@
                     [xAxis]="showXAxis"
                     [yAxis]="showYAxis"
                     [legend]="showLegend"
+                    [showDataLabel]="showDataLabel"
                     [legendPosition]="legendPosition"
                     [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel"
@@ -240,7 +242,7 @@
                 </ngx-charts-bar-vertical-2d>
             </div>
 
-        <div *ngIf="mostrarGraficas=='individuales'" class="motivo flex flex-col border-2 p-5">
+        <div *ngIf="mostrarGraficas=='individuales'" class="habitacionesReservadas flex flex-col border-2 p-5">
             <h2 class="block text-center font-bold">Habitaciones reservadas</h2>
             <ngx-charts-advanced-pie-chart 
                 [view]="view" 

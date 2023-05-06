@@ -3,17 +3,17 @@
         <div>
             <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2">
         </div>
-        <div class="botones flex flex-col justify-between items-center h-full flex-grow mt-9">
-            <button (click)="habitaciones()" class="">
+        <div class="botones flex flex-col justify-between items-center h-full flex-grow mt-9 ">
+            <button (click)="habitaciones()" class="transform hover:scale-110">
                 <img src="../../../assets/img/habitacion.png" class="w-60 h-auto">
             </button>
-            <button (click)="micategoria()" class="">
+            <button (click)="micategoria()" class="transform hover:scale-110">
                 <img src="../../../assets/img/grafico-de-barras.png" class="w-60 h-auto">
             </button>
-            <button (click)="principal()">
+            <button (click)="principal()" class="transform hover:scale-110">
                 <img src="../../../assets/img/hotel.png" class="w-60 h-auto">
             </button>
-            <button (click)="logOut()" class="flex flex-col items-center">
+            <button (click)="logOut()" class="flex flex-col items-center transform hover:scale-110">
                 <img src="../../../assets/img/salida.png" class="w-60 h-auto">
                 Cerrar Sesión
             </button>
@@ -53,28 +53,28 @@
             </button>
 
             <div *ngIf="graficasVisibles==1"  class="graficas"> <!-- Se muestran los datos que se ingresen en el rango seleccionado -->
-                <div class="motivo flex border-2 p-5">
+                <div class="motivo flex flex-col border-2 p-5">
                     <h2 class="block text-center font-bold">Motivos</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="motivos"
                         [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)">
                     </ngx-charts-advanced-pie-chart>
                 </div>
-                <div class="ciudad flex border-2 p-5">
+                <div class="ciudad flex flex-col border-2 p-5">
                     <h2 class="block text-center font-bold">Ciudades</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="ciudades"
                         [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)">
                     </ngx-charts-advanced-pie-chart>
                 </div>
-                <div class="habitaciones flex border-2 p-5">
+                <div class="habitaciones flex flex-col border-2 p-5">
                     <h2 class="block text-center font-bold">Habitaciones reservadas</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="habitacions"
                     [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)">
                 </ngx-charts-advanced-pie-chart>
             </div>
-            <div class="registros flex border-2 p-5">
+            <div class="registros flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros</h2> <!-- Mostrar los registros por día -->
                     <ngx-charts-bar-vertical-2d *ngIf="motivo"
                     [view]="view"
