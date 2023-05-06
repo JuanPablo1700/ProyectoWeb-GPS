@@ -36,6 +36,8 @@ export class GraficasgeneralesComponent implements OnInit {
 
   parametros: any;
 
+  mostrarGraficas = ""; //Cambiar a 'generales' o 'individuales'
+
   constructor(
     private router: Router,
     private toastr: ToastrService,
@@ -118,6 +120,7 @@ export class GraficasgeneralesComponent implements OnInit {
         "fechaInicio": this.fechaInicio,
         "fechaFin": this.fechaFin
       }
+      this.mostrarGraficas = "generales";
 
       this._dataService.getMotivoGeneral(this.parametros).subscribe(data => { this.motivo = data });
       this._dataService.getRegistrosGeneral(this.parametros).subscribe(data => { this.registros = data });
@@ -135,6 +138,7 @@ export class GraficasgeneralesComponent implements OnInit {
 
       let estrellasInt = parseInt(this.estrellas);
 
+      this.mostrarGraficas = "generales";
       this._dataService.getMotivoCategoria(this.parametros).subscribe(data => { this.motivo = data });
       this._dataService.getRegistrosCategoria(this.parametros).subscribe(data => { this.registros = data });
       this._dataService.getCiudadCategoria(this.parametros).subscribe(data => { this.ciudades = data });
@@ -149,6 +153,7 @@ export class GraficasgeneralesComponent implements OnInit {
         "fk_id_hotel": this.idHotel
       }
 
+      this.mostrarGraficas = "individuales";
       this._dataService.getMotivoHotel(this.parametros).subscribe(data => { this.motivoH = data });
       this._dataService.getRegistrosHotel(this.parametros).subscribe(data => { this.registrosH = data });
       this._dataService.getCiudadHotel(this.parametros).subscribe(data => { this.ciudadesH = data });
@@ -159,16 +164,16 @@ export class GraficasgeneralesComponent implements OnInit {
     return true;
   }
 
-  get multi1() {
+  get motivos() {
     return this.motivo;
   }
-  get multi2() {
+  get registross() {
     return this.registros;
   }
-  get multi3() {
+  get ciudadess() {
     return this.ciudades;
   }
-  get multi4() {
+  get costoss() {
     return this.costos;
   }
   get datosHabitaciones() {
@@ -229,8 +234,13 @@ export class GraficasgeneralesComponent implements OnInit {
   xAxisLabelR = 'Fechas';
   yAxisLabelR: string = 'Registros';
 
+  scaleLogarithmic = { 
+    scaleType: 'log',
+    
+  };
+  
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+    domain: ['#0081A7', '#FED9B7','#00AFB9', '#F7A58F' , '#F07167', '#7FC4B8', '#0098B0'],
   };
   
   //***************************************************************** */
