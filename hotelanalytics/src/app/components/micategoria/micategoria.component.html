@@ -22,8 +22,11 @@
     <div class="contenedor ml-32 flex h-full flex-col justify-center flex-grow items-center">
         <div class="mx-10 mt-10 mb-20 flex flex-col items-center bg-white w-3/4 min-w-min h-full rounded-lg overflow-auto">
             <h1 class="text-titulo text-2xl font-bold items-center mt-6">Gráficas de mi categoría</h1>
-            <div class="flex flex-col justify-items-center grid-rows-3 gap-3 items-center mt-3">
-                <select id="filtroConsulta" [(ngModel)]="filtroConsulta"
+            <div [ngClass]="filtroConsulta !== -2 ? 'flex flex-col justify-items-center grid-rows-3 gap-3 items-center mt-3' : 'flex flex-col justify-items-center justify-center h-full grid-rows-3 gap-3 items-center mt-3'">
+                <p *ngIf="filtroConsulta == -2" class="mx-32 text-2xl text-center font-semibold">
+                    Lo sentimos, pero actualmente no tienes acceso a esta sección del programa. Esto se debe a que no has ingresado datos en los <span class="text-red-700">últimos 14 días</span>. Para proteger tu privacidad y seguridad, hemos restringido temporalmente el acceso a esta sección del programa. Para volver a acceder a esta sección, por favor ingresa nuevos datos en el formulario correspondiente.
+                </p>
+                <select *ngIf="filtroConsulta != -2" id="filtroConsulta" [(ngModel)]="filtroConsulta"
                     class="h-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Fecha de consulta</option>
                     <option value="1">Este día</option>
@@ -45,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <button *ngIf="filtroConsulta != -1" (click)="consultar()"
+            <button *ngIf="filtroConsulta != -1 && filtroConsulta != -2" (click)="consultar()"
                 class="bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
                 Consultar
             </button>

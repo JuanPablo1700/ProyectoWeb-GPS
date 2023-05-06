@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Hotel } from 'src/app/interfaces/hotel';
 import { DataService } from 'src/app/services/data.service';
+import { NewHotelService } from 'src/app/services/new-hotel.service';
 
 @Component({
   selector: 'app-micategoria',
@@ -11,17 +13,26 @@ import { DataService } from 'src/app/services/data.service';
 export class MicategoriaComponent implements OnInit {
 
   tipoUsuario:any;
+  idHotel:any;
+  datosHotel:any;
 
-  constructor(private router: Router, private toastr: ToastrService, private dataService: DataService) { }
+  constructor(
+    private router: Router, 
+    private toastr: ToastrService, 
+    private dataService: DataService,
+    private _hotelService: NewHotelService
+  ) { }
 
   ngOnInit(): void {
     this.tipoUsuario = localStorage.getItem('tipo_usuario');
-
+    this.idHotel = localStorage.getItem('fk_id_hotel');
+    const idHotelInt = parseInt(this.idHotel);
     if (this.tipoUsuario != "gerente") {
       this.logOut();
     }
 
-    this.filtroConsulta = -1;
+    this.getHotel(idHotelInt);
+    
   }
 
   filtroConsulta: number = 0;
@@ -35,6 +46,21 @@ export class MicategoriaComponent implements OnInit {
   registros:any;
   habitacion:any;
   parametros: any;
+
+  getHotel(idHotel: number) {
+    this._hotelService.getHotel(idHotel).subscribe({
+      next: (data)=>{
+        if (data.dias_transcurridos == null || data.dias_transcurridos > 14) {
+          this.filtroConsulta = -2;
+        } else {
+          this.filtroConsulta = -1;
+        }
+      },
+      error: (error) => {
+        this.toastr.error("Error al obtener datos del hotel", error)
+      }
+    })
+  }
 
   consultar() {
     const hoy = new Date();
@@ -76,7 +102,6 @@ export class MicategoriaComponent implements OnInit {
       "estrellas": localStorage.getItem('estrellas')
     }
 
-    console.log(this.parametros);
     this.graficasVisibles = 1;
 
     this.dataService.getMotivoCategoria(this.parametros).subscribe(data => {
@@ -126,7 +151,6 @@ export class MicategoriaComponent implements OnInit {
     return this.ciudades;
   }
   get habitacions() {
-    console.log("habitacion: "+ this.habitacion);
     return this.habitacion;
   }
 
@@ -136,15 +160,15 @@ export class MicategoriaComponent implements OnInit {
   };
 
   onSelect(data: any): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data: any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    //console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data: any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
   //finGráficas
 

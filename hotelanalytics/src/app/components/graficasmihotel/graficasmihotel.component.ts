@@ -74,7 +74,6 @@ export class GraficasmihotelComponent implements OnInit {
       this.fechaFin.setDate(
         this.fechaFin.getDate() + (6 - this.fechaFin.getDay())
       );
-      console.log(this.fechaFin);
     }
     if (this.filtroConsulta == 3) {
       //Este mes
@@ -102,8 +101,6 @@ export class GraficasmihotelComponent implements OnInit {
         );
       }
     }
-    console.log('inicio: ' + this.fechaInicio);
-    console.log('fin: ' + this.fechaFin);
 
     this.parametros = {
       fechaInicio: this.fechaInicio,
@@ -153,15 +150,15 @@ export class GraficasmihotelComponent implements OnInit {
   };
 
   onSelect(data: any): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data: any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    //console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data: any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
   //finGráficas
 
