@@ -40,8 +40,9 @@
                         class="">
                         <h1 [textContent]=" hotel.activo == 0 ? 'Inactivo' : 'Activo'"></h1>
                     </div>
-                    <h1 class="font-bold text-base ml-28">Última modificación:</h1>
-                    <h1 class="ml-1">14 dias</h1>
+                    <h1 class="font-bold text-base ml-28">Último registro:</h1>
+                    <h1 *ngIf="hotel.dias_transcurridos != null" class="ml-1">hace {{hotel.dias_transcurridos}} días</h1>
+                    <h1 *ngIf="hotel.dias_transcurridos == null" class="ml-1">Sin registros</h1>
                 </div>
             </div>
 

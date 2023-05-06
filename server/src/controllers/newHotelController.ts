@@ -88,15 +88,16 @@ class NewHotelController {
     }
   }
 
+  //Consulta para obtener los datos de todos los hoteles ademas de la ultima insercion de registros.
   public async getHotels(req: Request, res: Response) {
-    const listHotel = await pool.query('SELECT id, nombre, direccion, correo, telefono, estrellas, activo FROM hotel');
+    const listHotel = await pool.query('SELECT h.id AS id, h.nombre AS nombre, h.direccion, h.correo, h.telefono, h.estrellas, h.activo, DATEDIFF(CURRENT_DATE, MAX( CASE WHEN rh.id IS NULL THEN NULL ELSE creado END )) AS dias_transcurridos FROM hotel AS h LEFT JOIN habitacion_hotel AS hh ON hh.fk_id_hotel = h.id LEFT JOIN registro_huesped AS rh ON rh.fk_id_habitacion_hotel = hh.id GROUP BY h.id');
     return res.json(listHotel[0]);
   }
 
   public async getHotel(req: Request, res: Response) {
     const id = req.params.id;
     const idInt = parseInt(id);
-    const response:any = await pool.query('SELECT id, nombre, direccion, correo, telefono, estrellas, activo FROM hotel WHERE id = ?', [idInt]);
+    const response:any = await pool.query('SELECT h.id AS id, h.nombre AS nombre, h.direccion, h.correo, h.telefono, h.estrellas, h.activo, DATEDIFF(CURRENT_DATE, MAX( CASE WHEN rh.id IS NULL THEN NULL ELSE creado END )) AS dias_transcurridos FROM hotel AS h LEFT JOIN habitacion_hotel AS hh ON hh.fk_id_hotel = h.id LEFT JOIN registro_huesped AS rh ON rh.fk_id_habitacion_hotel = hh.id WHERE h.id = ? GROUP BY h.id', [idInt]);
     const hotel = response[0][0];
     return res.json(hotel);
   }
@@ -111,14 +112,6 @@ class NewHotelController {
       await pool.query('UPDATE hotel SET nombre = ?, direccion = ?, telefono = ?, estrellas = ?, activo = ? WHERE id = ?', [nombre, direccion, telefono, estrellasInt, estado, idInt]);
       await pool.query('UPDATE usuario SET activo = ? where fk_id_hotel = ?', [estado, idInt]);
       return res.json({ msg: 'Hotel actualizado con exito.' });
-    } catch (error) {
-      return res.status(401).json({ msg: 'Hubo un problema al actualizar los datos.', error });
-    }
-  }
-
-  public async getUltimaModificacion(req: Request, res: Response) {
-    try {
-      await pool.query('SELECT hh.fk_id_hotel as idHotel, MAX(creado) as max_date FROM registro_huesped as rh left join habitacion_hotel as hh on hh.id = rh.fk_id_habitacion_hotel group by hh.fk_id_hotel');
     } catch (error) {
       return res.status(401).json({ msg: 'Hubo un problema al actualizar los datos.', error });
     }

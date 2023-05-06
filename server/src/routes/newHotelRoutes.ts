@@ -13,7 +13,7 @@ class NewHotelRoutes {
     config(): void {
         this.router.post('/api/hotel/newHotel', validateToken, newHotelController.newHotel);
         this.router.get('/api/hotel/getHotels', validateToken, newHotelController.getHotels);
-        this.router.get('/api/hotel/getHotel/:id', validateToken, newHotelController.getHotel);
+        this.router.get('/api/hotel/getHotel/:id', newHotelController.getHotel);
         this.router.put('/api/hotel/updateHotel/:id', validateToken, newHotelController.updateHotel);
     }
 }

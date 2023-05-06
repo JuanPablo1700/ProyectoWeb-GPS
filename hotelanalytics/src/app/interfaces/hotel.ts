@@ -7,4 +7,5 @@ export interface Hotel {
     estrellas:number;
     estado:string;
     activo:number;
+    dias_transcurridos?:number | null;
 }
