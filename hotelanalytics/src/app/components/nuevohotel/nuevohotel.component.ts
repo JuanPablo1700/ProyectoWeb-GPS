@@ -21,8 +21,8 @@ export class NuevohotelComponent implements OnInit {
   direccion: string = '';
   correo: string = '';
   telefono: string = '';
-  estrellas: number = 0;
-  estado: string = '';
+  estrellas: number = -1;
+  estado: string = '-1';
   activo: number = 0;
 
   constructor(
@@ -79,7 +79,7 @@ export class NuevohotelComponent implements OnInit {
       this.toastr.error('Campo estrellas obligatorio', 'Error')
       return false;
     }
-    if (this.estado.trim() == '') {
+    if (this.estado.trim() == '-1') {
       this.toastr.error('Campo estado obligatorio', 'Error')
       return
     }
