@@ -63,7 +63,7 @@
               class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
               placeholder=" " />
             <label for="nombre"
-              class="absolute text-base text-gray-900 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-10">
+              class="absolute block w-full text-base font-semibold text-gray-900 duration-300 transform -translate-y-8  top-3 -z-10 origin-[0] peer-focus-within:left-0 peer-focus-within:text-verde peer-focus-within:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus-within:scale-75 peer-focus-within:-translate-y-10">
               Nombre
             </label>
           </div>
@@ -72,7 +72,7 @@
               class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
               placeholder=" " />
             <label for="direccion"
-              class="absolute text-base text-gray-900 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-10">
+              class="absolute block w-full text-base font-semibold text-gray-900 duration-300 transform -translate-y-8  top-3 -z-10 origin-[0] peer-focus-within:left-0 peer-focus-within:text-verde peer-focus-within:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus-within:scale-75 peer-focus-within:-translate-y-10">
               Dirección</label>
           </div>
           <div class="relative z-0 my-6">
@@ -80,7 +80,7 @@
               class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
               placeholder=" " />
             <label for="telefono"
-              class="absolute text-base text-gray-900 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-10">
+              class="absolute block w-full text-base font-semibold text-gray-900 duration-300 transform -translate-y-8  top-3 -z-10 origin-[0] peer-focus-within:left-0 peer-focus-within:text-verde peer-focus-within:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus-within:scale-75 peer-focus-within:-translate-y-10">
               Teléfono</label>
           </div>
           <div class="relative z-0 my-6">
@@ -88,11 +88,11 @@
               class="block py-1 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-verde peer"
               placeholder=" " />
             <label for="correo"
-              class="absolute text-base text-gray-900 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-verde peer-focus:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-10">
+              class="absolute block w-full text-base font-semibold text-gray-900 duration-300 transform -translate-y-8  top-3 -z-10 origin-[0] peer-focus-within:left-0 peer-focus-within:text-verde peer-focus-within:dark:text-verde peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus-within:scale-75 peer-focus-within:-translate-y-10">
               Correo electrónico</label>
           </div>
 
-          <label for="estrellas" class="mb-1">Estrellas</label>
+          <label for="estrellas" class="mb-1 text-base font-semibold">Estrellas</label>
           <div class="selects grid">
             <select id="estrellas"
               class="mb-5 border-0 border-b-2 border-gray-300 focus:border-verde peer-focus:text-verde" name="estrellas"
@@ -105,7 +105,7 @@
               <option value="5">5 Estrellas</option>
             </select>
 
-            <label for="estado" class="mb-1">Estado</label>
+            <label for="estado" class="mb-1 text-base font-semibold">Estado</label>
             <select id="estado"
               class="mb-5 border-0 border-b-2 border-gray-300  focus:border-verde peer-focus:text-verde" name="estado"
               [(ngModel)]="estado">
@@ -120,7 +120,7 @@
                 class="hover:bg-verde text-white text-xl px-10 py-1 rounded-lg bg-green-600 focus:border-verde ">
                 Guardar
             </button>
-            <a href="/principaldirector" class="flex justify-center text-xl text-slate-500 px-10 hover:text-slate-950"> Cancelar</a>
+            <a href="/principaldirector" class="flex justify-center text-xl text-slate-500 px-10 transform hover:text-slate-950"> Cancelar</a>
         </div>
         </form>
       </div>
