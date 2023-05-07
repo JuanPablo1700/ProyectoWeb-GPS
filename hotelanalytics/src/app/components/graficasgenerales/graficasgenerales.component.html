@@ -83,6 +83,7 @@
                     [yAxis]="showYAxis"
                     [legend]="showLegend"
                     legendTitle="Motivos"
+                    [showDataLabel]="showDataLabel"
                     [legendPosition]="legendPosition"
                     [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel"
@@ -95,7 +96,7 @@
                 </ngx-charts-bar-vertical-2d>
             </div>
             <div *ngIf="mostrarGraficas=='generales'" class="fechasDeRegistros flex flex-col border-2 p-5">
-                <h2 class="block text-center font-bold">Registros</h2>
+                <h2 class="block text-center font-bold">Registros por día</h2>
                 <ngx-charts-bar-vertical-2d 
                     [view]="view"
                     [scheme]="colorScheme" 
@@ -106,6 +107,7 @@
                     [yAxis]="showYAxis"
                     [legend]="showLegend"
                     legendTitle="Fechas de registros"
+                    [showDataLabel]="showDataLabel"
                     [legendPosition]="legendPosition"
                     [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel"
@@ -129,6 +131,7 @@
                     [yAxis]="showYAxis"
                     [legend]="showLegend"
                     legendTitle="Ciudades"
+                    [showDataLabel]="showDataLabel"
                     [legendPosition]="legendPosition"
                     [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel"
@@ -152,6 +155,7 @@
                     [yAxis]="showYAxis"
                     [legend]="showLegend"
                     legendTitle="Habitaciones"
+                    [showDataLabel]="showDataLabel"
                     [legendPosition]="legendPosition"
                     [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel"
@@ -216,7 +220,7 @@
             </div>
 
             <div *ngIf="mostrarGraficas=='individuales'" class="registros flex flex-col border-2 p-5">
-                <h2 class="block text-center font-bold">Registros</h2> <!-- Mostrar los registros por día -->
+                <h2 class="block text-center font-bold">Registros por día</h2> <!-- Mostrar los registros por día -->
                 <ngx-charts-bar-vertical-2d 
                     [view]="view"
                     scheme="cool"

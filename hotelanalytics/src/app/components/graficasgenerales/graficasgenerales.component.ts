@@ -204,8 +204,8 @@ export class GraficasgeneralesComponent implements OnInit {
   showXAxisLabel: boolean = true;
   showYAxisLabel: boolean = true;
 
-  yAxisLabel1: string = 'Hotel';
-  xAxisLabel1 = 'Cantidad';
+  xAxisLabel1: string = 'Hotel';
+  yAxisLabel1 = 'Registros';
   
   yAxisLabel2: string = 'Registros';
   xAxisLabel2 = 'Hotel';
@@ -213,11 +213,11 @@ export class GraficasgeneralesComponent implements OnInit {
   yAxisLabel3: string = 'Cantidad por ciudad';
   xAxisLabel3 = 'Hotel';
   
-  yAxisLabel4: string = 'Hotel';
-  xAxisLabel4 = 'Costo por habitación';
+  xAxisLabel4: string = 'Hotel';
+  yAxisLabel4 = 'Costo por habitación';
   
-  yAxisLabel5: string = 'Hotel';
-  xAxisLabel5 = 'Cantidad';
+  xAxisLabel5: string = 'Hotel';
+  yAxisLabel5 = 'Cantidad';
 
   schemeType: string = 'ordinal';
 
