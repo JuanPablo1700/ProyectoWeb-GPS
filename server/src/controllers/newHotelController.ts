@@ -90,7 +90,7 @@ class NewHotelController {
 
   //Consulta para obtener los datos de todos los hoteles ademas de la ultima insercion de registros.
   public async getHotels(req: Request, res: Response) {
-    const listHotel = await pool.query('SELECT h.id AS id, h.nombre AS nombre, h.direccion, h.correo, h.telefono, h.estrellas, h.activo, DATEDIFF(CURRENT_DATE, MAX( CASE WHEN rh.id IS NULL THEN NULL ELSE creado END )) AS dias_transcurridos FROM hotel AS h LEFT JOIN habitacion_hotel AS hh ON hh.fk_id_hotel = h.id LEFT JOIN registro_huesped AS rh ON rh.fk_id_habitacion_hotel = hh.id WHERE h.id <> 35 GROUP BY h.id');
+    const listHotel = await pool.query('SELECT h.id AS id, h.nombre AS nombre, h.direccion, h.correo, h.telefono, h.estrellas, h.activo, DATEDIFF(CURRENT_DATE, MAX( CASE WHEN rh.id IS NULL THEN NULL ELSE creado END )) AS dias_transcurridos FROM hotel AS h LEFT JOIN habitacion_hotel AS hh ON hh.fk_id_hotel = h.id LEFT JOIN registro_huesped AS rh ON rh.fk_id_habitacion_hotel = hh.id WHERE h.id <> 35 GROUP BY h.id ORDER BY h.nombre');
     return res.json(listHotel[0]);
   }
 
