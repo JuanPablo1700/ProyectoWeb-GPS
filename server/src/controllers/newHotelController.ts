@@ -39,10 +39,10 @@ class NewHotelController {
             try {
               //Insertar los usuarios con el fk_id_hotel = id del hotel que acabamos de crear
               await pool.query('INSERT INTO usuario (user, password, activo, tipo_usuario, pass_actualizada, fk_id_hotel) values (?,?,?,?,?,?)',
-                [gerente, passGerente, '1', 'gerente', 0, fk_id_hotel]);
+                [gerente, passGerente, estado, 'gerente', 0, fk_id_hotel]);
 
               await pool.query('INSERT INTO usuario (user, password, activo, tipo_usuario, pass_actualizada, fk_id_hotel) values (?,?,?,?,?,?)',
-                [recepcion, passRecepcion, '1', 'recepcionista', 0, fk_id_hotel]);
+                [recepcion, passRecepcion, estado, 'recepcionista', 0, fk_id_hotel]);
             } catch (error) {
               return res.status(401).json({ msg: 'Error al guardar los usuarios' });
             }
