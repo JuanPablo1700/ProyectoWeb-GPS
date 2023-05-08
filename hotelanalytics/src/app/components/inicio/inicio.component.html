@@ -5,14 +5,14 @@
 <div class="flex h-64 justify-center  ">
     <div>
         <h1 class="text-titulo text-2xl  font-bold  mb-12 ml-48">Bienvenido a HotelAnalytics</h1>
-        <div class=" px-14 py-5  bg-white w-740 h-480 rounded-lg">
+        <div class="flex flex-col px-14 py-5  bg-white w-740 h-480 rounded-lg">
             <p class="text-2xl font-semibold mx-48">Define tu Contraseña </p>
             <div class="relative z-0 my-10">
                 <input type="password" [(ngModel)]="newPassword" id="nuevacontra"
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" " />
                 <label for="nuevacontra"
-                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    class="text-base font-semibold">
                     Nueva Contraseña</label>
             </div>
             <div class="relative z-0 my-5">
@@ -20,7 +20,7 @@
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" " />
                 <label for="repcontra"
-                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    class="absolute text-base font-semibold">
                     Repite tu contraseña</label>
                 <button (click)="actualizarPassword()" class="bg-verde text-white text-2xl px-20 py-1 mt-24 mx-48">
                     Guardar

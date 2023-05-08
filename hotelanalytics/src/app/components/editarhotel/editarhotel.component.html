@@ -1,17 +1,17 @@
 <div class="flex h-full w-full overflow-auto">
     <div class="barra fixed bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
         <div>
-            <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2" />
+            <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2">
         </div>
         <div class="botones flex flex-col justify-between items-center h-full flex-grow mt-9">
             <button (click)="principaldirector()">
-                <img src="../../../assets/img/usuarios.png" class="w-60 h-auto">
+                <img src="../../../assets/img/usuarios.png" class="w-60 h-auto transform hover:scale-110">
             </button>
-            <button class="">
-                <img src="../../../assets/img/grafico-histograma.png" class="w-60 h-auto" />
+            <button (click)="graficas()">
+                <img src="../../../assets/img/grafico-histograma.png" class="w-60 h-auto transform hover:scale-110">
             </button>
             <button (click)="logOut()" class="flex flex-col items-center">
-                <img src="../../../assets/img/salida.png" class="w-60 h-auto" />
+                <img src="../../../assets/img/salida.png" class="w-60 h-auto transform hover:scale-110">
                 Cerrar Sesión
             </button>
         </div>
