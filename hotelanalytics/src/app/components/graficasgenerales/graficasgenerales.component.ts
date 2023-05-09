@@ -21,6 +21,7 @@ export class GraficasgeneralesComponent implements OnInit {
   fechaFin:any = "";
   estrellas = "";
   idHotel = "";
+  isPressed = false;
 
   hoteles: Hotel[] = [];
   motivo: any;
@@ -64,7 +65,10 @@ export class GraficasgeneralesComponent implements OnInit {
 
   consultar() {
 
+    this.isPressed = false;
     const hoy = new Date();
+
+    this.isPressed = !this.isPressed;
 
     if (this.tipoGrafica == "-1") {
       return this.toastr.error('Seleccione un tipo de gráfica', 'Error');
@@ -193,7 +197,8 @@ export class GraficasgeneralesComponent implements OnInit {
     return this.habitacionesH;
   }
 
-  view: [number, number] = [700, 400];
+  view: [number, number] = [800, 600];
+  viewCircular: [number, number] = [800, 400];
 
   // options
   showXAxis: boolean = true;
@@ -204,20 +209,20 @@ export class GraficasgeneralesComponent implements OnInit {
   showXAxisLabel: boolean = true;
   showYAxisLabel: boolean = true;
 
-  xAxisLabel1: string = 'Hotel';
-  yAxisLabel1 = 'Registros';
+  xAxisLabel1: string = 'Registros';
+  yAxisLabel1 = 'Hotel';
   
-  yAxisLabel2: string = 'Registros';
-  xAxisLabel2 = 'Hotel';
+  yAxisLabel2: string = 'Hotel';
+  xAxisLabel2 = 'Registros';
   
-  yAxisLabel3: string = 'Cantidad por ciudad';
-  xAxisLabel3 = 'Hotel';
+  yAxisLabel3: string = 'Hotel';
+  xAxisLabel3 = 'Cantidad por ciudad';
   
-  xAxisLabel4: string = 'Hotel';
-  yAxisLabel4 = 'Costo por habitación';
+  xAxisLabel4: string = 'Costo por habitación';
+  yAxisLabel4 = 'Hotel';
   
-  xAxisLabel5: string = 'Hotel';
-  yAxisLabel5 = 'Cantidad';
+  xAxisLabel5: string = 'Cantidad';
+  yAxisLabel5 = 'Hotel';
 
   schemeType: string = 'ordinal';
 

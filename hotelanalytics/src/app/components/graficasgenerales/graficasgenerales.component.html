@@ -1,4 +1,4 @@
-<div>
+<div [ngClass]="{'bg-white': isPressed}" class="h-full mt-3">
     <div class="no-print fixed bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
         <div>
             <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2">
@@ -18,10 +18,10 @@
     </div>
 
     <div class="contenedor h-screen  ml-32 flex flex-col justify-center flex-grow items-center">
-        <h1 class="text-titulo text-2xl font-bold items-center mt-6 mb-3">Gráficas Generales</h1>
-        <div class="flex flex-col items-center mb-20 bg-white w-4/5 rounded-lg h-4/5">
+        <div [ngClass]="{'min-h-screen': isPressed, 'h-4/5': !isPressed}" class="recuadro flex flex-col items-center bg-white w-4/5 rounded-lg">
+            <h1 class="text-titulo text-2xl font-bold items-center mt-6 mb-3">Gráficas Generales</h1>
             <select [(ngModel)]="tipoGrafica" id="tipoGrafica" name="tipoGrafica"
-                class="my-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                class="no-print my-8 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                 <option value="-1"> Seleccione un tipo de gráfica </option>
                 <option value="1"> Gráficas Generales </option>
                 <option value="2">Gráficas por hotel</option>
@@ -29,7 +29,7 @@
 
             <div *ngIf="tipoGrafica != '-1'" class="flex justify-center items-start mb-3">
                 <select [(ngModel)]="fechaSelect" id="fechaconsulta" name="fechaSelect"
-                    class="mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    class="no-print mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Fecha de consulta</option>
                     <option value="1">Este día</option>
                     <option value="2">Esta semana</option>
@@ -37,21 +37,21 @@
                     <option value="4">Personalizado
                 </select>
 
-                <div *ngIf="fechaSelect == '4'" class="flex flex-col">
-                    <div class="">
+                <div *ngIf="fechaSelect == '4'" class="no-print flex flex-col">
+                    <div>
                         <label for="fechainicio"> Fecha Inicio: </label>
                         <input type="date" id="fechainicio" name="fecha_inicio" [(ngModel)]="fechaInicio"
                             class="mr-6 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     </div>
                     <div class="mt-4">
-                        <label for="fechafin" class=""> Fecha Fin: </label>
+                        <label for="fechafin"> Fecha Fin: </label>
                         <input type="date" id="fechafin" name="fecha_fin" [(ngModel)]="fechaFin"
                             class="-mr-12 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     </div>
                 </div>
 
                 <select *ngIf="tipoGrafica == '1'" id="estrellas" name="estrellas" [(ngModel)]="estrellas"
-                    class="border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    class="no-print border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Tipo de hotel</option>
                     <option value="0">Todos</option>
                     <option value="1"> 1 estrellas </option>
@@ -62,18 +62,18 @@
                 </select>
 
                 <select *ngIf="tipoGrafica == '2'" id="id_hotel" name="id_hotel" [(ngModel)]="idHotel"
-                    class="border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
+                    class="no-print border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Seleccione un Hotel </option>
                     <option *ngFor="let hotel of hoteles" [value]="hotel.id">{{hotel.nombre}}</option>
                 </select>
             </div>
-            <button (click)="consultar()" class="bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
+            <button (click)="consultar()" class="no-print bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
                 Consultar
             </button>
             <!-- Gráficas generales -->
             <div *ngIf="mostrarGraficas=='generales'" class="motivo flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Motivos</h2>
-                <ngx-charts-bar-vertical-2d
+                <ngx-charts-bar-horizontal-2d
                     [view]="view"
                     [scheme]="colorScheme" 
                     [schemeType]="schemeType"
@@ -93,11 +93,11 @@
                     (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)"
                     >
-                </ngx-charts-bar-vertical-2d>
+                </ngx-charts-bar-horizontal-2d>
             </div>
-            <div *ngIf="mostrarGraficas=='generales'" class="fechasDeRegistros flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='generales'" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros por día</h2>
-                <ngx-charts-bar-vertical-2d 
+                <ngx-charts-bar-horizontal-2d 
                     [view]="view"
                     [scheme]="colorScheme" 
                     [schemeType]="schemeType"
@@ -117,11 +117,11 @@
                     (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)"
                     >
-                </ngx-charts-bar-vertical-2d>
+                </ngx-charts-bar-horizontal-2d>
             </div>
-            <div *ngIf="mostrarGraficas=='generales'" class="ciudades flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='generales'" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Ciudades</h2>
-                <ngx-charts-bar-vertical-2d 
+                <ngx-charts-bar-horizontal-2d 
                     [view]="view"
                     [scheme]="colorScheme" 
                     [schemeType]="schemeType"
@@ -141,11 +141,11 @@
                     (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)"
                     >
-                </ngx-charts-bar-vertical-2d>
+                </ngx-charts-bar-horizontal-2d>
             </div>
-            <div *ngIf="mostrarGraficas=='generales'" class="costos flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='generales'" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Costos por habitación</h2>
-                <ngx-charts-bar-vertical-2d
+                <ngx-charts-bar-horizontal-2d
                     [view]="view"
                     [scheme]="colorScheme" 
                     [schemeType]="schemeType"
@@ -165,11 +165,11 @@
                     (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)"
                     >
-                </ngx-charts-bar-vertical-2d>
+                </ngx-charts-bar-horizontal-2d>
             </div>
-            <div *ngIf="mostrarGraficas=='generales'" class="registrosPorHabitacion flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='generales'" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros por habitaciones</h2>
-                <ngx-charts-bar-vertical-2d *ngIf="motivo" class="mb-10"
+                <ngx-charts-bar-horizontal-2d *ngIf="motivo" class="mb-10"
                     [view]="view"
                     [scheme]="colorScheme" 
                     [schemeType]="schemeType"
@@ -189,14 +189,14 @@
                     (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)"
                     >
-                </ngx-charts-bar-vertical-2d>
+                </ngx-charts-bar-horizontal-2d>
             </div>
 
             <!-- Gráficas por hotel -->
-            <div *ngIf="mostrarGraficas=='individuales'" class="motivo flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='individuales'" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Motivos</h2>
                 <ngx-charts-advanced-pie-chart
-                    [view]="view" 
+                    [view]="viewCircular" 
                     [scheme]="colorScheme" 
                     [results]="motivosHotel"
                     [gradient]="gradient" 
@@ -206,10 +206,10 @@
                 </ngx-charts-advanced-pie-chart>
             </div>
             
-            <div *ngIf="mostrarGraficas=='individuales'" class="ciudades flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='individuales'" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Ciudades</h2>
                 <ngx-charts-advanced-pie-chart 
-                    [view]="view" 
+                    [view]="viewCircular" 
                     [scheme]="colorScheme" 
                     [results]="ciudadesHotel"
                     [gradient]="gradient" 
@@ -219,9 +219,9 @@
                 </ngx-charts-advanced-pie-chart>
             </div>
 
-            <div *ngIf="mostrarGraficas=='individuales'" class="registros flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='individuales'" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros por día</h2> <!-- Mostrar los registros por día -->
-                <ngx-charts-bar-vertical-2d 
+                <ngx-charts-bar-horizontal-2d 
                     [view]="view"
                     scheme="cool"
                     [scheme]="colorScheme"
@@ -243,24 +243,25 @@
                     (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)"
                     >
-                </ngx-charts-bar-vertical-2d>
+                </ngx-charts-bar-horizontal-2d>
             </div>
 
-        <div *ngIf="mostrarGraficas=='individuales'" class="habitacionesReservadas flex flex-col border-2 p-5">
-            <h2 class="block text-center font-bold">Habitaciones reservadas</h2>
-            <ngx-charts-advanced-pie-chart 
-                [view]="view" 
-                [scheme]="colorScheme" 
-                [results]="habitacionHotel"
-                [gradient]="gradient" 
-                (select)="onSelect($event)" 
-                (activate)="onActivate($event)"
-                (deactivate)="onDeactivate($event)">
-            </ngx-charts-advanced-pie-chart>
-        </div>
+            <div *ngIf="mostrarGraficas=='individuales'" class="nueva-pagina flex flex-col border-2 p-5">
+                <h2 class="block text-center font-bold">Habitaciones reservadas</h2>
+                <ngx-charts-advanced-pie-chart 
+                    [view]="viewCircular" 
+                    [scheme]="colorScheme" 
+                    [results]="habitacionHotel"
+                    [gradient]="gradient" 
+                    (select)="onSelect($event)" 
+                    (activate)="onActivate($event)"
+                    (deactivate)="onDeactivate($event)">
+                </ngx-charts-advanced-pie-chart>
+            </div>
 
-        <button (click)="imprimir()" *ngIf="motivo || motivoH" class="bg-verde text-white text-2xl px-20 py-2 mt-8 rounded-lg">
-            Generar PDF
-        </button>
+            <button (click)="imprimir()" *ngIf="motivo || motivoH" class="no-print bg-verde text-white text-2xl px-20 py-2 my-8 rounded-lg">
+                Generar PDF
+            </button>
+        </div>
     </div>
 </div>
