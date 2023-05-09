@@ -272,6 +272,10 @@ export class GraficasgeneralesComponent implements OnInit {
     this.router.navigate(['/principaldirector']);
   };
 
+  imprimir() {
+    window.print();
+  }
+
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

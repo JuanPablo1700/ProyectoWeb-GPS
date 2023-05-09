@@ -1,5 +1,5 @@
 <div>
-    <div class="barra fixed bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
+    <div class="no-print fixed bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
         <div>
             <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2">
         </div>
@@ -19,7 +19,7 @@
 
     <div class="contenedor h-screen  ml-32 flex flex-col justify-center flex-grow items-center">
         <h1 class="text-titulo text-2xl font-bold items-center mt-6 mb-3">Gráficas Generales</h1>
-        <div class="flex flex-col items-center mb-20 bg-white w-4/5 rounded-lg h-full overflow-auto">
+        <div class="flex flex-col items-center mb-20 bg-white w-4/5 rounded-lg h-4/5">
             <select [(ngModel)]="tipoGrafica" id="tipoGrafica" name="tipoGrafica"
                 class="my-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                 <option value="-1"> Seleccione un tipo de gráfica </option>
@@ -259,7 +259,7 @@
             </ngx-charts-advanced-pie-chart>
         </div>
 
-        <button *ngIf="motivo || motivoH" class="bg-verde text-white text-2xl px-20 py-2 mt-8 rounded-lg">
+        <button (click)="imprimir()" *ngIf="motivo || motivoH" class="bg-verde text-white text-2xl px-20 py-2 mt-8 rounded-lg">
             Generar PDF
         </button>
     </div>
