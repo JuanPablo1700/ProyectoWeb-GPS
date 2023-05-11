@@ -1,0 +1,11 @@
+@media print {
+    .no-print {
+        display: none;
+    }
+    .contenedor {
+        margin-left: 0px;
+    }
+    .nueva-pagina {
+        page-break-before: always;
+    }
+}

@@ -38,6 +38,8 @@ export class GraficasmihotelComponent implements OnInit {
   habitacion: any;
   parametros: any;
 
+  isPressed = false;
+
   //Gráficas
   // motivo: any;
   view: [number, number] = [750, 400];
@@ -56,6 +58,7 @@ export class GraficasmihotelComponent implements OnInit {
   }
 
   consultar() {
+    
     const hoy = new Date();
 
     if (this.filtroConsulta == -1) {
@@ -102,6 +105,8 @@ export class GraficasmihotelComponent implements OnInit {
       }
     }
 
+    this.isPressed = true;
+    
     this.parametros = {
       fechaInicio: this.fechaInicio,
       fechaFin: this.fechaFin,
@@ -172,7 +177,9 @@ export class GraficasmihotelComponent implements OnInit {
   micategoria() {
     this.router.navigate(['/micategoria']);
   }
-
+  imprimir() {
+    window.print();
+  }
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

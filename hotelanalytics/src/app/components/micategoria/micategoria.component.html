@@ -1,5 +1,5 @@
-<div class="flex  h-full w-full  ">
-    <div class="barra fixed z-50 bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
+<div [ngClass]="{'bg-white': isPressed}" class="flex h-full w-full">
+    <div class="barra no-print fixed z-50 bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
         <div>
             <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2">
         </div>
@@ -20,9 +20,9 @@
         </div>
     </div>
     <div class="contenedor ml-32 flex h-full flex-col justify-center flex-grow items-center">
-        <div class="mx-10 mt-10 mb-10 flex flex-col items-center bg-white w-4/5 min-w-min h-full rounded-lg overflow-auto">
+        <div class="mx-10 mt-10 mb-10 flex flex-col items-center bg-white w-4/5 min-w-min h-full rounded-lg">
             <h1 class="text-titulo text-2xl font-bold items-center mt-6">Gráficas de mi categoría</h1>
-            <div [ngClass]="filtroConsulta !== -2 ? 'flex flex-col justify-items-center grid-rows-3 gap-3 items-center mt-3' : 'flex flex-col justify-items-center justify-center h-full grid-rows-3 gap-3 items-center mt-3'">
+            <div [ngClass]="filtroConsulta !== -2 ? 'no-print flex flex-col justify-items-center grid-rows-3 gap-3 items-center mt-3' : 'no-print flex flex-col justify-items-center justify-center h-full grid-rows-3 gap-3 items-center mt-3'">
                 <p *ngIf="filtroConsulta == -2" class="mx-32 text-2xl text-center font-semibold">
                     Lo sentimos, pero actualmente no tienes acceso a esta sección del programa. Esto se debe a que no has ingresado datos en los <span class="text-red-700">últimos 14 días</span>. Para proteger tu privacidad y seguridad, hemos restringido temporalmente el acceso a esta sección del programa. Para volver a acceder a esta sección, por favor ingresa nuevos datos en el formulario correspondiente.
                 </p>
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <button *ngIf="filtroConsulta != -1 && filtroConsulta != -2" (click)="consultar()"
-                class="bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
+                class="no-print bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
                 Consultar
             </button>
 
@@ -78,7 +78,7 @@
                     </ngx-charts-bar-vertical-2d>
                 </div>
                 
-                <div class="ciudad flex flex-col border-2 p-5">
+                <div class="ciudad nueva-pagina flex flex-col border-2 p-5">
                     <h2 class="block text-center font-bold">Ciudades</h2>
                     <ngx-charts-bar-vertical-2d 
                     [view]="view"
@@ -101,8 +101,8 @@
                         >
                     </ngx-charts-bar-vertical-2d>
                 </div>
-                <div class="motivo flex flex-col border-2 p-5">
-                    <h2 class="block  text-center font-bold">Registros por habitaciones</h2>
+                <div class="registrosHabitacion nueva-pagina flex flex-col border-2 p-5">
+                    <h2 class="block text-center font-bold">Registros por habitaciones</h2>
                     <ngx-charts-bar-vertical-2d 
                     [view]="view"
                     [scheme]="colorScheme"
@@ -124,7 +124,7 @@
                     >
                 </ngx-charts-bar-vertical-2d>
             </div>
-            <div class="registros flex flex-col border-2 p-5">
+            <div class="registros nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros</h2>
                 <ngx-charts-bar-vertical-2d 
                 [view]="view"
@@ -151,8 +151,8 @@
             
             </div>
         </div>
-        <div *ngIf="graficasVisibles==1" class="flex justify-center items-baseline mt-2">
-            <button class="hover:bg-verde text-white text-xl px-10 py-1 rounded-lg bg-green-600 focus:border-verde ">
+        <div *ngIf="graficasVisibles==1" class="no-print flex justify-center items-baseline mt-2">
+            <button (click)="imprimir()" class="hover:bg-verde text-white text-xl px-10 py-1 rounded-lg bg-green-600 focus:border-verde ">
                 Generar PDF
             </button>
         </div>

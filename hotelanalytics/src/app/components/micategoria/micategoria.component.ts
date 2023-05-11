@@ -32,7 +32,6 @@ export class MicategoriaComponent implements OnInit {
     }
 
     this.getHotel(idHotelInt);
-    
   }
 
   filtroConsulta: number = 0;
@@ -47,6 +46,8 @@ export class MicategoriaComponent implements OnInit {
   habitacion:any;
   parametros: any;
 
+  isPressed = false;
+  
   getHotel(idHotel: number) {
     this._hotelService.getHotel(idHotel).subscribe({
       next: (data)=>{
@@ -93,6 +94,7 @@ export class MicategoriaComponent implements OnInit {
         return this.toastr.error('Seleccione fecha inicio y fecha fin correctamente', 'Error');
       }
     }
+    this.isPressed = true;
     console.log('inicio: ' + this.fechaInicio);
     console.log('fin: ' + this.fechaFin);
 
@@ -182,6 +184,9 @@ export class MicategoriaComponent implements OnInit {
     this.router.navigate(['/micategoria']);
   }
 
+  imprimir() {
+    window.print();
+  }
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

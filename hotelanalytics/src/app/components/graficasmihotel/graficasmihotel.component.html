@@ -1,5 +1,5 @@
-<div class="flex h-full w-full bg-fondo">
-    <div class="barra fixed z-50 bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
+<div [ngClass]="{'bg-white': isPressed}" class="flex h-full w-full">
+    <div class="no-print barra fixed z-50 bg-white border-r-2 w-32 flex flex-col border-verde items-center min-h-screen flex-1">
         <div>
             <img src="../../../assets/img/logo.jpeg" class="w-auto h-24 mt-2">
         </div>
@@ -21,11 +21,10 @@
     </div>
 
     <div class="contenedor ml-32 flex h-full flex-col justify-center flex-grow items-center">
-        <div class="mx-10 mt-10 flex flex-col items-center bg-white w-3/4 min-w-min h-full rounded-lg overflow-auto">
+        <div class="mx-10 mt-10 flex flex-col items-center bg-white w-3/4 min-w-min h-full rounded-lg">
             <h1 class="text-titulo text-2xl font-bold items-center mt-6">Gráficas de mi hotel</h1>
-            <div class="flex flex-col justify-items-center grid-rows-3 gap-3 items-center mt-3">
-
-                <select id="filtroConsulta" [(ngModel)]="filtroConsulta"
+            <div class="no-print flex flex-col justify-items-center grid-rows-3 gap-3 items-center mt-3">
+                <select  id="filtroConsulta" [(ngModel)]="filtroConsulta"
                     class="h-10 border-2 rounded-md border-gray-300 p-1 focus:border-verde peer-focus:text-verde">
                     <option value="-1" selected> Fecha de consulta</option>
                     <option value="1">Este día</option>
@@ -48,33 +47,33 @@
                 </div>
             </div>
             <button *ngIf="filtroConsulta != -1" (click)="consultar()"
-                class="bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
+                class="no-print bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
                 Consultar
             </button>
 
             <div *ngIf="graficasVisibles==1"  class="graficas"> <!-- Se muestran los datos que se ingresen en el rango seleccionado -->
-                <div class="motivo flex flex-col border-2 p-5">
+                <div class="motivo mt-3 flex flex-col border-2 p-5">
                     <h2 class="block text-center font-bold">Motivos</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="motivos"
                         [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)">
                     </ngx-charts-advanced-pie-chart>
                 </div>
-                <div class="ciudad flex flex-col border-2 p-5">
+                <div class="ciudad nueva-pagina flex flex-col border-2 p-5">
                     <h2 class="block text-center font-bold">Ciudades</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="ciudades"
                         [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)">
                     </ngx-charts-advanced-pie-chart>
                 </div>
-                <div class="habitaciones flex flex-col border-2 p-5">
+                <div class="habitaciones nueva-pagina flex flex-col border-2 p-5">
                     <h2 class="block text-center font-bold">Habitaciones reservadas</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="habitacions"
                     [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)">
                 </ngx-charts-advanced-pie-chart>
             </div>
-            <div class="registros flex flex-col border-2 p-5">
+            <div class="registros nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros</h2> <!-- Mostrar los registros por día -->
                     <ngx-charts-bar-vertical-2d *ngIf="motivo"
                     [view]="view"
@@ -101,7 +100,7 @@
         </div>
         </div>
         <div *ngIf="graficasVisibles==1" class="flex justify-center items-baseline mt-2">
-            <button class="hover:bg-verde text-white text-xl px-10 py-1 rounded-lg bg-green-600 focus:border-verde ">
+            <button (click)="imprimir()" class="hover:bg-verde text-white text-xl px-10 py-1 rounded-lg bg-green-600 focus:border-verde ">
                 Generar PDF
             </button>
         </div>
