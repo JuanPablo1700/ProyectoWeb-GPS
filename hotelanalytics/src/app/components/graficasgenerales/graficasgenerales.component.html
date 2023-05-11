@@ -66,12 +66,35 @@
                     <option value="-1" selected> Seleccione un Hotel </option>
                     <option *ngFor="let hotel of hoteles" [value]="hotel.id">{{hotel.nombre}}</option>
                 </select>
+
+                <div class="no-print">
+                    <div>
+                        <label for="graficaMotivo">Motivos</label>
+                        <input type="checkbox" [(ngModel)]="graficaMotivo">
+                    </div>
+                    <div>
+                        <label for="graficaRegistros">Registros por Día</label>
+                        <input type="checkbox" [(ngModel)]="graficaRegistros">
+                    </div>
+                    <div>
+                        <label for="graficaCiudades">Ciudades</label>
+                        <input type="checkbox" [(ngModel)]="graficaCiudades">
+                    </div>
+                    <div>
+                        <label for="graficaCostos">Costos</label>
+                        <input type="checkbox" [(ngModel)]="graficaCostos">
+                    </div>
+                    <div>
+                        <label for="graficaHabitacion">Habitacion</label>
+                        <input type="checkbox" [(ngModel)]="graficaHabitacion">
+                    </div>
+                </div>
             </div>
             <button (click)="consultar()" class="no-print bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
                 Consultar
             </button>
             <!-- Gráficas generales -->
-            <div *ngIf="mostrarGraficas=='generales'" class="motivo flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas == 'generales' && graficaMotivo" class="motivo flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Motivos</h2>
                 <ngx-charts-bar-horizontal-2d
                     [view]="view"
@@ -95,7 +118,7 @@
                     >
                 </ngx-charts-bar-horizontal-2d>
             </div>
-            <div *ngIf="mostrarGraficas=='generales'" class="nueva-pagina flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='generales' && graficaRegistros" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros por día</h2>
                 <ngx-charts-bar-horizontal-2d 
                     [view]="view"
@@ -119,7 +142,7 @@
                     >
                 </ngx-charts-bar-horizontal-2d>
             </div>
-            <div *ngIf="mostrarGraficas=='generales'" class="nueva-pagina flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='generales' && graficaCiudades" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Ciudades</h2>
                 <ngx-charts-bar-horizontal-2d 
                     [view]="view"
@@ -143,7 +166,7 @@
                     >
                 </ngx-charts-bar-horizontal-2d>
             </div>
-            <div *ngIf="mostrarGraficas=='generales'" class="nueva-pagina flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='generales' && graficaCostos" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Costos por habitación</h2>
                 <ngx-charts-bar-horizontal-2d
                     [view]="view"
@@ -167,7 +190,7 @@
                     >
                 </ngx-charts-bar-horizontal-2d>
             </div>
-            <div *ngIf="mostrarGraficas=='generales'" class="nueva-pagina flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='generales' && graficaHabitacion" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros por habitaciones</h2>
                 <ngx-charts-bar-horizontal-2d *ngIf="motivo" class="mb-10"
                     [view]="view"
@@ -193,7 +216,7 @@
             </div>
 
             <!-- Gráficas por hotel -->
-            <div *ngIf="mostrarGraficas=='individuales'" class="nueva-pagina flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='individuales' && graficaMotivo" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Motivos</h2>
                 <ngx-charts-advanced-pie-chart
                     [view]="viewCircular" 
@@ -206,7 +229,7 @@
                 </ngx-charts-advanced-pie-chart>
             </div>
             
-            <div *ngIf="mostrarGraficas=='individuales'" class="nueva-pagina flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='individuales' && graficaCiudades" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Ciudades</h2>
                 <ngx-charts-advanced-pie-chart 
                     [view]="viewCircular" 
@@ -219,7 +242,7 @@
                 </ngx-charts-advanced-pie-chart>
             </div>
 
-            <div *ngIf="mostrarGraficas=='individuales'" class="nueva-pagina flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='individuales' && graficaRegistros" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros por día</h2> <!-- Mostrar los registros por día -->
                 <ngx-charts-bar-horizontal-2d 
                     [view]="view"
@@ -246,7 +269,7 @@
                 </ngx-charts-bar-horizontal-2d>
             </div>
 
-            <div *ngIf="mostrarGraficas=='individuales'" class="nueva-pagina flex flex-col border-2 p-5">
+            <div *ngIf="mostrarGraficas=='individuales' && graficaHabitacion" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Habitaciones reservadas</h2>
                 <ngx-charts-advanced-pie-chart 
                     [view]="viewCircular" 

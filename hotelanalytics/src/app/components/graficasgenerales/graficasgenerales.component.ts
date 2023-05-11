@@ -15,6 +15,12 @@ import { ToastrService } from 'ngx-toastr';
 export class GraficasgeneralesComponent implements OnInit {
   tipoUsuario:any;
 
+  graficaMotivo: Boolean = false;
+  graficaRegistros: Boolean = false;
+  graficaCiudades: Boolean = false;
+  graficaCostos: Boolean = false;
+  graficaHabitacion: Boolean = false;
+
   fechaSelect = "";
   tipoGrafica = "";
   fechaInicio:any = "";
@@ -125,7 +131,6 @@ export class GraficasgeneralesComponent implements OnInit {
         "fechaFin": this.fechaFin
       }
       this.mostrarGraficas = "generales";
-
       this._dataService.getMotivoGeneral(this.parametros).subscribe(data => { this.motivo = data });
       this._dataService.getRegistrosGeneral(this.parametros).subscribe(data => { this.registros = data });
       this._dataService.getCiudadVisitaGeneral(this.parametros).subscribe(data => { this.ciudades = data });
