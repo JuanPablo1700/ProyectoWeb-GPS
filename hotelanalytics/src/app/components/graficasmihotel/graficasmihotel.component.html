@@ -46,36 +46,62 @@
                     </div>
                 </div>
             </div>
+            <ul *ngIf="filtroConsulta != -1" class="no-print items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <div class="flex items-center pl-3">
+                        <input id="graficaMotivo" type="checkbox" [(ngModel)]="graficaMotivo" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label for="graficaMotivo" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Motivos</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <div class="flex items-center pl-3">
+                        <input checked id="graficaRegistros" type="checkbox" [(ngModel)]="graficaRegistros"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label for="graficaRegistros" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Registros por Día</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <div class="flex items-center pl-3">
+                        <input id="graficaCiudades" type="checkbox" [(ngModel)]="graficaCiudades" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label for="graficaCiudades" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Ciudades</label>
+                    </div>
+                </li>
+                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <div class="flex items-center pl-3">
+                        <input id="graficaHabitacion" type="checkbox" [(ngModel)]="graficaHabitacion" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label for="graficaHabitacion" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Habitacion</label>
+                    </div>
+                </li>
+            </ul>
             <button *ngIf="filtroConsulta != -1" (click)="consultar()"
                 class="no-print bg-verde text-white text-xl px-14 py-2 my-3 rounded-lg">
                 Consultar
             </button>
 
-            <div *ngIf="graficasVisibles==1"  class="graficas"> <!-- Se muestran los datos que se ingresen en el rango seleccionado -->
-                <div class="motivo mt-3 flex flex-col border-2 p-5">
+            <div class="graficas"> <!-- Se muestran los datos que se ingresen en el rango seleccionado -->
+                <div *ngIf="graficasVisibles==1 && graficaMotivo" class="motivo mt-3 flex flex-col border-2 p-5">
                     <h2 class="block text-center font-bold">Motivos</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="motivos"
                         [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)">
                     </ngx-charts-advanced-pie-chart>
                 </div>
-                <div class="ciudad nueva-pagina flex flex-col border-2 p-5">
+                <div *ngIf="graficasVisibles==1 && graficaCiudades" class="ciudad nueva-pagina flex flex-col border-2 p-5">
                     <h2 class="block text-center font-bold">Ciudades</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="ciudades"
                         [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                         (deactivate)="onDeactivate($event)">
                     </ngx-charts-advanced-pie-chart>
                 </div>
-                <div class="habitaciones nueva-pagina flex flex-col border-2 p-5">
+                <div *ngIf="graficasVisibles==1 && graficaHabitacion" class="habitaciones nueva-pagina flex flex-col border-2 p-5">
                     <h2 class="block text-center font-bold">Habitaciones reservadas</h2>
                     <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="habitacions"
                     [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)">
                 </ngx-charts-advanced-pie-chart>
             </div>
-            <div class="registros nueva-pagina flex flex-col border-2 p-5">
+            <div *ngIf="graficasVisibles==1 && graficaRegistros" class="registros nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros</h2> <!-- Mostrar los registros por día -->
-                    <ngx-charts-bar-vertical-2d *ngIf="motivo"
+                    <ngx-charts-bar-horizontal-2d *ngIf="motivo"
                     [view]="view"
                     scheme="cool"
                     [scheme]="colorScheme"
@@ -96,11 +122,11 @@
                     (activate)="onActivate($event)"
                     (deactivate)="onDeactivate($event)"
                     >
-                </ngx-charts-bar-vertical-2d>
+                </ngx-charts-bar-horizontal-2d>
         </div>
         </div>
         <div *ngIf="graficasVisibles==1" class="flex justify-center items-baseline mt-2">
-            <button (click)="imprimir()" class="hover:bg-verde text-white text-xl px-10 py-1 rounded-lg bg-green-600 focus:border-verde ">
+            <button (click)="imprimir()" class="no-print hover:bg-verde text-white text-xl px-10 py-1 rounded-lg bg-green-600 focus:border-verde ">
                 Generar PDF
             </button>
         </div>

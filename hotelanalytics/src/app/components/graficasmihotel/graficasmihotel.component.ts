@@ -10,6 +10,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class GraficasmihotelComponent implements OnInit {
   tipoUsuario:any;
+
+  graficaMotivo: Boolean = false;
+  graficaRegistros: Boolean = false;
+  graficaCiudades: Boolean = false;
+  graficaCostos: Boolean = false;
+  graficaHabitacion: Boolean = false;
+
   constructor(
     private router: Router,
     private toastr: ToastrService,
@@ -146,8 +153,8 @@ export class GraficasmihotelComponent implements OnInit {
   schemeType: string = 'ordinal';
   roundDomains: boolean = false;
   legendTitleR: string = 'Fechas';
-  xAxisLabelR = 'Fechas';
-  yAxisLabelR: string = 'Registros';
+  xAxisLabelR = 'Registros';
+  yAxisLabelR: string = 'Fechas';
 
   colorScheme = {
     //domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
@@ -178,6 +185,7 @@ export class GraficasmihotelComponent implements OnInit {
     this.router.navigate(['/micategoria']);
   }
   imprimir() {
+    confirm("Recuerde desplegar más ajustes al imprimir y habilitar los Gráficos de fondo");
     window.print();
   }
   logOut() {

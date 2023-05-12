@@ -283,6 +283,7 @@ export class GraficasgeneralesComponent implements OnInit {
   };
 
   imprimir() {
+    confirm("Recuerde desplegar más ajustes al imprimir y habilitar los Gráficos de fondo");
     window.print();
   }
 

@@ -15,6 +15,13 @@ export class MicategoriaComponent implements OnInit {
   tipoUsuario:any;
   idHotel:any;
   datosHotel:any;
+  costos: any;
+
+  graficaMotivo: Boolean = false;
+  graficaRegistros: Boolean = false;
+  graficaCiudades: Boolean = false;
+  graficaCostos: Boolean = false;
+  graficaHabitacion: Boolean = false;
 
   constructor(
     private router: Router, 
@@ -104,6 +111,10 @@ export class MicategoriaComponent implements OnInit {
       "estrellas": localStorage.getItem('estrellas')
     }
 
+    let estrella:any = localStorage.getItem('estrellas')
+
+    let estrellasInt = parseInt(estrella);
+
     this.graficasVisibles = 1;
 
     this.dataService.getMotivoCategoria(this.parametros).subscribe(data => {
@@ -118,6 +129,7 @@ export class MicategoriaComponent implements OnInit {
     this.dataService.getHabitacionesCategoria(this.parametros).subscribe(data => {
       this.habitacion = data;
     })
+    this.dataService.getCostosHabitacionCategoria(estrellasInt).subscribe(data => { this.costos = data });
 
     return true;
   }
@@ -140,6 +152,9 @@ export class MicategoriaComponent implements OnInit {
   
   xAxisLabel2 = 'Hotel';
   yAxisLabel2: string = 'Registros';
+
+  xAxisLabel4: string = 'Costo por habitación';
+  yAxisLabel4 = 'Hotel';
 
   schemeType: string = 'ordinal';
 
@@ -185,6 +200,7 @@ export class MicategoriaComponent implements OnInit {
   }
 
   imprimir() {
+    confirm("Recuerde desplegar más ajustes al imprimir y habilitar los Gráficos de fondo");
     window.print();
   }
   logOut() {
