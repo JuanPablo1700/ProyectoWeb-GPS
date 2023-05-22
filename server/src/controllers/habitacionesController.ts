@@ -47,11 +47,10 @@ class HabitacionesController {
                     return res.status(401).json({ msg: 'No se pudo insertar el tipo de habitación' });
                 }
             } else {
-                return res.status(401).json({ msg: 'El tipo de habitacion ya exixte' });
+                return res.status(409).json({ msg: 'El tipo de habitacion ya exixte' });
             }
 
         } catch (error) {
-            console.error(error);
             res.status(500).json({ msg: 'Error del servidor' });
         }
     }

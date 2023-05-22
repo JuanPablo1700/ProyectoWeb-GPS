@@ -88,8 +88,10 @@ export class DatoshotelComponent implements OnInit{
           this.toastr.success('Tipo de habitación registrado correctamente', 'Correcto');
         },
         error: (error: HttpErrorResponse) => {
-          this._errorService.msjError(error);
-        },
+          this.nuevoTipoHabitacion = '';
+          this.toastr.success('La habitación ya existe', 'Correcto');
+          /* this._errorService.msjError(error); */
+        }
       });
     }
   }
