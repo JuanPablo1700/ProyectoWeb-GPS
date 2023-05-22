@@ -75,26 +75,54 @@ export class DatoshotelComponent implements OnInit{
       },
     });
   }
-
   nuevo_tipo_habitacion() {
+    if (this.validarNuevoTipoHabitacion()) {
+      let nuevo = {
+        tipo_habitacion: this.nuevoTipoHabitacion
+      }
+      this._habitacionService.nuevo(nuevo).subscribe(
+        (response) => {
+          this.handleResponse(response);
+        },
+        (error) => {
+          this.handleError(error);
+        }
+      );
+    }
+  }
+  
+  handleResponse(response:any) {
+    this.nuevoTipoHabitacion = '';
+    this.toastr.success('Tipo de habitación registrado correctamente', 'Correcto');
+    location.reload();
+  }
+  
+  handleError(error:any) {
+    this.nuevoTipoHabitacion = '';
+    this.toastr.success('La habitación ya existe', 'Correcto');
+    /* this._errorService.msjError(error); */
+  }
+
+  
+ /*  nuevo_tipo_habitacion() {
     if (this.validarNuevoTipoHabitacion()) {
       let nuevo = {
         tipo_habitacion: this.nuevoTipoHabitacion
       }
       this._habitacionService.nuevo(nuevo).subscribe({
         next: () => {
+          this.toastr.success('Tipo de habitación registrado correctamente', 'Correcto');
           this.nuevoTipoHabitacion = '';
           location.reload();
-          this.toastr.success('Tipo de habitación registrado correctamente', 'Correcto');
         },
         error: (error: HttpErrorResponse) => {
           this.nuevoTipoHabitacion = '';
-          this.toastr.success('La habitación ya existe', 'Correcto');
-          /* this._errorService.msjError(error); */
+          this.toastr.error('La habitación ya existe', 'Correcto');
+         
         }
       });
     }
-  }
+  } */
 
   actualizar(id:number) {
     this._habitacionService.getHabitacionById(id).subscribe({
