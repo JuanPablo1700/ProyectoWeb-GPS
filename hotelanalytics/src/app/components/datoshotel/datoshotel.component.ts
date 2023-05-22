@@ -80,24 +80,27 @@ export class DatoshotelComponent implements OnInit{
       let nuevo = {
         tipo_habitacion: this.nuevoTipoHabitacion
       }
-      this._habitacionService.nuevo(nuevo).subscribe(
-        (response) => {
+      this._habitacionService.nuevo(nuevo).subscribe({
+        next: (response) => {
           this.handleResponse(response);
         },
-        (error) => {
+        error: (error) => {
           this.handleError(error);
         }
-      );
+      });
     }
   }
   
   handleResponse(response:any) {
+    console.log(response);
+    
     this.nuevoTipoHabitacion = '';
     this.toastr.success('Tipo de habitación registrado correctamente', 'Correcto');
-    location.reload();
   }
   
   handleError(error:any) {
+    console.log(error);
+    
     this.nuevoTipoHabitacion = '';
     this.toastr.success('La habitación ya existe', 'Correcto');
     /* this._errorService.msjError(error); */
@@ -167,10 +170,9 @@ export class DatoshotelComponent implements OnInit{
       
       this._habitacionService.nuevaHabitacion(this.datosHabitacion).subscribe({
         next: () => {
-          this.tipoHabitacion = '';
+          this.tipoHabitacion = '-1';
           this.cantidad = 0;
           this.costo = 0;
-          location.reload();
           this.toastr.success('Habitación de hotel registrado correctamente', 'Correcto');
         }
       });
