@@ -154,7 +154,7 @@
             <div *ngIf="mostrarGraficas=='generales' && graficaCiudades" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Ciudades</h2>
                 <ngx-charts-bar-horizontal-2d 
-                    [view]="view"
+                    [view]="viewCiudades"
                     [scheme]="colorScheme" 
                     [schemeType]="schemeType"
                     [results]="ciudadess"
@@ -254,7 +254,7 @@
             <div *ngIf="mostrarGraficas=='individuales' && graficaRegistros" class="nueva-pagina flex flex-col border-2 p-5">
                 <h2 class="block text-center font-bold">Registros por día</h2> <!-- Mostrar los registros por día -->
                 <ngx-charts-bar-horizontal-2d 
-                    [view]="view"
+                    [view]="viewRegistros"
                     scheme="cool"
                     [scheme]="colorScheme"
                     [results]="registrosHotel"

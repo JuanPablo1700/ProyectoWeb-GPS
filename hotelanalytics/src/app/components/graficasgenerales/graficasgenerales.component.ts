@@ -202,7 +202,12 @@ export class GraficasgeneralesComponent implements OnInit {
     return this.habitacionesH;
   }
 
-  view: [number, number] = [800, 600];
+  alto =0;
+  altoCiudades =0;
+  altoRegistros =0;
+  view: [number, number] = [800, this.alto];
+  viewCiudades: [number, number] = [800, this.altoCiudades];
+  viewRegistros: [number, number] = [800, this.altoRegistros];
   viewCircular: [number, number] = [800, 400];
 
   // options
@@ -271,6 +276,13 @@ export class GraficasgeneralesComponent implements OnInit {
     this._newHotelService.getHotels().subscribe({
       next: (data) => {
         this.hoteles = data;
+        this.alto = this.hoteles.length*100;
+        this.altoCiudades = this.hoteles.length*200;
+        this.altoRegistros = this.hoteles.length*450;
+        this.view = [800, this.alto];
+        this.viewCiudades = [800, this.altoCiudades];
+        this.viewRegistros = [800, this.altoRegistros];
+        console.log(`El tamaño de data es: ${this.alto}`);
       },
       error: (error: HttpErrorResponse) => {
         this._errorService.msjError(error);
